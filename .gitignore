@@ -50,8 +50,11 @@ pickle-email-*.html
 
 # Rails credentials and keys
 /config/master.key
+server/config/master.key
 /config/credentials/*.key
+server/config/credentials/*.key
 /config/credentials.yml.enc
+server/config/credentials.yml.enc
 /config/application.yml
 
 # Environment variables
