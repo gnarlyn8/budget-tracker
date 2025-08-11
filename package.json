@@ -1,0 +1,25 @@
+{
+  "name": "budget-tracker",
+  "version": "1.0.0",
+  "description": "A full-stack budget tracking application",
+  "private": true,
+  "scripts": {
+    "dev:server": "cd server && rails server",
+    "dev:web": "cd web && npm run dev",
+    "install:all": "cd web && npm install && cd ../server && bundle install",
+    "build": "cd web && npm run build",
+    "test:server": "cd server && rails test",
+    "test:web": "cd web && npm run lint",
+    "setup": "npm run install:all && cd server && rails db:create && rails db:migrate"
+  },
+  "keywords": [
+    "budget",
+    "tracker",
+    "rails",
+    "graphql",
+    "react",
+    "typescript"
+  ],
+  "author": "gnarlyn8",
+  "license": "MIT"
+}

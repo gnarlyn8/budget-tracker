@@ -18,28 +18,40 @@ capybara-*.html
 rerun.txt
 pickle-email-*.html
 
-# Ignore all logfiles and tempfiles.
+# Rails directories
 /log/*
 /tmp/*
 !/log/.keep
 !/tmp/.keep
 
-# Ignore pidfiles, but keep the directory.
+# Rails pidfiles
 /tmp/pids/*
 !/tmp/pids/
 !/tmp/pids/.keep
 
-# Ignore uploaded files in development.
+# Rails storage
 /storage/*
 !/storage/.keep
 /tmp/storage/*
 !/tmp/storage/
 !/tmp/storage/.keep
 
-# Ignore master key for decrypting credentials and more.
-/config/master.key
+# Rails cache
+/tmp/cache/*
+!/tmp/cache/.keep
 
-# Ignore application configuration
+# Rails sockets
+/tmp/sockets/*
+!/tmp/sockets/
+!/tmp/sockets/.keep
+
+# Rails restart
+/tmp/restart.txt
+
+# Rails credentials and keys
+/config/master.key
+/config/credentials/*.key
+/config/credentials.yml.enc
 /config/application.yml
 
 # Environment variables
@@ -71,16 +83,13 @@ Thumbs.db
 
 # Ruby
 *.gem
-*.rbc
 /.config
-/coverage/
 /InstalledFiles
 /pkg/
 /spec/reports/
 /spec/examples.txt
 /test/tmp/
 /test/version_tmp/
-/tmp/
 
 # Bundler
 /.bundle/
@@ -94,32 +103,18 @@ Thumbs.db
 # rbenv
 /.ruby-version
 
-# dotenv
-.env
-.env.development.local
-.env.test.local
-.env.production.local
-
 # Yarn
 .yarn-integrity
 
-# parcel-bundler cache (https://parceljs.org/)
+# Cache directories
 .cache
 .parcel-cache
 
-# next.js build output
+# Build outputs
 .next
-
-# nuxt.js build output
 .nuxt
-
-# vuepress build output
 .vuepress/dist
-
-# Serverless directories
 .serverless
-
-# FuseBox cache
 .fusebox/
 
 # DynamoDB Local files
@@ -127,3 +122,12 @@ Thumbs.db
 
 # TernJS port file
 .tern-port
+
+# Spring
+/spring/
+
+# RuboCop
+.rubocop_todo.yml
+
+# Brakeman
+brakeman-report.html
