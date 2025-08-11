@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { BudgetList } from "./components/BudgetList";
 import { CreateBudgetForm } from "./components/CreateBudgetForm";
+import { Budget } from "./components/Budget";
 import "./App.css";
 
 function App() {
-  const [activeTab, setActiveTab] = useState<"list" | "create">("list");
+  const [activeTab, setActiveTab] = useState<"list" | "create" | "show">(
+    "list"
+  );
+  const [selectedBudgetId, setSelectedBudgetId] = useState<string | null>(null);
 
   return (
     <div className="app">
@@ -27,7 +31,21 @@ function App() {
       </header>
 
       <main className="app-main">
-        {activeTab === "list" ? <BudgetList /> : <CreateBudgetForm />}
+        {activeTab === "list" && (
+          <BudgetList
+            onBudgetClick={(budgetId) => {
+              setSelectedBudgetId(budgetId);
+              setActiveTab("show");
+            }}
+          />
+        )}
+        {activeTab === "create" && <CreateBudgetForm />}
+        {activeTab === "show" && selectedBudgetId && (
+          <Budget
+            budgetId={selectedBudgetId}
+            onBack={() => setActiveTab("list")}
+          />
+        )}
       </main>
     </div>
   );

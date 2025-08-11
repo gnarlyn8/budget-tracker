@@ -17,3 +17,32 @@ export const CREATE_BUDGET = gql`
     }
   }
 `;
+
+export const CREATE_TRANSACTION = gql`
+  mutation CreateTransaction(
+    $budgetId: ID!
+    $description: String!
+    $amount: Float!
+    $date: ISO8601DateTime
+  ) {
+    createTransaction(
+      input: {
+        budgetId: $budgetId
+        description: $description
+        amount: $amount
+        date: $date
+      }
+    ) {
+      transaction {
+        id
+        budgetId
+        description
+        amount
+        date
+        createdAt
+        updatedAt
+      }
+      errors
+    }
+  }
+`;

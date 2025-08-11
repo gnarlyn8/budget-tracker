@@ -9,6 +9,10 @@ export const GET_BUDGETS = gql`
       description
       createdAt
       updatedAt
+      transactions {
+        id
+        amount
+      }
     }
   }
 `;
@@ -22,6 +26,15 @@ export const GET_BUDGET = gql`
       description
       createdAt
       updatedAt
+      transactions {
+        id
+        budgetId
+        description
+        amount
+        date
+        createdAt
+        updatedAt
+      }
     }
   }
 `;
