@@ -1,12 +1,39 @@
 import { gql } from "@apollo/client";
 
 export const CREATE_BUDGET = gql`
-  mutation CreateBudget($name: String!, $amount: Float!, $description: String) {
-    createBudget(
-      input: { name: $name, amount: $amount, description: $description }
-    ) {
+  mutation CreateBudget($name: String!, $description: String) {
+    createBudget(input: { name: $name, description: $description }) {
       budget {
         id
+        name
+        description
+        totalAmount
+        createdAt
+        updatedAt
+      }
+      errors
+    }
+  }
+`;
+
+export const CREATE_BUDGET_CATEGORY = gql`
+  mutation CreateBudgetCategory(
+    $budgetId: ID!
+    $name: String!
+    $amount: Float!
+    $description: String
+  ) {
+    createBudgetCategory(
+      input: {
+        budgetId: $budgetId
+        name: $name
+        amount: $amount
+        description: $description
+      }
+    ) {
+      budgetCategory {
+        id
+        budgetId
         name
         amount
         description
@@ -20,14 +47,14 @@ export const CREATE_BUDGET = gql`
 
 export const CREATE_TRANSACTION = gql`
   mutation CreateTransaction(
-    $budgetId: ID!
+    $budgetCategoryId: ID!
     $description: String!
     $amount: Float!
     $date: ISO8601DateTime
   ) {
     createTransaction(
       input: {
-        budgetId: $budgetId
+        budgetCategoryId: $budgetCategoryId
         description: $description
         amount: $amount
         date: $date
@@ -35,7 +62,7 @@ export const CREATE_TRANSACTION = gql`
     ) {
       transaction {
         id
-        budgetId
+        budgetCategoryId
         description
         amount
         date

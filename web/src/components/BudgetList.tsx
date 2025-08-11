@@ -6,14 +6,22 @@ interface Transaction {
   amount: number;
 }
 
-interface Budget {
+interface BudgetCategory {
   id: string;
   name: string;
   amount: number;
   description?: string;
+  transactions: Transaction[];
+}
+
+interface Budget {
+  id: string;
+  name: string;
+  description?: string;
+  totalAmount: number;
   createdAt: string;
   updatedAt: string;
-  transactions: Transaction[];
+  budgetCategories: BudgetCategory[];
 }
 
 interface BudgetListProps {
@@ -39,11 +47,17 @@ export function BudgetList({ onBudgetClick }: BudgetListProps) {
       ) : (
         <div className="budget-grid">
           {budgets.map((budget: Budget) => {
-            const totalSpent = budget.transactions.reduce(
-              (sum, transaction) => sum + transaction.amount,
+            const totalSpent = budget.budgetCategories.reduce(
+              (budgetTotal, category) => {
+                const categorySpent = category.transactions.reduce(
+                  (sum, transaction) => sum + transaction.amount,
+                  0
+                );
+                return budgetTotal + categorySpent;
+              },
               0
             );
-            const remaining = budget.amount - totalSpent;
+            const remaining = budget.totalAmount - totalSpent;
 
             return (
               <div
@@ -55,10 +69,10 @@ export function BudgetList({ onBudgetClick }: BudgetListProps) {
                 <h3>{budget.name}</h3>
                 <div className="budget-amounts">
                   <p className="total-amount">
-                    Budget: ${budget.amount.toFixed(2)}
+                    Total Budget: ${budget.totalAmount.toFixed(2)}
                   </p>
                   <p className="spent-amount">
-                    Spent: ${totalSpent.toFixed(2)}
+                    Total Spent: ${totalSpent.toFixed(2)}
                   </p>
                   <p
                     className={`remaining-amount ${
@@ -71,6 +85,9 @@ export function BudgetList({ onBudgetClick }: BudgetListProps) {
                 {budget.description && (
                   <p className="description">{budget.description}</p>
                 )}
+                <p className="categories-count">
+                  {budget.budgetCategories.length} categories
+                </p>
                 <p className="date">
                   Created: {new Date(budget.createdAt).toLocaleDateString()}
                 </p>

@@ -1,16 +1,14 @@
 module Mutations
   class CreateBudget < BaseMutation
     argument :name, String, required: true
-    argument :amount, Float, required: true
     argument :description, String, required: false
 
     field :budget, Types::BudgetType, null: true
     field :errors, [String], null: false
 
-    def resolve(name:, amount:, description: nil)
+    def resolve(name:, description: nil)
       budget = Budget.new(
         name: name,
-        amount: amount,
         description: description
       )
 

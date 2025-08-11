@@ -5,13 +5,19 @@ export const GET_BUDGETS = gql`
     budgets {
       id
       name
-      amount
       description
+      totalAmount
       createdAt
       updatedAt
-      transactions {
+      budgetCategories {
         id
+        name
         amount
+        description
+        transactions {
+          id
+          amount
+        }
       }
     }
   }
@@ -22,13 +28,42 @@ export const GET_BUDGET = gql`
     budget(id: $id) {
       id
       name
+      description
+      totalAmount
+      createdAt
+      updatedAt
+      budgetCategories {
+        id
+        name
+        amount
+        description
+        transactions {
+          id
+          budgetCategoryId
+          description
+          amount
+          date
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+
+export const GET_BUDGET_CATEGORY = gql`
+  query GetBudgetCategory($id: ID!) {
+    budgetCategory(id: $id) {
+      id
+      budgetId
+      name
       amount
       description
       createdAt
       updatedAt
       transactions {
         id
-        budgetId
+        budgetCategoryId
         description
         amount
         date

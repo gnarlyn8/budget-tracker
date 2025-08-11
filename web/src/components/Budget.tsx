@@ -1,15 +1,16 @@
 import { useQuery } from "@apollo/client";
 import { GET_BUDGET } from "../graphql/queries";
-import { CreateTransactionForm } from "./CreateTransactionForm";
+import { CreateBudgetCategoryForm } from "./CreateBudgetCategoryForm";
 
 interface BudgetProps {
   budgetId: string;
   onBack: () => void;
+  onCategoryClick: (categoryId: string) => void;
 }
 
 interface Transaction {
   id: string;
-  budgetId: string;
+  budgetCategoryId: string;
   description: string;
   amount: number;
   date: string;
@@ -17,17 +18,25 @@ interface Transaction {
   updatedAt: string;
 }
 
-interface Budget {
+interface BudgetCategory {
   id: string;
   name: string;
   amount: number;
   description?: string;
-  createdAt: string;
-  updatedAt: string;
   transactions: Transaction[];
 }
 
-export function Budget({ budgetId, onBack }: BudgetProps) {
+interface Budget {
+  id: string;
+  name: string;
+  description?: string;
+  totalAmount: number;
+  createdAt: string;
+  updatedAt: string;
+  budgetCategories: BudgetCategory[];
+}
+
+export function Budget({ budgetId, onBack, onCategoryClick }: BudgetProps) {
   const { loading, error, data, refetch } = useQuery(GET_BUDGET, {
     variables: { id: budgetId },
   });
@@ -40,11 +49,14 @@ export function Budget({ budgetId, onBack }: BudgetProps) {
 
   const budget: Budget = data.budget;
 
-  const totalSpent = budget.transactions.reduce(
-    (sum, transaction) => sum + transaction.amount,
-    0
-  );
-  const remaining = budget.amount - totalSpent;
+  const totalSpent = budget.budgetCategories.reduce((budgetTotal, category) => {
+    const categorySpent = category.transactions.reduce(
+      (sum, transaction) => sum + transaction.amount,
+      0
+    );
+    return budgetTotal + categorySpent;
+  }, 0);
+  const remaining = budget.totalAmount - totalSpent;
 
   return (
     <div className="budget-show">
@@ -60,8 +72,8 @@ export function Budget({ budgetId, onBack }: BudgetProps) {
 
       <div className="budget-summary">
         <div className="summary-card">
-          <h3>Budget Amount</h3>
-          <p className="amount">${budget.amount.toFixed(2)}</p>
+          <h3>Total Budget</h3>
+          <p className="amount">${budget.totalAmount.toFixed(2)}</p>
         </div>
         <div className="summary-card">
           <h3>Total Spent</h3>
@@ -77,30 +89,77 @@ export function Budget({ budgetId, onBack }: BudgetProps) {
         </div>
       </div>
 
-      <div className="transactions-section">
-        <h2>Transactions</h2>
-        {budget.transactions.length === 0 ? (
-          <p>No transactions yet. Add your first transaction above!</p>
+      <div className="categories-section">
+        <h2>Budget Categories</h2>
+        {budget.budgetCategories.length === 0 ? (
+          <p>No categories yet. Add your first category below!</p>
         ) : (
-          <div className="transactions-list">
-            {budget.transactions.map((transaction) => (
-              <div key={transaction.id} className="transaction-card">
-                <div className="transaction-header">
-                  <h4>{transaction.description}</h4>
-                  <span className="transaction-amount">
-                    ${transaction.amount.toFixed(2)}
-                  </span>
+          <div className="categories-list">
+            {budget.budgetCategories.map((category) => {
+              const categorySpent = category.transactions.reduce(
+                (sum, transaction) => sum + transaction.amount,
+                0
+              );
+              const categoryRemaining = category.amount - categorySpent;
+
+              return (
+                <div key={category.id} className="category-card">
+                  <div className="category-header">
+                    <h3>{category.name}</h3>
+                    <div className="category-amounts">
+                      <span className="category-budget">
+                        Budget: ${category.amount.toFixed(2)}
+                      </span>
+                      <span className="category-spent">
+                        Spent: ${categorySpent.toFixed(2)}
+                      </span>
+                      <span
+                        className={`category-remaining ${
+                          categoryRemaining < 0 ? "over-budget" : "remaining"
+                        }`}
+                      >
+                        Remaining: ${categoryRemaining.toFixed(2)}
+                      </span>
+                    </div>
+                  </div>
+                  {category.description && (
+                    <p className="category-description">
+                      {category.description}
+                    </p>
+                  )}
+                  <div className="transactions-list">
+                    {category.transactions.length === 0 ? (
+                      <p>No transactions yet.</p>
+                    ) : (
+                      category.transactions.map((transaction) => (
+                        <div key={transaction.id} className="transaction-card">
+                          <div className="transaction-header">
+                            <h4>{transaction.description}</h4>
+                            <span className="transaction-amount">
+                              ${transaction.amount.toFixed(2)}
+                            </span>
+                          </div>
+                          <p className="transaction-date">
+                            {new Date(transaction.date).toLocaleDateString()}
+                          </p>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                  <button
+                    className="view-category-button"
+                    onClick={() => onCategoryClick(category.id)}
+                  >
+                    View Category Details
+                  </button>
                 </div>
-                <p className="transaction-date">
-                  {new Date(transaction.date).toLocaleDateString()}
-                </p>
-              </div>
-            ))}
+              );
+            })}
           </div>
         )}
-        <CreateTransactionForm
+        <CreateBudgetCategoryForm
           budgetId={budgetId}
-          onTransactionCreated={refetch}
+          onBudgetCategoryCreated={refetch}
         />
       </div>
     </div>

@@ -10,24 +10,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_11_202250) do
-  create_table "budgets", force: :cascade do |t|
+ActiveRecord::Schema[8.0].define(version: 2025_08_11_232433) do
+  create_table "budget_categories", force: :cascade do |t|
+    t.integer "budget_id", null: false
     t.string "name"
     t.decimal "amount"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["budget_id"], name: "index_budget_categories_on_budget_id"
+  end
+
+  create_table "budgets", force: :cascade do |t|
+    t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "budget_id", null: false
     t.string "description"
     t.decimal "amount"
     t.datetime "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "budget_id"
+    t.integer "budget_category_id", null: false
+    t.index ["budget_category_id"], name: "index_transactions_on_budget_category_id"
     t.index ["budget_id"], name: "index_transactions_on_budget_id"
   end
 
+  add_foreign_key "budget_categories", "budgets"
+  add_foreign_key "transactions", "budget_categories"
   add_foreign_key "transactions", "budgets"
 end

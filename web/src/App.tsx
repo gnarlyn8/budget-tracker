@@ -2,13 +2,17 @@ import { useState } from "react";
 import { BudgetList } from "./components/BudgetList";
 import { CreateBudgetForm } from "./components/CreateBudgetForm";
 import { Budget } from "./components/Budget";
+import { BudgetCategory } from "./components/BudgetCategory";
 import "./App.css";
 
 function App() {
-  const [activeTab, setActiveTab] = useState<"list" | "create" | "show">(
-    "list"
-  );
+  const [activeTab, setActiveTab] = useState<
+    "list" | "create" | "show" | "category"
+  >("list");
   const [selectedBudgetId, setSelectedBudgetId] = useState<string | null>(null);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
+    null
+  );
 
   return (
     <div className="app">
@@ -44,6 +48,16 @@ function App() {
           <Budget
             budgetId={selectedBudgetId}
             onBack={() => setActiveTab("list")}
+            onCategoryClick={(categoryId: string) => {
+              setSelectedCategoryId(categoryId);
+              setActiveTab("category");
+            }}
+          />
+        )}
+        {activeTab === "category" && selectedCategoryId && (
+          <BudgetCategory
+            categoryId={selectedCategoryId}
+            onBack={() => setActiveTab("show")}
           />
         )}
       </main>

@@ -3,12 +3,12 @@ import { useMutation } from "@apollo/client";
 import { CREATE_TRANSACTION } from "../graphql/mutations";
 
 interface CreateTransactionFormProps {
-  budgetId: string;
+  budgetCategoryId: string;
   onTransactionCreated: () => void;
 }
 
 export function CreateTransactionForm({
-  budgetId,
+  budgetCategoryId,
   onTransactionCreated,
 }: CreateTransactionFormProps) {
   const [description, setDescription] = useState("");
@@ -24,7 +24,7 @@ export function CreateTransactionForm({
     try {
       await createTransaction({
         variables: {
-          budgetId,
+          budgetCategoryId,
           description,
           amount: parseFloat(amount),
           date: date || null,

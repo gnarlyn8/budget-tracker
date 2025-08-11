@@ -5,7 +5,6 @@ import { GET_BUDGETS } from "../graphql/queries";
 
 export function CreateBudgetForm() {
   const [name, setName] = useState("");
-  const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const client = useApolloClient();
 
@@ -18,7 +17,6 @@ export function CreateBudgetForm() {
       const result = await createBudget({
         variables: {
           name,
-          amount: parseFloat(amount),
           description: description || null,
         },
       });
@@ -34,7 +32,6 @@ export function CreateBudgetForm() {
       }
 
       setName("");
-      setAmount("");
       setDescription("");
     } catch (err) {
       console.error("Error creating budget:", err);
@@ -53,21 +50,7 @@ export function CreateBudgetForm() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            placeholder="e.g., Groceries, Entertainment"
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="amount">Amount ($):</label>
-          <input
-            type="number"
-            id="amount"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            required
-            min="0"
-            step="0.01"
-            placeholder="0.00"
+            placeholder="e.g., Monthly Budget, Vacation Budget"
           />
         </div>
 

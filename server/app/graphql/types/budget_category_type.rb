@@ -1,11 +1,12 @@
 module Types
-  class TransactionType < Types::BaseObject
+  class BudgetCategoryType < Types::BaseObject
     field :id, ID, null: false
-    field :budget_category_id, ID, null: false
-    field :description, String, null: true
+    field :budget_id, ID, null: false
+    field :name, String, null: false
     field :amount, Float, null: false
-    field :date, GraphQL::Types::ISO8601DateTime, null: true
+    field :description, String, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+    field :transactions, [Types::TransactionType], null: false
   end
 end

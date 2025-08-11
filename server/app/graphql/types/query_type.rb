@@ -33,7 +33,15 @@ module Types
     end
 
     def budget(id:)
-      Budget.includes(:transactions).find(id)
+      Budget.includes(:budget_categories).find(id)
+    end
+
+    field :budget_category, Types::BudgetCategoryType, null: true do
+      argument :id, ID, required: true
+    end
+
+    def budget_category(id:)
+      BudgetCategory.includes(:transactions).find(id)
     end
   end
 end
