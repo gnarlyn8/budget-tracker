@@ -1,0 +1,193 @@
+  [1m[35m (103.0ms)[0m  [1m[35mCREATE DATABASE "server_development" ENCODING = 'unicode' /*application='Server'*/[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY) /*application='Server'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Server'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Server'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.4ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-08-11 16:33:05.022421', '2025-08-11 16:33:05.022446') RETURNING "key" /*application='Server'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Server'*/[0m
+Migrating to CreateBudgets (20250811163108)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN immediate TRANSACTION /*application='Server'*/[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "budgets" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL) /*application='Server'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250811163108') RETURNING "version" /*application='Server'*/[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mCOMMIT TRANSACTION /*application='Server'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Server'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Server'*/[0m
+  [1m[35m (102.4ms)[0m  [1m[35mCREATE DATABASE "server_development" ENCODING = 'unicode' /*application='Server'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='Server'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Server'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='Server'*/[0m
+Started POST "/graphql" for ::1 at 2025-08-11 10:02:54 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 26ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:03:52 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"This is a budget for all of my software development tools I need for the month"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"This is a budget for all of my software development tools I need for the month"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Completed 204 No Content in 0ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:05:11 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"query"=>"{ budgets { id name amount } }", "graphql"=>{"query"=>"{ budgets { id name amount } }"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/graphiql" for ::1 at 2025-08-11 10:05:23 -0700
+Processing by GraphiQL::Rails::EditorsController#show as */*
+  Parameters: {"graphql_path"=>"/graphql"}
+  Rendering /Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphiql-rails-1.10.5/app/views/graphiql/rails/editors/show.html.erb
+  Rendered /Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphiql-rails-1.10.5/app/views/graphiql/rails/editors/show.html.erb (Duration: 4.3ms | GC: 0.0ms)
+Completed 200 OK in 35ms (Views: 13.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:06:17 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) { createBudget(input: { name: $name, amount: $amount, description: $description }) { budget { id name amount description createdAt updatedAt } errors } }", "variables"=>{"name"=>"Test Budget", "amount"=>100.0, "description"=>"Test description"}, "graphql"=>{"query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) { createBudget(input: { name: $name, amount: $amount, description: $description }) { budget { id name amount description createdAt updatedAt } errors } }", "variables"=>{"name"=>"Test Budget", "amount"=>100.0, "description"=>"Test description"}}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:06:41 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:07:19 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"A budget for all the different tools I need for my software development"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"A budget for all the different tools I need for my software development"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:07:19 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:07:23 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:13:27 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:13:58 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:14:07 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:14:32 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"All the different tools I need"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"All the different tools I need"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:14:32 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:14:36 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:15:23 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 9ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:15:32 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"Tools and stuff"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"Tools and stuff"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:15:32 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:17:24 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"query"=>"{ budgets { id name amount } }", "graphql"=>{"query"=>"{ budgets { id name amount } }"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:17:55 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"stuff and things"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"stuff and things"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:17:55 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:20:43 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:20:57 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"please work"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"please work"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:21:17 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:23:17 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:25:01 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:25:17 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:27:13 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 10:27:29 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"All the tools I need to get started"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>100, "description"=>"All the tools I need to get started"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
