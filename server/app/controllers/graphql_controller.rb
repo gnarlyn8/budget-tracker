@@ -2,54 +2,13 @@
 
 class GraphqlController < ApplicationController
   def execute
-    if params[:query]&.include?("budgets")
-      render json: {
-        data: {
-          budgets: [
-            {
-              id: "1",
-              name: "Groceries",
-              amount: 500.0,
-              description: "Monthly grocery budget",
-              createdAt: Time.current.iso8601,
-              updatedAt: Time.current.iso8601
-            },
-            {
-              id: "2", 
-              name: "Entertainment",
-              amount: 200.0,
-              description: "Movies, dining out, etc.",
-              createdAt: Time.current.iso8601,
-              updatedAt: Time.current.iso8601
-            }
-          ]
-        }
-      }
-      return
-    end
-
-    if params[:query]&.include?("createBudget")
-      variables = prepare_variables(params[:variables])
-      
-      new_budget = {
-        id: (Time.current.to_f * 1000).to_i.to_s,
-        name: variables["name"],
-        amount: variables["amount"].to_f,
-        description: variables["description"],
-        createdAt: Time.current.iso8601,
-        updatedAt: Time.current.iso8601
-      }
-
-      render json: {
-        data: {
-          createBudget: {
-            budget: new_budget,
-            errors: []
-          }
-        }
-      }
-      return
-    end
+    result = ServerSchema.execute(
+      params[:query],
+      variables: prepare_variables(params[:variables]),
+      context: { current_user: nil },
+      operation_name: params[:operationName]
+    )
+    render json: result
 
 
   rescue StandardError => e

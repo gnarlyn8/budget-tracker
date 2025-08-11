@@ -33,7 +33,7 @@ module Types
     end
 
     def budget(id:)
-      Budget.find(id)
+      Budget.includes(:transactions).find(id)
     end
   end
 end

@@ -191,3 +191,265 @@ Processing by GraphqlController#execute as */*
 Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
 
 
+Started POST "/graphql" for ::1 at 2025-08-11 11:31:19 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 9ms (Views: 0.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 11:31:33 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>30, "description"=>"Tools. All the tools"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>30, "description"=>"Tools. All the tools"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 11:51:59 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 12:39:54 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mBudget Load (15.5ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/graphql" for ::1 at 2025-08-11 12:45:43 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 12:46:36 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 12:46:43 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 12:46:48 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/graphql" for ::1 at 2025-08-11 12:50:29 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (2.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+Completed 200 OK in 608ms (Views: 0.2ms | ActiveRecord: 3.6ms (1 query, 0 cached) | GC: 18.9ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 12:52:47 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>30, "description"=>"To cover my Cursor and chatgpt bills"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudget", "variables"=>{"name"=>"Software Development", "amount"=>30, "description"=>"To cover my Cursor and chatgpt bills"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mBudget Create (1.1ms)[0m  [1m[32mINSERT INTO "budgets" ("name", "amount", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Software Development"], ["amount", 30.0], ["description", "To cover my Cursor and chatgpt bills"], ["created_at", "2025-08-11 19:52:47.518024"], ["updated_at", "2025-08-11 19:52:47.518024"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 25ms (Views: 0.1ms | ActiveRecord: 2.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 12:52:54 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mBudget Load (0.9ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/graphql" for ::1 at 2025-08-11 12:54:03 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudget", "variables"=>{"name"=>"Groceries", "amount"=>200, "description"=>"This is a weekly budget"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudget", "variables"=>{"name"=>"Groceries", "amount"=>200, "description"=>"This is a weekly budget"}, "query"=>"mutation CreateBudget($name: String!, $amount: Float!, $description: String) {\n  createBudget(input: {name: $name, amount: $amount, description: $description}) {\n    budget {\n      id\n      name\n      amount\n      description\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mBudget Create (0.6ms)[0m  [1m[32mINSERT INTO "budgets" ("name", "amount", "description", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Groceries"], ["amount", 200.0], ["description", "This is a weekly budget"], ["created_at", "2025-08-11 19:54:03.331597"], ["updated_at", "2025-08-11 19:54:03.331597"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mBudget Load (1.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateTransactions (20250811201517)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "budget_id" integer NOT NULL, "description" varchar, "amount" decimal, "date" date, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250811201517') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/graphql" for ::1 at 2025-08-11 13:18:58 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.0ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+Completed 200 OK in 43ms (Views: 0.2ms | ActiveRecord: 1.0ms (1 query, 0 cached) | GC: 11.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:18:59 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 1]]
+Completed 200 OK in 45ms (Views: 0.1ms | ActiveRecord: 0.8ms (2 queries, 0 cached) | GC: 2.2ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:19:34 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"budgetId"=>"1", "description"=>"Monthly ChatGPT", "amount"=>10, "date"=>"2025-08-07"}, "query"=>"mutation CreateTransaction($budgetId: ID!, $description: String!, $amount: Float!, $date: Date) {\n  createTransaction(\n    input: {budgetId: $budgetId, description: $description, amount: $amount, date: $date}\n  ) {\n    transaction {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"budgetId"=>"1", "description"=>"Monthly ChatGPT", "amount"=>10, "date"=>"2025-08-07"}, "query"=>"mutation CreateTransaction($budgetId: ID!, $description: String!, $amount: Float!, $date: Date) {\n  createTransaction(\n    input: {budgetId: $budgetId, description: $description, amount: $amount, date: $date}\n  ) {\n    transaction {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Interface `Node` hidden because it has no visible implementers
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to ChangeDateToDatetimeInTransactions (20250811202250)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "budget_id" integer NOT NULL, "description" varchar, "amount" decimal, "date" date, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","budget_id","description","amount","date","created_at","updated_at")
+                     SELECT "id","budget_id","description","amount","date","created_at","updated_at" FROM "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "budget_id" integer NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","budget_id","description","amount","date","created_at","updated_at")
+                     SELECT "id","budget_id","description","amount","date","created_at","updated_at" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250811202250') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/graphql" for ::1 at 2025-08-11 13:26:36 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"budgetId"=>"1", "description"=>"Monthly ChatGPT", "amount"=>10, "date"=>"2025-08-07"}, "query"=>"mutation CreateTransaction($budgetId: ID!, $description: String!, $amount: Float!, $date: DateTime) {\n  createTransaction(\n    input: {budgetId: $budgetId, description: $description, amount: $amount, date: $date}\n  ) {\n    transaction {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"budgetId"=>"1", "description"=>"Monthly ChatGPT", "amount"=>10, "date"=>"2025-08-07"}, "query"=>"mutation CreateTransaction($budgetId: ID!, $description: String!, $amount: Float!, $date: DateTime) {\n  createTransaction(\n    input: {budgetId: $budgetId, description: $description, amount: $amount, date: $date}\n  ) {\n    transaction {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Interface `Node` hidden because it has no visible implementers
+Completed 200 OK in 13ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.2ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:26:47 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+Completed 200 OK in 20ms (Views: 0.2ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 1.1ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:26:49 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 1]]
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:27:32 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"budgetId"=>"1", "description"=>"Monthly ChatGPT", "amount"=>10, "date"=>"2025-08-12"}, "query"=>"mutation CreateTransaction($budgetId: ID!, $description: String!, $amount: Float!, $date: DateTime) {\n  createTransaction(\n    input: {budgetId: $budgetId, description: $description, amount: $amount, date: $date}\n  ) {\n    transaction {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"budgetId"=>"1", "description"=>"Monthly ChatGPT", "amount"=>10, "date"=>"2025-08-12"}, "query"=>"mutation CreateTransaction($budgetId: ID!, $description: String!, $amount: Float!, $date: DateTime) {\n  createTransaction(\n    input: {budgetId: $budgetId, description: $description, amount: $amount, date: $date}\n  ) {\n    transaction {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+Interface `Node` hidden because it has no visible implementers
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:28:15 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.4ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+Completed 200 OK in 14ms (Views: 0.3ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:28:17 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 1]]
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:28:36 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"budgetId"=>"1", "description"=>"Monthly ChatGPT", "amount"=>10, "date"=>"2025-08-07"}, "query"=>"mutation CreateTransaction($budgetId: ID!, $description: String!, $amount: Float!, $date: ISO8601DateTime) {\n  createTransaction(\n    input: {budgetId: $budgetId, description: $description, amount: $amount, date: $date}\n  ) {\n    transaction {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"budgetId"=>"1", "description"=>"Monthly ChatGPT", "amount"=>10, "date"=>"2025-08-07"}, "query"=>"mutation CreateTransaction($budgetId: ID!, $description: String!, $amount: Float!, $date: ISO8601DateTime) {\n  createTransaction(\n    input: {budgetId: $budgetId, description: $description, amount: $amount, date: $date}\n  ) {\n    transaction {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("budget_id", "description", "amount", "date", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["budget_id", 1], ["description", "Monthly ChatGPT"], ["amount", 10.0], ["date", "2025-08-07"], ["created_at", "2025-08-11 20:28:36.203533"], ["updated_at", "2025-08-11 20:28:36.203533"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 26ms (Views: 0.1ms | ActiveRecord: 1.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:28:36 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 1]]
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:28:49 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:28:50 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 1]]
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 13:39:09 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (2.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 2.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 15:20:29 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 1]]
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 1.2ms (2 queries, 0 cached) | GC: 5.4ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 15:22:38 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 2]]
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 0.3ms (3 queries, 0 cached) | GC: 0.8ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 15:24:08 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 2]]
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 0.3ms (3 queries, 0 cached) | GC: 2.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 15:24:13 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"1"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_id" = ?[0m  [["budget_id", 1]]
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.7ms)
+
+
