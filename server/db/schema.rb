@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_12_175524) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_12_193104) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.string "account_type", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_175524) do
   create_table "transactions", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "budget_category_id", null: false
+    t.integer "budget_category_id"
     t.integer "account_id", null: false
     t.integer "amount_cents", null: false
     t.date "occurred_on", null: false

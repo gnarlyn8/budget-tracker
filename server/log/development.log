@@ -3140,3 +3140,61 @@ Processing by GraphqlController#execute as */*
 Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.2ms)
 
 
+Started POST "/graphql" for ::1 at 2025-08-12 11:51:02 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (2.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.5ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 15ms (Views: 0.1ms | ActiveRecord: 3.3ms (6 queries, 0 cached) | GC: 0.4ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to MakeBudgetCategoryNullableForTransactions (20250812193104)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250812193104') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mAccount Load (0.6ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."account_type" = ? LIMIT ?[0m  [["account_type", "monthly_budget"], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."account_type" = ? LIMIT ?[0m  [["account_type", "load"], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.4ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."name" = ? LIMIT ?[0m  [["name", "Groceries"], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."name" = ? LIMIT ?[0m  [["name", "LOC Repayment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Create (0.3ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-12 19:39:22.347536"], ["updated_at", "2025-08-12 19:39:22.347536"], ["budget_category_id", 1], ["account_id", 1], ["amount_cents", -15000], ["occurred_on", "2025-08-12"], ["memo", "Tuesday market"]]
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."name" = ? LIMIT ?[0m  [["name", "LOC Repayment"], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."name" = ? LIMIT ?[0m  [["name", "LOC Repayment"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
