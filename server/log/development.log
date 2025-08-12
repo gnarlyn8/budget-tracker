@@ -3607,3 +3607,44 @@ Processing by GraphqlController#execute as */*
 Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.3ms (4 queries, 0 cached) | GC: 0.5ms)
 
 
+Started POST "/graphql" for ::1 at 2025-08-12 14:12:30 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateAccount", "variables"=>{"name"=>"Nathen LOC", "accountType"=>"loan", "startingBalance"=>12500}, "query"=>"mutation CreateAccount($name: String!, $accountType: String!, $startingBalance: Float) {\n  createAccount(\n    input: {name: $name, accountType: $accountType, startingBalance: $startingBalance}\n  ) {\n    account {\n      id\n      name\n      accountType\n      startingBalance\n      currentBalance\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateAccount", "variables"=>{"name"=>"Nathen LOC", "accountType"=>"loan", "startingBalance"=>12500}, "query"=>"mutation CreateAccount($name: String!, $accountType: String!, $startingBalance: Float) {\n  createAccount(\n    input: {name: $name, accountType: $accountType, startingBalance: $startingBalance}\n  ) {\n    account {\n      id\n      name\n      accountType\n      startingBalance\n      currentBalance\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mAccount Create (1.4ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "account_type", "starting_balance_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Nathen LOC"], ["account_type", "loan"], ["starting_balance_cents", 1250000], ["created_at", "2025-08-12 21:12:30.768641"], ["updated_at", "2025-08-12 21:12:30.768641"]]
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.9ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 14:12:31 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?)[0m  [["account_id", 1], ["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.5ms (5 queries, 0 cached) | GC: 0.4ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 14:12:34 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"2"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"2"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.3ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 14:15:52 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?)[0m  [["account_id", 1], ["account_id", 2]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 13ms (Views: 0.1ms | ActiveRecord: 1.0ms (5 queries, 0 cached) | GC: 0.2ms)
+
+

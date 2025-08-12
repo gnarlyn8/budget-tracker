@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AccountList } from "./components/AccountList";
-import { CreateTransactionForm } from "./components/CreateTransactionForm";
+import { CreateBankAccountForm } from "./components/CreateBankAccountForm";
 import { Account } from "./components/Account";
 import "./App.css";
 
@@ -21,13 +21,13 @@ function App() {
             className={activeTab === "list" ? "active" : ""}
             onClick={() => setActiveTab("list")}
           >
-            View Budgets
+            View Bank / Loan Accounts
           </button>
           <button
             className={activeTab === "create" ? "active" : ""}
             onClick={() => setActiveTab("create")}
           >
-            Create Budget
+            Add New Bank / Loan Account
           </button>
         </nav>
       </header>
@@ -41,11 +41,7 @@ function App() {
             }}
           />
         )}
-        {activeTab === "create" && (
-          <CreateTransactionForm
-            onTransactionCreated={() => setActiveTab("list")}
-          />
-        )}
+        {activeTab === "create" && <CreateBankAccountForm />}
         {activeTab === "show" && selectedAccountId && (
           <Account
             accountId={selectedAccountId}
