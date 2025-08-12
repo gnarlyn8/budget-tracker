@@ -3261,3 +3261,34 @@ Migrating to RemoveBudgetsTable (20250812195906)
   [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250812195906') RETURNING "version"[0m
   [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/graphql" for ::1 at 2025-08-12 13:06:03 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+uninitialized constant Types::QueryType::Budget
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/object.rb:135:in `const_missing'
+/Users/nate/budget-tracker/server/app/graphql/types/query_type.rb:28:in `budgets'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:760:in `public_send'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:760:in `block (2 levels) in resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:903:in `block in with_extensions'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:939:in `block (2 levels) in run_extensions_before_resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:942:in `run_extensions_before_resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:939:in `block in run_extensions_before_resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field_extension.rb:134:in `resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:926:in `run_extensions_before_resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:898:in `with_extensions'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:729:in `block in resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:871:in `minimal_after_lazy'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/query.rb:28:in `after_lazy'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:727:in `resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:462:in `block (2 levels) in evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/tracing/trace.rb:90:in `execute_field'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:461:in `block in evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:809:in `call_method_on_directives'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:449:in `evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:359:in `evaluate_selection'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:315:in `block (3 levels) in evaluate_selections'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/dataloader.rb:300:in `block in spawn_job_fiber'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/dataloader.rb:255:in `block in spawn_fiber'
+Completed 500 Internal Server Error in 33ms (Views: 0.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+

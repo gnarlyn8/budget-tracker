@@ -1,6 +1,5 @@
 module Mutations
   class CreateBudgetCategory < BaseMutation
-    argument :budget_id, ID, required: true
     argument :name, String, required: true
     argument :amount, Float, required: true
     argument :description, String, required: false
@@ -9,9 +8,8 @@ module Mutations
     field :budget_category, Types::BudgetCategoryType, null: true
     field :errors, [String], null: false
 
-    def resolve(budget_id:, name:, amount:, description: nil, category_type: 'budget')
-      budget = Budget.find(budget_id)
-      budget_category = budget.budget_categories.build(
+    def resolve(name:, amount:, description: nil, category_type: 'variable_expense')
+      budget_category = BudgetCategory.new(
         name: name,
         amount: amount,
         description: description,

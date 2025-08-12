@@ -21,19 +21,26 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    field :budgets, [Types::BudgetType], null: false,
-      description: "Returns a list of budgets"
-    
-    def budgets
-      Budget.all
+        field :accounts, [Types::AccountType], null: false,
+      description: "Returns a list of accounts"
+
+    def accounts
+      Account.includes(:transactions).all
     end
 
-    field :budget, Types::BudgetType, null: true do
+    field :account, Types::AccountType, null: true do
       argument :id, ID, required: true
     end
 
-    def budget(id:)
-      Budget.includes(:budget_categories).find(id)
+    def account(id:)
+      Account.includes(:transactions).find(id)
+    end
+
+    field :budget_categories, [Types::BudgetCategoryType], null: false,
+      description: "Returns a list of budget categories"
+
+    def budget_categories
+      BudgetCategory.includes(:transactions).all
     end
 
     field :budget_category, Types::BudgetCategoryType, null: true do
@@ -42,6 +49,13 @@ module Types
 
     def budget_category(id:)
       BudgetCategory.includes(:transactions).find(id)
+    end
+
+    field :transactions, [Types::TransactionType], null: false,
+      description: "Returns a list of transactions"
+
+    def transactions
+      Transaction.includes(:account, :budget_category).all
     end
   end
 end
