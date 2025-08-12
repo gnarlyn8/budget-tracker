@@ -3198,3 +3198,66 @@ FOREIGN KEY ("account_id")
   [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."name" = ? LIMIT ?[0m  [["name", "LOC Repayment"], ["LIMIT", 1]]
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
   [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveBudgetsTable (20250812195906)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "abudget_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "budget_id" integer NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_type" varchar DEFAULT 'variable_expense' NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_categories_on_category_type" ON "abudget_categories" ("category_type")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_categories_on_budget_id" ON "abudget_categories" ("budget_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "abudget_categories" ("id","budget_id","name","amount","description","created_at","updated_at","category_type")
+                     SELECT "id","budget_id","name","amount","description","created_at","updated_at","category_type" FROM "budget_categories"[0m
+  [1m[35m (0.7ms)[0m  [1m[35mDROP TABLE "budget_categories"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "budget_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_type" varchar DEFAULT 'variable_expense' NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_budget_categories_on_category_type" ON "budget_categories" ("category_type")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "budget_categories" ("id","name","amount","description","created_at","updated_at","category_type")
+                     SELECT "id","name","amount","description","created_at","updated_at","category_type" FROM "abudget_categories"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "abudget_categories"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to RemoveBudgetsTable (20250812195906)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "abudget_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "budget_id" integer NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_type" varchar DEFAULT 'variable_expense' NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_categories_on_category_type" ON "abudget_categories" ("category_type")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_categories_on_budget_id" ON "abudget_categories" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "abudget_categories" ("id","budget_id","name","amount","description","created_at","updated_at","category_type")
+                     SELECT "id","budget_id","name","amount","description","created_at","updated_at","category_type" FROM "budget_categories"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "budget_categories"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "budget_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_type" varchar DEFAULT 'variable_expense' NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_budget_categories_on_category_type" ON "budget_categories" ("category_type")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "budget_categories" ("id","name","amount","description","created_at","updated_at","category_type")
+                     SELECT "id","name","amount","description","created_at","updated_at","category_type" FROM "abudget_categories"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "abudget_categories"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "abudget_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_type" varchar DEFAULT 'variable_expense' NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_categories_on_category_type" ON "abudget_categories" ("category_type")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "abudget_categories" ("id","name","amount","description","created_at","updated_at","category_type")
+                     SELECT "id","name","amount","description","created_at","updated_at","category_type" FROM "budget_categories"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "budget_categories"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "budget_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_type" varchar DEFAULT 'variable_expense' NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_budget_categories_on_category_type" ON "budget_categories" ("category_type")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "budget_categories" ("id","name","amount","description","created_at","updated_at","category_type")
+                     SELECT "id","name","amount","description","created_at","updated_at","category_type" FROM "abudget_categories"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "abudget_categories"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "budgets"[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250812195906') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m

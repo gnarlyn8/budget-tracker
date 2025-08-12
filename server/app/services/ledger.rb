@@ -1,7 +1,7 @@
 class Ledger
   def self.spend(cash:, category:, amount_cents:, on:, memo:)
     Transaction.create!(
-      account_id: cash.id,
+      account: cash,
       budget_category_id: category.id,
       amount_cents: -amount_cents,
       occurred_on: on,
@@ -12,7 +12,7 @@ class Ledger
   def self.repay(cash:, loan:, category:, amount_cents:, on:, memo:)
     ApplicationRecord.transaction do
       Transaction.create!(
-        account_id: cash.id,
+        account: cash,
         budget_category_id: category.id,
         amount_cents: -amount_cents,
         occurred_on: on,
@@ -20,8 +20,8 @@ class Ledger
       )
 
       Transaction.create!(
-        account_id: loan.id,
-        amount_cents: -amount_cents,
+        account: loan,
+        amount_cents: -amount_cents,  
         occurred_on: on,
         memo: memo
       )
