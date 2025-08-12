@@ -1,6 +1,8 @@
 import { useQuery } from "@apollo/client";
+import { useState } from "react";
 import { GET_ACCOUNT } from "../graphql/queries";
 import { CreateTransactionForm } from "./CreateTransactionForm";
+import { EditAccountForm } from "./EditAccountForm";
 
 interface AccountProps {
   accountId: string;
@@ -37,6 +39,7 @@ interface Account {
 }
 
 export function Account({ accountId, onBack }: AccountProps) {
+  const [isEditing, setIsEditing] = useState(false);
   const { loading, error, data, refetch } = useQuery(GET_ACCOUNT, {
     variables: { id: accountId },
   });
@@ -70,15 +73,38 @@ export function Account({ accountId, onBack }: AccountProps) {
         <button onClick={onBack} className="back-button">
           ← Back to Accounts
         </button>
-        <h1>
-          {account.name}
-          <span className={`account-type-badge ${account.accountType}`}>
-            {account.accountType === "monthly_budget" && "💰"}
-            {account.accountType === "loan" && "🏦"}
-            {account.accountType.replace("_", " ").toUpperCase()}
-          </span>
-        </h1>
+        <div className="header-content">
+          <h1>
+            {account.name}
+            <span className={`account-type-badge ${account.accountType}`}>
+              {account.accountType === "monthly_budget" && "💰"}
+              {account.accountType === "loan" && "🏦"}
+              {account.accountType.replace("_", " ").toUpperCase()}
+            </span>
+          </h1>
+          <button
+            onClick={() => setIsEditing(true)}
+            className="edit-button"
+            disabled={isEditing}
+          >
+            ✏️ Edit Account
+          </button>
+        </div>
       </div>
+
+      {isEditing && (
+        <EditAccountForm
+          accountId={accountId}
+          currentName={account.name}
+          currentAccountType={account.accountType}
+          currentStartingBalance={account.startingBalance}
+          onAccountUpdated={() => {
+            setIsEditing(false);
+            refetch();
+          }}
+          onCancel={() => setIsEditing(false)}
+        />
+      )}
 
       <div className="account-summary">
         <div className="summary-card">

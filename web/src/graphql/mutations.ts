@@ -27,6 +27,35 @@ export const CREATE_ACCOUNT = gql`
   }
 `;
 
+export const UPDATE_ACCOUNT = gql`
+  mutation UpdateAccount(
+    $id: ID!
+    $name: String
+    $accountType: String
+    $startingBalance: Float
+  ) {
+    updateAccount(
+      input: {
+        id: $id
+        name: $name
+        accountType: $accountType
+        startingBalance: $startingBalance
+      }
+    ) {
+      account {
+        id
+        name
+        accountType
+        startingBalance
+        currentBalance
+        createdAt
+        updatedAt
+      }
+      errors
+    }
+  }
+`;
+
 export const CREATE_BUDGET_CATEGORY = gql`
   mutation CreateBudgetCategory(
     $name: String!
