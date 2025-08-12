@@ -14,6 +14,7 @@ export function CreateBudgetCategoryForm({
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
+  const [categoryType, setCategoryType] = useState("variable_expense");
 
   const [createBudgetCategory, { loading, error }] = useMutation(
     CREATE_BUDGET_CATEGORY
@@ -29,12 +30,14 @@ export function CreateBudgetCategoryForm({
           name,
           amount: parseFloat(amount),
           description: description || null,
+          categoryType,
         },
       });
 
       setName("");
       setAmount("");
       setDescription("");
+      setCategoryType("variable_expense");
       onBudgetCategoryCreated();
     } catch (err) {
       console.error("Error creating budget category:", err);
@@ -53,12 +56,25 @@ export function CreateBudgetCategoryForm({
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            placeholder="e.g., Groceries, Entertainment"
+            placeholder="e.g., Groceries, Entertainment, Mortgage"
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="amount">Budget Amount ($):</label>
+          <label htmlFor="categoryType">Category Type:</label>
+          <select
+            id="categoryType"
+            value={categoryType}
+            onChange={(e) => setCategoryType(e.target.value)}
+            required
+          >
+            <option value="fixed_payment">Variable Expense</option>
+            <option value="debt_repayment">Debt Repayment</option>
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="amount">Amount ($):</label>
           <input
             type="number"
             id="amount"

@@ -23,6 +23,7 @@ interface BudgetCategory {
   name: string;
   amount: number;
   description?: string;
+  categoryType: string;
   transactions: Transaction[];
 }
 
@@ -105,7 +106,16 @@ export function Budget({ budgetId, onBack, onCategoryClick }: BudgetProps) {
               return (
                 <div key={category.id} className="category-card">
                   <div className="category-header">
-                    <h3>{category.name}</h3>
+                    <h3>
+                      {category.name}
+                      <span
+                        className={`category-type-badge ${category.categoryType}`}
+                      >
+                        {category.categoryType === "variable_expense" && "📊"}
+                        {category.categoryType === "debt_repayment" && "💳"}
+                        {category.categoryType.replace("_", " ").toUpperCase()}
+                      </span>
+                    </h3>
                     <div className="category-amounts">
                       <span className="category-budget">
                         Budget: ${category.amount.toFixed(2)}

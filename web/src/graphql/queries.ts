@@ -14,6 +14,7 @@ export const GET_BUDGETS = gql`
         name
         amount
         description
+        categoryType
         transactions {
           id
           amount
@@ -37,6 +38,7 @@ export const GET_BUDGET = gql`
         name
         amount
         description
+        categoryType
         transactions {
           id
           budgetCategoryId
@@ -59,6 +61,7 @@ export const GET_BUDGET_CATEGORY = gql`
       name
       amount
       description
+      categoryType
       createdAt
       updatedAt
       transactions {

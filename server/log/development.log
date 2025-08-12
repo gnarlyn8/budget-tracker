@@ -1725,3 +1725,1418 @@ Processing by GraphqlController#execute as */*
 Completed 200 OK in 29ms (Views: 0.1ms | ActiveRecord: 1.2ms (6 queries, 0 cached) | GC: 0.6ms)
 
 
+Started POST "/graphql" for ::1 at 2025-08-11 16:44:11 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 34ms (Views: 0.1ms | ActiveRecord: 2.5ms (6 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 16:44:48 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 16:44:53 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 0.8ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 16:44:59 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.5ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 16:45:06 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 0.6ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 16:45:09 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.3ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 16:45:11 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 0.5ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 16:45:12 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.4ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 16:45:15 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.2ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 0.9ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-11 16:45:16 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 0.3ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2025-08-11 16:56:18 -0700
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/railties-8.0.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/railties-8.0.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.1ms | GC: 0.0ms)
+Completed 200 OK in 25ms (Views: 7.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.7ms)
+
+
+Started GET "/icon.png" for ::1 at 2025-08-11 16:56:18 -0700
+  
+ActionController::RoutingError (No route matches [GET] "/icon.png"):
+  
+Started POST "/graphql" for ::1 at 2025-08-11 18:07:08 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (5.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.6ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 22ms (Views: 0.1ms | ActiveRecord: 6.3ms (6 queries, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 07:50:11 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.9ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.5ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in -38ms (Views: 0.3ms | ActiveRecord: 2.7ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 09:15:51 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.3ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 11ms (Views: 0.1ms | ActiveRecord: 1.8ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddCategoryTypeToBudgetCategories (20250812162748)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "budget_categories" ADD "category_type" varchar DEFAULT 'budget' NOT NULL[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE INDEX "index_budget_categories_on_category_type" ON "budget_categories" ("category_type")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250812162748') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/graphql" for ::1 at 2025-08-12 09:28:52 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+wrong number of arguments (given 0, expected 1..2)
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/enum.rb:216:in `enum'
+/Users/nate/budget-tracker/server/app/models/budget_category.rb:5:in `<class:BudgetCategory>'
+/Users/nate/budget-tracker/server/app/models/budget_category.rb:1:in `<main>'
+<internal:/Users/nate/.rbenv/versions/3.2.8/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+<internal:/Users/nate/.rbenv/versions/3.2.8/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/bootsnap-1.18.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:26:in `require'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activesupport-8.0.2/lib/active_support/inflector/methods.rb:290:in `const_get'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activesupport-8.0.2/lib/active_support/inflector/methods.rb:290:in `constantize'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activesupport-8.0.2/lib/active_support/inflector/methods.rb:316:in `safe_constantize'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activesupport-8.0.2/lib/active_support/core_ext/string/inflections.rb:87:in `safe_constantize'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/inheritance.rb:259:in `block in compute_type'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/inheritance.rb:258:in `each'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/inheritance.rb:258:in `compute_type'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:496:in `compute_class'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:431:in `_klass'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:423:in `klass'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:763:in `automatic_inverse_of'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:751:in `block in inverse_name'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:751:in `fetch'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:751:in `inverse_name'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:675:in `has_inverse?'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:265:in `check_validity_of_inverse!'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:619:in `check_validity!'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association.rb:42:in `initialize'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations.rb:58:in `new'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations.rb:58:in `association'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/builder/association.rb:105:in `budget_categories'
+/Users/nate/budget-tracker/server/app/graphql/types/budget_type.rb:12:in `total_amount'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:760:in `public_send'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:760:in `block (2 levels) in resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:892:in `with_extensions'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:729:in `block in resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:871:in `minimal_after_lazy'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/query.rb:28:in `after_lazy'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:727:in `resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:462:in `block (2 levels) in evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/tracing/trace.rb:90:in `execute_field'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:461:in `block in evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:809:in `call_method_on_directives'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:449:in `evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:359:in `evaluate_selection'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:315:in `block (3 levels) in evaluate_selections'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/dataloader.rb:300:in `block in spawn_job_fiber'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/dataloader.rb:255:in `block in spawn_fiber'
+Completed 500 Internal Server Error in 32ms (Views: 0.2ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 09:30:08 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+wrong number of arguments (given 0, expected 1..2)
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/enum.rb:216:in `enum'
+/Users/nate/budget-tracker/server/app/models/budget_category.rb:5:in `<class:BudgetCategory>'
+/Users/nate/budget-tracker/server/app/models/budget_category.rb:1:in `<main>'
+<internal:/Users/nate/.rbenv/versions/3.2.8/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+<internal:/Users/nate/.rbenv/versions/3.2.8/lib/ruby/3.2.0/rubygems/core_ext/kernel_require.rb>:38:in `require'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/bootsnap-1.18.6/lib/bootsnap/load_path_cache/core_ext/kernel_require.rb:30:in `require'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/zeitwerk-2.7.3/lib/zeitwerk/core_ext/kernel.rb:26:in `require'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activesupport-8.0.2/lib/active_support/inflector/methods.rb:290:in `const_get'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activesupport-8.0.2/lib/active_support/inflector/methods.rb:290:in `constantize'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activesupport-8.0.2/lib/active_support/inflector/methods.rb:316:in `safe_constantize'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activesupport-8.0.2/lib/active_support/core_ext/string/inflections.rb:87:in `safe_constantize'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/inheritance.rb:259:in `block in compute_type'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/inheritance.rb:258:in `each'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/inheritance.rb:258:in `compute_type'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:496:in `compute_class'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:431:in `_klass'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:423:in `klass'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:763:in `automatic_inverse_of'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:751:in `block in inverse_name'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:751:in `fetch'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:751:in `inverse_name'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:675:in `has_inverse?'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:265:in `check_validity_of_inverse!'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/reflection.rb:619:in `check_validity!'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association.rb:42:in `initialize'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations.rb:58:in `new'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations.rb:58:in `association'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/builder/association.rb:105:in `budget_categories'
+/Users/nate/budget-tracker/server/app/graphql/types/budget_type.rb:12:in `total_amount'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:760:in `public_send'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:760:in `block (2 levels) in resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:892:in `with_extensions'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:729:in `block in resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:871:in `minimal_after_lazy'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/query.rb:28:in `after_lazy'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:727:in `resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:462:in `block (2 levels) in evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/tracing/trace.rb:90:in `execute_field'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:461:in `block in evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:809:in `call_method_on_directives'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:449:in `evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:359:in `evaluate_selection'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:315:in `block (3 levels) in evaluate_selections'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/dataloader.rb:300:in `block in spawn_job_fiber'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/dataloader.rb:255:in `block in spawn_fiber'
+Completed 500 Internal Server Error in 42ms (Views: 0.2ms | ActiveRecord: 1.5ms (1 query, 0 cached) | GC: 1.8ms)
+
+
+  [1m[36mBudget Load (2.6ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mBudget Delete All (0.4ms)[0m  [1m[31mDELETE FROM "budgets"[0m
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mBudget Delete All (0.2ms)[0m  [1m[31mDELETE FROM "budgets"[0m
+  [1m[36mBudgetCategory Load (2.8ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+Started POST "/graphql" for ::1 at 2025-08-12 09:34:57 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.0ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.2ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 46ms (Views: 0.2ms | ActiveRecord: 3.6ms (6 queries, 0 cached) | GC: 2.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 09:35:01 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 0.5ms (6 queries, 0 cached) | GC: 0.7ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 09:38:01 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.7ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+Completed 200 OK in 35ms (Views: 0.2ms | ActiveRecord: 2.0ms (3 queries, 0 cached) | GC: 1.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 09:39:36 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 09:39:40 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 0.2ms (3 queries, 0 cached) | GC: 0.3ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddCategoryTypeToBudgetCategories (20250812162748)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mDROP INDEX "index_budget_categories_on_category_type"[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "abudget_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "budget_id" integer NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_type" varchar DEFAULT 'budget' NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_categories_on_budget_id" ON "abudget_categories" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "abudget_categories" ("id","budget_id","name","amount","description","created_at","updated_at","category_type")
+                     SELECT "id","budget_id","name","amount","description","created_at","updated_at","category_type" FROM "budget_categories"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "budget_categories"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "budget_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "budget_id" integer NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a928ada795"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_budget_categories_on_budget_id" ON "budget_categories" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "budget_categories" ("id","budget_id","name","amount","description","created_at","updated_at")
+                     SELECT "id","budget_id","name","amount","description","created_at","updated_at" FROM "abudget_categories"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "abudget_categories"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.0ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20250812162748'[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/graphql" for ::1 at 2025-08-12 09:42:41 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (2.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+Undeclared attribute type for enum 'category_type' in BudgetCategory. Enums must be backed by a database column or declared with an explicit type via `attribute`.
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/enum.rb:242:in `block in _enum'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activemodel-8.0.2/lib/active_model/attribute_registration.rb:71:in `block in apply_to'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activemodel-8.0.2/lib/active_model/attribute_registration.rb:69:in `each'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activemodel-8.0.2/lib/active_model/attribute_registration.rb:69:in `apply_to'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activemodel-8.0.2/lib/active_model/attribute_registration.rb:87:in `block in apply_pending_attribute_modifications'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activemodel-8.0.2/lib/active_model/attribute_registration.rb:86:in `each'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activemodel-8.0.2/lib/active_model/attribute_registration.rb:86:in `apply_pending_attribute_modifications'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/attributes.rb:250:in `_default_attributes'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/model_schema.rb:596:in `load_schema!'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/counter_cache.rb:187:in `load_schema!'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/encryption/encryptable_record.rb:127:in `load_schema!'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/model_schema.rb:539:in `block in load_schema'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/model_schema.rb:536:in `synchronize'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/model_schema.rb:536:in `load_schema'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/model_schema.rb:428:in `columns_hash'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/attributes.rb:244:in `block in _default_attributes'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/connection_adapters/abstract/connection_pool.rb:418:in `with_connection'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/connection_handling.rb:310:in `with_connection'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/attributes.rb:243:in `_default_attributes'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activemodel-8.0.2/lib/active_model/attribute_registration.rb:38:in `attribute_types'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activemodel-8.0.2/lib/active_model/attribute_registration.rb:49:in `type_for_attribute'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/type_caster/map.rb:16:in `type_for_attribute'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/arel/table.rb:107:in `type_for_attribute'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/table_metadata.rb:18:in `type'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/predicate_builder.rb:59:in `build'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/predicate_builder.rb:54:in `[]'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/predicate_builder.rb:145:in `block in expand_from_hash'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/predicate_builder.rb:87:in `each'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/predicate_builder.rb:87:in `flat_map'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/predicate_builder.rb:87:in `expand_from_hash'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/predicate_builder.rb:25:in `build_from_hash'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/query_methods.rb:1643:in `build_where_clause'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/query_methods.rb:1044:in `where!'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association_scope.rb:163:in `apply_scope'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association_scope.rb:66:in `block in last_chain_scope'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association_scope.rb:64:in `each'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association_scope.rb:64:in `last_chain_scope'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association_scope.rb:125:in `add_constraints'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association_scope.rb:29:in `scope'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association_scope.rb:7:in `scope'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association.rb:305:in `association_scope'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/association.rb:115:in `scope'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/collection_association.rb:299:in `scope'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/collection_proxy.rb:950:in `scope'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/collection_proxy.rb:1137:in `eager_load_values'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation.rb:1240:in `eager_loading?'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/calculations.rb:431:in `has_include?'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/calculations.rb:231:in `calculate'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/associations/collection_proxy.rb:725:in `calculate'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/activerecord-8.0.2/lib/active_record/relation/calculations.rb:176:in `sum'
+/Users/nate/budget-tracker/server/app/graphql/types/budget_type.rb:12:in `total_amount'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:760:in `public_send'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:760:in `block (2 levels) in resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:892:in `with_extensions'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:729:in `block in resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:871:in `minimal_after_lazy'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/query.rb:28:in `after_lazy'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/schema/field.rb:727:in `resolve'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:462:in `block (2 levels) in evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/tracing/trace.rb:90:in `execute_field'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:461:in `block in evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:809:in `call_method_on_directives'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:449:in `evaluate_selection_with_resolved_keyword_args'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:359:in `evaluate_selection'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/execution/interpreter/runtime.rb:315:in `block (3 levels) in evaluate_selections'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/dataloader.rb:300:in `block in spawn_job_fiber'
+/Users/nate/.rbenv/versions/3.2.8/lib/ruby/gems/3.2.0/gems/graphql-2.5.11/lib/graphql/dataloader.rb:255:in `block in spawn_fiber'
+Completed 500 Internal Server Error in 58ms (Views: 0.4ms | ActiveRecord: 3.6ms (1 query, 0 cached) | GC: 4.7ms)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddCategoryTypeToBudgetCategories (20250812162748)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "budget_categories" ADD "category_type" varchar DEFAULT 'monthly_budget' NOT NULL[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_budget_categories_on_category_type" ON "budget_categories" ("category_type")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250812162748') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/graphql" for ::1 at 2025-08-12 09:43:08 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.8ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 51ms (Views: 0.2ms | ActiveRecord: 3.7ms (6 queries, 0 cached) | GC: 1.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 09:43:17 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 0.4ms (6 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 09:43:29 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategory", "variables"=>{"id"=>"2"}, "query"=>"query GetBudgetCategory($id: ID!) {\n  budgetCategory(id: $id) {\n    id\n    budgetId\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetCategoryId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategory", "variables"=>{"id"=>"2"}, "query"=>"query GetBudgetCategory($id: ID!) {\n  budgetCategory(id: $id) {\n    id\n    budgetId\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetCategoryId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 09:44:44 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 0.7ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 09:44:45 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.4ms (6 queries, 0 cached) | GC: 0.2ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddCategoryTypeToBudgetCategories (20250812162748)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[35mDROP INDEX "index_budget_categories_on_category_type"[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "abudget_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "budget_id" integer NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "category_type" varchar DEFAULT 'monthly_budget' NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_abudget_categories_on_budget_id" ON "abudget_categories" ("budget_id")[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO "abudget_categories" ("id","budget_id","name","amount","description","created_at","updated_at","category_type")
+                     SELECT "id","budget_id","name","amount","description","created_at","updated_at","category_type" FROM "budget_categories"[0m
+  [1m[35m (0.6ms)[0m  [1m[35mDROP TABLE "budget_categories"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "budget_categories" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "budget_id" integer NOT NULL, "name" varchar, "amount" decimal, "description" text, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_a928ada795"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_budget_categories_on_budget_id" ON "budget_categories" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "budget_categories" ("id","budget_id","name","amount","description","created_at","updated_at")
+                     SELECT "id","budget_id","name","amount","description","created_at","updated_at" FROM "abudget_categories"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "abudget_categories"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.1ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20250812162748'[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddCategoryTypeToBudgetCategories (20250812162748)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "budget_categories" ADD "category_type" varchar DEFAULT 'variable_expense' NOT NULL[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_budget_categories_on_category_type" ON "budget_categories" ("category_type")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250812162748') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/graphql" for ::1 at 2025-08-12 10:17:44 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.5ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.2ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 49ms (Views: 0.3ms | ActiveRecord: 2.1ms (6 queries, 0 cached) | GC: 2.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 10:17:45 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 0.4ms (6 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateAccounts (20250812175059)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE TABLE "accounts" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "account_type" varchar NOT NULL, "starting_balance_cents" integer DEFAULT 0 NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250812175059') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddAccountReferenceToTransactions (20250812175524)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id" FROM "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mTransaction Load (2.9ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mBudgetCategory Delete All (0.4ms)[0m  [1m[31mDELETE FROM "budget_categories"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddAccountReferenceToTransactions (20250812175524)
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id" FROM "transactions"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id" FROM "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mAccount Load (3.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddAccountReferenceToTransactions (20250812175524)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "transactions" ADD "account_id" integer[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id" FROM "transactions"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "transactions" ADD "amount_cents" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD "occurred_on" date[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "transactions" ADD "memo" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[36mAddAccountReferenceToTransactions::Account Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."name" = ? LIMIT ?[0m  [["name", "Monthly Budget"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mAddAccountReferenceToTransactions::Account Create (0.2ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "account_type", "starting_balance_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Monthly Budget"], ["account_type", "monthly_budget"], ["starting_balance_cents", 0], ["created_at", "2025-08-12 18:26:25.936834"], ["updated_at", "2025-08-12 18:26:25.936834"]]
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mAddAccountReferenceToTransactions::Transaction Update All (0.1ms)[0m  [1m[33mUPDATE "transactions" SET "account_id" = ? WHERE "transactions"."account_id" IS NULL[0m  [["account_id", 1]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."memo" IS NULL ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Update (0.1ms)[0m  [1m[33mUPDATE "transactions" SET "memo" = ? WHERE "transactions"."id" = ?[0m  [["memo", "Weekly Groceries"], ["id", 1]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."amount_cents" IS NULL ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Update (0.1ms)[0m  [1m[33mUPDATE "transactions" SET "amount_cents" = ?, "occurred_on" = ? WHERE "transactions"."id" = ?[0m  [["amount_cents", 16200], ["occurred_on", "2025-08-04"], ["id", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer, "amount_cents" integer, "occurred_on" date, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer, "occurred_on" date, "memo" varchar, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer, "occurred_on" date, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date, "memo" varchar, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "amount" decimal, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","amount","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","description","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "date" datetime(6), "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","description","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","date","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","description","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "description" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","description","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","description","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_71101f657c"
+FOREIGN KEY ("budget_id")
+  REFERENCES "budgets" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_id" ON "transactions" ("budget_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_id" integer, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_id" ON "atransactions" ("budget_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_id","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250812175524') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddAccountReferenceToTransactions (20250812175524)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "transactions" ADD "amount" decimal[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD "date" datetime(6)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD "description" varchar[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD "budget_id" integer[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mDROP INDEX "index_transactions_on_occurred_on"[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","memo","amount","date","description","budget_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","memo","amount","date","description","budget_id" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","amount","date","description","budget_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","amount","date","description","budget_id" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","amount","date","description","budget_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","amount","date","description","budget_id" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","account_id","amount_cents","amount","date","description","budget_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount_cents","amount","date","description","budget_id" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","account_id","amount_cents","amount","date","description","budget_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount_cents","amount","date","description","budget_id" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","account_id","amount","date","description","budget_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount","date","description","budget_id" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","account_id","amount","date","description","budget_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount","date","description","budget_id" FROM "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","account_id","amount","date","description","budget_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount","date","description","budget_id" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","account_id","amount","date","description","budget_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount","date","description","budget_id" FROM "transactions"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Destroy (0.1ms)[0m  [1m[31mDELETE FROM "schema_migrations" WHERE "schema_migrations"."version" = '20250812175524'[0m
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddAccountReferenceToTransactions (20250812175524)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.5ms)[0m  [1m[35mALTER TABLE "transactions" ADD "account_id" integer[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "transactions" ADD "amount_cents" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD "occurred_on" date[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD "memo" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[36mAddAccountReferenceToTransactions::Account Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."name" = ? LIMIT ?[0m  [["name", "Monthly Budget"], ["LIMIT", 1]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Update All (0.1ms)[0m  [1m[33mUPDATE "transactions" SET "account_id" = ? WHERE "transactions"."account_id" IS NULL[0m  [["account_id", 1]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."memo" IS NULL ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Update (0.1ms)[0m  [1m[33mUPDATE "transactions" SET "memo" = ? WHERE "transactions"."id" = ?[0m  [["memo", nil], ["id", 1]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."amount_cents" IS NULL ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Update (0.2ms)[0m  [1m[33mUPDATE "transactions" SET "amount_cents" = ?, "occurred_on" = ? WHERE "transactions"."id" = ?[0m  [["amount_cents", nil], ["occurred_on", "2025-08-12"], ["id", 1]]
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer, "amount_cents" integer, "occurred_on" date, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer, "occurred_on" date, "memo" varchar, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer, "occurred_on" date, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date, "memo" varchar, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK TRANSACTION[0m
+Started POST "/graphql" for ::1 at 2025-08-12 11:30:18 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.2ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 49ms (Views: 0.1ms | ActiveRecord: 1.9ms (6 queries, 0 cached) | GC: 1.6ms)
+
+
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTransaction Load (2.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mTransaction Delete All (0.7ms)[0m  [1m[31mDELETE FROM "transactions"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddAccountReferenceToTransactions (20250812175524)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.6ms)[0m  [1m[35mALTER TABLE "transactions" ADD "account_id" integer[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id" FROM "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id" FROM "atransactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "transactions" ADD "amount_cents" integer[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD "occurred_on" date[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "transactions" ADD "memo" varchar[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[36mAddAccountReferenceToTransactions::Account Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."name" = ? LIMIT ?[0m  [["name", "Monthly Budget"], ["LIMIT", 1]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Update All (0.1ms)[0m  [1m[33mUPDATE "transactions" SET "account_id" = ? WHERE "transactions"."account_id" IS NULL[0m  [["account_id", 1]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."memo" IS NULL ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  [1m[36mAddAccountReferenceToTransactions::Transaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."amount_cents" IS NULL ORDER BY "transactions"."id" ASC LIMIT ?[0m  [["LIMIT", 1000]]
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer, "amount_cents" integer, "occurred_on" date, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer, "occurred_on" date, "memo" varchar, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer, "occurred_on" date, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date, "memo" varchar, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.3ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "amount" decimal, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","amount","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "date" datetime(6), "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","date","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","date","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "description" varchar, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","description","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","description","budget_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","budget_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA foreign_keys[0m
+  [1m[35mSQL (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = ON[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = OFF[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TEMPORARY TABLE "atransactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "budget_id" integer, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_occurred_on" ON "atransactions" ("occurred_on")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_account_id" ON "atransactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "tindex_atransactions_on_budget_category_id" ON "atransactions" ("budget_category_id")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "atransactions" ("id","created_at","updated_at","budget_category_id","budget_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","budget_id","account_id","amount_cents","occurred_on","memo" FROM "transactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "transactions"[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE TABLE "transactions" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, "budget_category_id" integer NOT NULL, "account_id" integer NOT NULL, "amount_cents" integer NOT NULL, "occurred_on" date NOT NULL, "memo" varchar, CONSTRAINT "fk_rails_01f020e267"
+FOREIGN KEY ("account_id")
+  REFERENCES "accounts" ("id")
+, CONSTRAINT "fk_rails_3149034a54"
+FOREIGN KEY ("budget_category_id")
+  REFERENCES "budget_categories" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_budget_category_id" ON "transactions" ("budget_category_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_account_id" ON "transactions" ("account_id")[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_transactions_on_occurred_on" ON "transactions" ("occurred_on")[0m
+  [1m[35mSQL (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","memo")
+                     SELECT "id","created_at","updated_at","budget_category_id","account_id","amount_cents","occurred_on","memo" FROM "atransactions"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE "atransactions"[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA defer_foreign_keys = 0[0m
+  [1m[35m (0.0ms)[0m  [1m[35mPRAGMA foreign_keys = 1[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250812175524') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started POST "/graphql" for ::1 at 2025-08-12 11:33:52 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (1.7ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.2ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 77ms (Views: 0.3ms | ActiveRecord: 4.2ms (6 queries, 0 cached) | GC: 3.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 11:33:56 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      categoryType\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 8ms (Views: 0.1ms | ActiveRecord: 0.5ms (6 queries, 0 cached) | GC: 0.4ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 11:34:01 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgets", "variables"=>{}, "query"=>"query GetBudgets {\n  budgets {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        amount\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.2ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets"[0m
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 12ms (Views: 0.1ms | ActiveRecord: 0.8ms (6 queries, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 11:36:00 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudget", "variables"=>{"id"=>"5"}, "query"=>"query GetBudget($id: ID!) {\n  budget(id: $id) {\n    id\n    name\n    description\n    totalAmount\n    createdAt\n    updatedAt\n    budgetCategories {\n      id\n      name\n      amount\n      description\n      transactions {\n        id\n        budgetCategoryId\n        description\n        amount\n        date\n        createdAt\n        updatedAt\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudget Load (0.1ms)[0m  [1m[34mSELECT "budgets".* FROM "budgets" WHERE "budgets"."id" = ? LIMIT ?[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mBudgetCategory Sum (0.1ms)[0m  [1m[34mSELECT SUM("budget_categories"."amount") FROM "budget_categories" WHERE "budget_categories"."budget_id" = ?[0m  [["budget_id", 5]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 2]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.4ms (6 queries, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-12 11:36:02 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategory", "variables"=>{"id"=>"3"}, "query"=>"query GetBudgetCategory($id: ID!) {\n  budgetCategory(id: $id) {\n    id\n    budgetId\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetCategoryId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategory", "variables"=>{"id"=>"3"}, "query"=>"query GetBudgetCategory($id: ID!) {\n  budgetCategory(id: $id) {\n    id\n    budgetId\n    name\n    amount\n    description\n    createdAt\n    updatedAt\n    transactions {\n      id\n      budgetCategoryId\n      description\n      amount\n      date\n      createdAt\n      updatedAt\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" = ?[0m  [["budget_category_id", 3]]
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.2ms)
+
+

@@ -22,6 +22,7 @@ export const CREATE_BUDGET_CATEGORY = gql`
     $name: String!
     $amount: Float!
     $description: String
+    $categoryType: String
   ) {
     createBudgetCategory(
       input: {
@@ -29,6 +30,7 @@ export const CREATE_BUDGET_CATEGORY = gql`
         name: $name
         amount: $amount
         description: $description
+        categoryType: $categoryType
       }
     ) {
       budgetCategory {
@@ -37,6 +39,7 @@ export const CREATE_BUDGET_CATEGORY = gql`
         name
         amount
         description
+        categoryType
         createdAt
         updatedAt
       }
