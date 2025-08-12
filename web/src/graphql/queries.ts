@@ -1,53 +1,76 @@
 import { gql } from "@apollo/client";
 
-export const GET_BUDGETS = gql`
-  query GetBudgets {
-    budgets {
+export const GET_ACCOUNTS = gql`
+  query GetAccounts {
+    accounts {
       id
       name
-      description
-      totalAmount
+      accountType
+      startingBalance
+      currentBalance
       createdAt
       updatedAt
-      budgetCategories {
+      transactions {
         id
-        name
         amount
-        description
-        categoryType
-        transactions {
+        occurredOn
+        memo
+        createdAt
+        updatedAt
+        budgetCategory {
           id
-          amount
+          name
+          categoryType
         }
       }
     }
   }
 `;
 
-export const GET_BUDGET = gql`
-  query GetBudget($id: ID!) {
-    budget(id: $id) {
+export const GET_ACCOUNT = gql`
+  query GetAccount($id: ID!) {
+    account(id: $id) {
       id
       name
-      description
-      totalAmount
+      accountType
+      startingBalance
+      currentBalance
       createdAt
       updatedAt
-      budgetCategories {
+      transactions {
         id
-        name
         amount
-        description
-        categoryType
-        transactions {
+        occurredOn
+        memo
+        createdAt
+        updatedAt
+        budgetCategory {
           id
-          budgetCategoryId
-          description
+          name
           amount
-          date
-          createdAt
-          updatedAt
+          description
+          categoryType
         }
+      }
+    }
+  }
+`;
+
+export const GET_BUDGET_CATEGORIES = gql`
+  query GetBudgetCategories {
+    budgetCategories {
+      id
+      name
+      amount
+      description
+      categoryType
+      createdAt
+      updatedAt
+      transactions {
+        id
+        amount
+        memo
+        occurredOn
       }
     }
   }
@@ -57,7 +80,6 @@ export const GET_BUDGET_CATEGORY = gql`
   query GetBudgetCategory($id: ID!) {
     budgetCategory(id: $id) {
       id
-      budgetId
       name
       amount
       description
@@ -66,12 +88,16 @@ export const GET_BUDGET_CATEGORY = gql`
       updatedAt
       transactions {
         id
-        budgetCategoryId
-        description
         amount
-        date
+        occurredOn
+        memo
         createdAt
         updatedAt
+        account {
+          id
+          name
+          accountType
+        }
       }
     }
   }

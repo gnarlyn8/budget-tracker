@@ -1,19 +1,29 @@
 import { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { CREATE_TRANSACTION } from "../graphql/mutations";
+import { GET_ACCOUNTS, GET_BUDGET_CATEGORIES } from "../graphql/queries";
 
 interface CreateTransactionFormProps {
-  budgetCategoryId: string;
+  accountId?: string;
+  budgetCategoryId?: string;
   onTransactionCreated: () => void;
 }
 
 export function CreateTransactionForm({
+  accountId,
   budgetCategoryId,
   onTransactionCreated,
 }: CreateTransactionFormProps) {
-  const [description, setDescription] = useState("");
+  const [selectedAccountId, setSelectedAccountId] = useState(accountId || "");
+  const [selectedBudgetCategoryId, setSelectedBudgetCategoryId] = useState(
+    budgetCategoryId || ""
+  );
+  const [memo, setMemo] = useState("");
   const [amount, setAmount] = useState("");
-  const [date, setDate] = useState("");
+  const [occurredOn, setOccurredOn] = useState("");
+
+  const { data: accountsData } = useQuery(GET_ACCOUNTS);
+  const { data: categoriesData } = useQuery(GET_BUDGET_CATEGORIES);
 
   const [createTransaction, { loading, error }] =
     useMutation(CREATE_TRANSACTION);
@@ -24,16 +34,19 @@ export function CreateTransactionForm({
     try {
       await createTransaction({
         variables: {
-          budgetCategoryId,
-          description,
+          accountId: selectedAccountId,
+          budgetCategoryId: selectedBudgetCategoryId || null,
+          memo,
           amount: parseFloat(amount),
-          date: date || null,
+          occurredOn: occurredOn || null,
         },
       });
 
-      setDescription("");
+      setMemo("");
       setAmount("");
-      setDate("");
+      setOccurredOn("");
+      if (!accountId) setSelectedAccountId("");
+      if (!budgetCategoryId) setSelectedBudgetCategoryId("");
       onTransactionCreated();
     } catch (err) {
       console.error("Error creating transaction:", err);
@@ -44,13 +57,50 @@ export function CreateTransactionForm({
     <div className="create-transaction-form">
       <h3>Add New Transaction</h3>
       <form onSubmit={handleSubmit}>
+        {!accountId && (
+          <div className="form-group">
+            <label htmlFor="account">Account:</label>
+            <select
+              id="account"
+              value={selectedAccountId}
+              onChange={(e) => setSelectedAccountId(e.target.value)}
+              required
+            >
+              <option value="">Select an account</option>
+              {accountsData?.accounts?.map((account: any) => (
+                <option key={account.id} value={account.id}>
+                  {account.name} ({account.accountType.replace("_", " ")})
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {!budgetCategoryId && (
+          <div className="form-group">
+            <label htmlFor="budgetCategory">Budget Category (optional):</label>
+            <select
+              id="budgetCategory"
+              value={selectedBudgetCategoryId}
+              onChange={(e) => setSelectedBudgetCategoryId(e.target.value)}
+            >
+              <option value="">No category</option>
+              {categoriesData?.budgetCategories?.map((category: any) => (
+                <option key={category.id} value={category.id}>
+                  {category.name} ({category.categoryType.replace("_", " ")})
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
         <div className="form-group">
-          <label htmlFor="description">Description:</label>
+          <label htmlFor="memo">Description:</label>
           <input
             type="text"
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
+            id="memo"
+            value={memo}
+            onChange={(e) => setMemo(e.target.value)}
             required
             placeholder="e.g., Grocery shopping, Movie tickets"
           />
@@ -64,24 +114,23 @@ export function CreateTransactionForm({
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             required
-            min="0"
             step="0.01"
             placeholder="0.00"
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="date">Date:</label>
+          <label htmlFor="occurredOn">Date:</label>
           <input
             type="date"
-            id="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
+            id="occurredOn"
+            value={occurredOn}
+            onChange={(e) => setOccurredOn(e.target.value)}
             placeholder="Leave empty for today"
           />
         </div>
 
-        <button type="submit" disabled={loading}>
+        <button type="submit" disabled={loading || !selectedAccountId}>
           {loading ? "Adding..." : "Add Transaction"}
         </button>
 

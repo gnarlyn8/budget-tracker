@@ -1,16 +1,14 @@
 import { useState } from "react";
-import { BudgetList } from "./components/BudgetList";
-import { CreateBudgetForm } from "./components/CreateBudgetForm";
-import { Budget } from "./components/Budget";
-import { BudgetCategory } from "./components/BudgetCategory";
+import { AccountList } from "./components/AccountList";
+import { CreateTransactionForm } from "./components/CreateTransactionForm";
+import { Account } from "./components/Account";
 import "./App.css";
 
 function App() {
-  const [activeTab, setActiveTab] = useState<
-    "list" | "create" | "show" | "category"
-  >("list");
-  const [selectedBudgetId, setSelectedBudgetId] = useState<string | null>(null);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
+  const [activeTab, setActiveTab] = useState<"list" | "create" | "show">(
+    "list"
+  );
+  const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
   );
 
@@ -36,28 +34,22 @@ function App() {
 
       <main className="app-main">
         {activeTab === "list" && (
-          <BudgetList
-            onBudgetClick={(budgetId) => {
-              setSelectedBudgetId(budgetId);
+          <AccountList
+            onAccountClick={(accountId) => {
+              setSelectedAccountId(accountId);
               setActiveTab("show");
             }}
           />
         )}
-        {activeTab === "create" && <CreateBudgetForm />}
-        {activeTab === "show" && selectedBudgetId && (
-          <Budget
-            budgetId={selectedBudgetId}
-            onBack={() => setActiveTab("list")}
-            onCategoryClick={(categoryId: string) => {
-              setSelectedCategoryId(categoryId);
-              setActiveTab("category");
-            }}
+        {activeTab === "create" && (
+          <CreateTransactionForm
+            onTransactionCreated={() => setActiveTab("list")}
           />
         )}
-        {activeTab === "category" && selectedCategoryId && (
-          <BudgetCategory
-            categoryId={selectedCategoryId}
-            onBack={() => setActiveTab("show")}
+        {activeTab === "show" && selectedAccountId && (
+          <Account
+            accountId={selectedAccountId}
+            onBack={() => setActiveTab("list")}
           />
         )}
       </main>

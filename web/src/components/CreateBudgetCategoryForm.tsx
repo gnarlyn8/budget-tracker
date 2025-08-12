@@ -1,20 +1,14 @@
 import { useState } from "react";
-import { useMutation } from "@apollo/client";
+import { useMutation, useApolloClient } from "@apollo/client";
 import { CREATE_BUDGET_CATEGORY } from "../graphql/mutations";
+import { GET_BUDGET_CATEGORIES } from "../graphql/queries";
 
-interface CreateBudgetCategoryFormProps {
-  budgetId: string;
-  onBudgetCategoryCreated: () => void;
-}
-
-export function CreateBudgetCategoryForm({
-  budgetId,
-  onBudgetCategoryCreated,
-}: CreateBudgetCategoryFormProps) {
+export function CreateBudgetCategoryForm() {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [categoryType, setCategoryType] = useState("variable_expense");
+  const client = useApolloClient();
 
   const [createBudgetCategory, { loading, error }] = useMutation(
     CREATE_BUDGET_CATEGORY
@@ -24,9 +18,8 @@ export function CreateBudgetCategoryForm({
     e.preventDefault();
 
     try {
-      await createBudgetCategory({
+      const result = await createBudgetCategory({
         variables: {
-          budgetId,
           name,
           amount: parseFloat(amount),
           description: description || null,
@@ -34,11 +27,23 @@ export function CreateBudgetCategoryForm({
         },
       });
 
+      const existingData = client.readQuery({ query: GET_BUDGET_CATEGORIES });
+      if (existingData) {
+        client.writeQuery({
+          query: GET_BUDGET_CATEGORIES,
+          data: {
+            budgetCategories: [
+              ...existingData.budgetCategories,
+              result.data.createBudgetCategory.budgetCategory,
+            ],
+          },
+        });
+      }
+
       setName("");
       setAmount("");
       setDescription("");
       setCategoryType("variable_expense");
-      onBudgetCategoryCreated();
     } catch (err) {
       console.error("Error creating budget category:", err);
     }
@@ -46,7 +51,7 @@ export function CreateBudgetCategoryForm({
 
   return (
     <div className="create-budget-category-form">
-      <h3>Add New Category</h3>
+      <h2>Create New Budget Category</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Category Name:</label>
@@ -56,7 +61,7 @@ export function CreateBudgetCategoryForm({
             value={name}
             onChange={(e) => setName(e.target.value)}
             required
-            placeholder="e.g., Groceries, Entertainment, Mortgage"
+            placeholder="e.g., Groceries, Entertainment, Credit Card Payment"
           />
         </div>
 
@@ -68,13 +73,13 @@ export function CreateBudgetCategoryForm({
             onChange={(e) => setCategoryType(e.target.value)}
             required
           >
-            <option value="fixed_payment">Variable Expense</option>
+            <option value="variable_expense">Variable Expense</option>
             <option value="debt_repayment">Debt Repayment</option>
           </select>
         </div>
 
         <div className="form-group">
-          <label htmlFor="amount">Amount ($):</label>
+          <label htmlFor="amount">Budget Amount ($):</label>
           <input
             type="number"
             id="amount"
@@ -99,7 +104,7 @@ export function CreateBudgetCategoryForm({
         </div>
 
         <button type="submit" disabled={loading}>
-          {loading ? "Adding..." : "Add Category"}
+          {loading ? "Creating..." : "Create Category"}
         </button>
 
         {error && <p className="error">Error: {error.message}</p>}

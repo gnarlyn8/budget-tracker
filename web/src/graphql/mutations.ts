@@ -1,13 +1,24 @@
 import { gql } from "@apollo/client";
 
-export const CREATE_BUDGET = gql`
-  mutation CreateBudget($name: String!, $description: String) {
-    createBudget(input: { name: $name, description: $description }) {
-      budget {
+export const CREATE_ACCOUNT = gql`
+  mutation CreateAccount(
+    $name: String!
+    $accountType: String!
+    $startingBalance: Float
+  ) {
+    createAccount(
+      input: {
+        name: $name
+        accountType: $accountType
+        startingBalance: $startingBalance
+      }
+    ) {
+      account {
         id
         name
-        description
-        totalAmount
+        accountType
+        startingBalance
+        currentBalance
         createdAt
         updatedAt
       }
@@ -18,7 +29,6 @@ export const CREATE_BUDGET = gql`
 
 export const CREATE_BUDGET_CATEGORY = gql`
   mutation CreateBudgetCategory(
-    $budgetId: ID!
     $name: String!
     $amount: Float!
     $description: String
@@ -26,7 +36,6 @@ export const CREATE_BUDGET_CATEGORY = gql`
   ) {
     createBudgetCategory(
       input: {
-        budgetId: $budgetId
         name: $name
         amount: $amount
         description: $description
@@ -35,7 +44,6 @@ export const CREATE_BUDGET_CATEGORY = gql`
     ) {
       budgetCategory {
         id
-        budgetId
         name
         amount
         description
@@ -50,25 +58,28 @@ export const CREATE_BUDGET_CATEGORY = gql`
 
 export const CREATE_TRANSACTION = gql`
   mutation CreateTransaction(
-    $budgetCategoryId: ID!
-    $description: String!
+    $accountId: ID!
+    $budgetCategoryId: ID
+    $memo: String!
     $amount: Float!
-    $date: ISO8601DateTime
+    $occurredOn: ISO8601Date
   ) {
     createTransaction(
       input: {
+        accountId: $accountId
         budgetCategoryId: $budgetCategoryId
-        description: $description
+        memo: $memo
         amount: $amount
-        date: $date
+        occurredOn: $occurredOn
       }
     ) {
       transaction {
         id
+        accountId
         budgetCategoryId
-        description
+        memo
         amount
-        date
+        occurredOn
         createdAt
         updatedAt
       }
