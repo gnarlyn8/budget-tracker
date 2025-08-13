@@ -97,6 +97,11 @@ export const CREATE_TRANSACTION = gql`
         occurredOn
         createdAt
         updatedAt
+        budgetCategory {
+          id
+          name
+          categoryType
+        }
       }
       errors
     }

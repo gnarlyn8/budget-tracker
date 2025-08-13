@@ -10853,3 +10853,987 @@ Processing by GraphqlController#execute as */*
 Completed 200 OK in 45ms (Views: 0.4ms | ActiveRecord: 1.3ms (28 queries, 20 cached) | GC: 0.3ms)
 
 
+Started POST "/graphql" for ::1 at 2025-08-13 07:12:17 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (13.5ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.9ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?)[0m  [["account_id", 1], ["account_id", 2]]
+  [1m[36mTransaction Sum (0.5ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mBudgetCategory Load (0.4ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 370ms (Views: 0.5ms | ActiveRecord: 27.3ms (30 queries, 21 cached) | GC: 4.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:12:43 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateAccount", "variables"=>{"name"=>"House Mortgage LOC", "accountType"=>"loan", "startingBalance"=>45000}, "query"=>"mutation CreateAccount($name: String!, $accountType: String!, $startingBalance: Float) {\n  createAccount(\n    input: {name: $name, accountType: $accountType, startingBalance: $startingBalance}\n  ) {\n    account {\n      id\n      name\n      accountType\n      startingBalance\n      currentBalance\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateAccount", "variables"=>{"name"=>"House Mortgage LOC", "accountType"=>"loan", "startingBalance"=>45000}, "query"=>"mutation CreateAccount($name: String!, $accountType: String!, $startingBalance: Float) {\n  createAccount(\n    input: {name: $name, accountType: $accountType, startingBalance: $startingBalance}\n  ) {\n    account {\n      id\n      name\n      accountType\n      startingBalance\n      currentBalance\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mAccount Create (2.4ms)[0m  [1m[32mINSERT INTO "accounts" ("name", "account_type", "starting_balance_cents", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "House Mortgage LOC"], ["account_type", "loan"], ["starting_balance_cents", 4500000], ["created_at", "2025-08-13 14:12:43.186609"], ["updated_at", "2025-08-13 14:12:43.186609"]]
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 4.0ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:12:43 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 30ms (Views: 0.4ms | ActiveRecord: 1.2ms (32 queries, 21 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:12:54 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.3ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:12:54 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?, ?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2], ["budget_category_id", 3], ["budget_category_id", 4]]
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:13:14 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."account_type" = ? ORDER BY "accounts"."id" ASC LIMIT ?[0m  [["account_type", "monthly_budget"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mTransaction Create (1.1ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-13 14:13:15.008915"], ["updated_at", "2025-08-13 14:13:15.008915"], ["budget_category_id", 4], ["account_id", 1], ["amount_cents", -50000], ["occurred_on", "2025-08-15"], ["memo", "August 15 Loan Repayment"]]
+  [1m[36mTransaction Create (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-13 14:13:15.011660"], ["updated_at", "2025-08-13 14:13:15.011660"], ["budget_category_id", nil], ["account_id", 3], ["amount_cents", 50000], ["occurred_on", "2025-08-15"], ["memo", "August 15 Loan Repayment"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 32ms (Views: 0.1ms | ActiveRecord: 1.7ms (5 queries, 0 cached) | GC: 11.8ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:13:15 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 33ms (Views: 0.4ms | ActiveRecord: 1.2ms (33 queries, 22 cached) | GC: 3.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:13:22 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 26ms (Views: 0.3ms | ActiveRecord: 0.9ms (26 queries, 19 cached) | GC: 1.7ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:21:20 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"Mortgage", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"Mortgage", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (1.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."account_type" = ? ORDER BY "accounts"."id" ASC LIMIT ?[0m  [["account_type", "monthly_budget"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mTransaction Create (0.5ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-13 14:21:20.565461"], ["updated_at", "2025-08-13 14:21:20.565461"], ["budget_category_id", 4], ["account_id", 1], ["amount_cents", -50000], ["occurred_on", "2025-08-15"], ["memo", "Mortgage"]]
+  [1m[36mTransaction Create (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-13 14:21:20.566813"], ["updated_at", "2025-08-13 14:21:20.566813"], ["budget_category_id", nil], ["account_id", 3], ["amount_cents", 50000], ["occurred_on", "2025-08-15"], ["memo", "Mortgage"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 40ms (Views: 0.1ms | ActiveRecord: 2.7ms (5 queries, 0 cached) | GC: 1.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:21:20 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 34ms (Views: 0.4ms | ActiveRecord: 1.3ms (34 queries, 23 cached) | GC: 0.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:21:30 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (4.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 347ms (Views: 0.7ms | ActiveRecord: 11.9ms (34 queries, 23 cached) | GC: 4.7ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:21:34 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 0.4ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:21:34 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?, ?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2], ["budget_category_id", 3], ["budget_category_id", 4]]
+Completed 200 OK in 7ms (Views: 0.2ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:21:53 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."account_type" = ? ORDER BY "accounts"."id" ASC LIMIT ?[0m  [["account_type", "monthly_budget"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mTransaction Create (0.7ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-13 14:21:53.681774"], ["updated_at", "2025-08-13 14:21:53.681774"], ["budget_category_id", 4], ["account_id", 1], ["amount_cents", -50000], ["occurred_on", "2025-08-15"], ["memo", "August 15 Loan Repayment"]]
+  [1m[36mTransaction Create (1.0ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-13 14:21:53.683525"], ["updated_at", "2025-08-13 14:21:53.683525"], ["budget_category_id", nil], ["account_id", 3], ["amount_cents", 50000], ["occurred_on", "2025-08-15"], ["memo", "August 15 Loan Repayment"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 10ms (Views: 0.1ms | ActiveRecord: 2.7ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:21:53 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.5ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 52ms (Views: 0.4ms | ActiveRecord: 2.3ms (35 queries, 24 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:23:30 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (2.7ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 227ms (Views: 0.6ms | ActiveRecord: 7.7ms (35 queries, 24 cached) | GC: 4.1ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:23:32 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 0.5ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:23:32 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?, ?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2], ["budget_category_id", 3], ["budget_category_id", 4]]
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:23:44 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:23:44 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 42ms (Views: 0.4ms | ActiveRecord: 1.6ms (35 queries, 24 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:24:17 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.2ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:24:17 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 44ms (Views: 0.4ms | ActiveRecord: 1.6ms (35 queries, 24 cached) | GC: 3.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:24:22 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 32ms (Views: 0.4ms | ActiveRecord: 0.9ms (28 queries, 21 cached) | GC: 2.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:25:43 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."account_type" = ? ORDER BY "accounts"."id" ASC LIMIT ?[0m  [["account_type", "monthly_budget"], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-13 14:25:43.459828"], ["updated_at", "2025-08-13 14:25:43.459828"], ["budget_category_id", 4], ["account_id", 1], ["amount_cents", -50000], ["occurred_on", "2025-08-15"], ["memo", "August 15 Loan Repayment"]]
+  [1m[36mTransaction Create (0.1ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-13 14:25:43.461295"], ["updated_at", "2025-08-13 14:25:43.461295"], ["budget_category_id", nil], ["account_id", 3], ["amount_cents", 50000], ["occurred_on", "2025-08-15"], ["memo", "August 15 Loan Repayment"]]
+  [1m[36mTRANSACTION (0.8ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 42ms (Views: 0.1ms | ActiveRecord: 4.0ms (5 queries, 0 cached) | GC: 2.1ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:25:43 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 39ms (Views: 0.5ms | ActiveRecord: 1.3ms (36 queries, 25 cached) | GC: 0.1ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:28:22 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (1.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.4ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 117ms (Views: 0.8ms | ActiveRecord: 5.7ms (36 queries, 25 cached) | GC: 3.8ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:28:29 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 30ms (Views: 0.4ms | ActiveRecord: 1.0ms (29 queries, 22 cached) | GC: 0.9ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:28:29 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?, ?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2], ["budget_category_id", 3], ["budget_category_id", 4]]
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 0.6ms (2 queries, 0 cached) | GC: 0.7ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:28:35 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mCACHE BudgetCategory Load (0.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 57ms (Views: 0.6ms | ActiveRecord: 1.7ms (36 queries, 25 cached) | GC: 1.2ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:30:39 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (1.6ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 125ms (Views: 0.5ms | ActiveRecord: 4.2ms (9 queries, 1 cached) | GC: 10.1ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:30:54 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 0.4ms (4 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:30:54 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?, ?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2], ["budget_category_id", 3], ["budget_category_id", 4]]
+Completed 200 OK in 11ms (Views: 0.5ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:31:13 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"3", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."account_type" = ? ORDER BY "accounts"."id" ASC LIMIT ?[0m  [["account_type", "monthly_budget"], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mTransaction Create (0.4ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-13 14:31:13.559265"], ["updated_at", "2025-08-13 14:31:13.559265"], ["budget_category_id", 4], ["account_id", 1], ["amount_cents", -50000], ["occurred_on", "2025-08-15"], ["memo", "August 15 Loan Repayment"]]
+  [1m[36mTransaction Create (0.2ms)[0m  [1m[32mINSERT INTO "transactions" ("created_at", "updated_at", "budget_category_id", "account_id", "amount_cents", "occurred_on", "memo") VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["created_at", "2025-08-13 14:31:13.561045"], ["updated_at", "2025-08-13 14:31:13.561045"], ["budget_category_id", nil], ["account_id", 3], ["amount_cents", 50000], ["occurred_on", "2025-08-15"], ["memo", "August 15 Loan Repayment"]]
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+Completed 200 OK in 24ms (Views: 0.1ms | ActiveRecord: 2.1ms (9 queries, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:31:13 -0700
+Started POST "/graphql" for ::1 at 2025-08-13 07:31:13 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+Processing by GraphqlController#execute as */*
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mAccount Load (0.8ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+Completed 200 OK in 12ms (Views: 0.1ms | ActiveRecord: 0.4ms (4 queries, 0 cached) | GC: 0.6ms)
+
+
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 28ms (Views: 0.4ms | ActiveRecord: 1.7ms (9 queries, 1 cached) | GC: 1.2ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:31:21 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+Completed 200 OK in 16ms (Views: 0.4ms | ActiveRecord: 0.5ms (5 queries, 1 cached) | GC: 0.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:33:34 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (1.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 71ms (Views: 0.5ms | ActiveRecord: 9.5ms (9 queries, 1 cached) | GC: 7.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:33:36 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"2"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"2"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ?[0m  [["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 0.5ms (5 queries, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:33:36 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?, ?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2], ["budget_category_id", 3], ["budget_category_id", 4]]
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 0.5ms (2 queries, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:33:49 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"2", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateTransaction", "variables"=>{"input"=>{"accountId"=>"2", "budgetCategoryId"=>"4", "memo"=>"August 15 Loan Repayment", "amount"=>500, "occurredOn"=>"2025-08-15"}}, "query"=>"mutation CreateTransaction($input: CreateTransactionInput!) {\n  createTransaction(input: $input) {\n    transaction {\n      id\n      accountId\n      budgetCategoryId\n      memo\n      amount\n      occurredOn\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ?[0m  [["id", 4]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ? LIMIT ?[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."account_type" = ? ORDER BY "accounts"."id" ASC LIMIT ?[0m  [["account_type", "monthly_budget"], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+Completed 200 OK in 12ms (Views: 0.1ms | ActiveRecord: 1.1ms (8 queries, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:33:49 -0700
+Started POST "/graphql" for ::1 at 2025-08-13 07:33:49 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"2"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"2"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ?[0m  [["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 0.6ms (5 queries, 0 cached) | GC: 0.5ms)
+
+
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 24ms (Views: 0.4ms | ActiveRecord: 1.2ms (9 queries, 1 cached) | GC: 0.8ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:34:04 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+Completed 200 OK in 16ms (Views: 0.4ms | ActiveRecord: 0.5ms (5 queries, 1 cached) | GC: 0.9ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:34:39 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (2.5ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (3.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.4ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 119ms (Views: 0.5ms | ActiveRecord: 9.9ms (9 queries, 1 cached) | GC: 59.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:34:40 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+Completed 200 OK in 17ms (Views: 0.3ms | ActiveRecord: 0.5ms (5 queries, 1 cached) | GC: 1.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:34:40 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?, ?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2], ["budget_category_id", 3], ["budget_category_id", 4]]
+Completed 200 OK in 8ms (Views: 0.3ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.4ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:34:44 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.9ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 37ms (Views: 0.8ms | ActiveRecord: 1.7ms (9 queries, 1 cached) | GC: 1.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:34:45 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+Completed 200 OK in 15ms (Views: 0.4ms | ActiveRecord: 0.5ms (5 queries, 1 cached) | GC: 0.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:34:45 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?, ?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2], ["budget_category_id", 3], ["budget_category_id", 4]]
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 0.4ms (2 queries, 0 cached) | GC: 0.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:35:02 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.5ms (4 queries, 0 cached) | GC: 0.2ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:35:16 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"2"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"2"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" = ?[0m  [["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 0.5ms (5 queries, 0 cached) | GC: 0.4ms)
+
+

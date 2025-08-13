@@ -18,19 +18,25 @@ module Mutations
       on       = args[:occurred_on] || Date.current
       memo     = args[:memo]
 
+      monthly_budget_account = monthly_budget
+      current_balance_cents = monthly_budget_account.starting_balance_cents + monthly_budget_account.transactions.sum(:amount_cents)
+      
+      if current_balance_cents <= 0
+        return {
+          transaction: nil,
+          errors: ["Insufficient funds in monthly budget. Current balance: $#{current_balance_cents / 100.0}"]
+        }
+      end
+
       transaction =
         case category&.category_type
         when "debt_repayment"
-          monthly_budget = Account.where(account_type: "monthly_budget").first
-          raise ArgumentError, "No monthly budget account found" unless monthly_budget
-
           Ledger.repay(cash: monthly_budget, loan: account, category: category, amount_cents: cents, on: on, memo: memo)
         when "variable_expense"
-          Ledger.spend(cash: account, category: category, amount_cents: cents, on: on, memo: memo)
+          Ledger.spend(cash: monthly_budget, category: category, amount_cents: cents, on: on, memo: memo)
         else
-
           Transaction.create!(
-            account: account,
+            account: monthly_budget,
             budget_category: category,
             amount_cents: -cents,
             occurred_on: on,
@@ -43,6 +49,15 @@ module Mutations
       { transaction: nil, errors: e.record.errors.full_messages }
     rescue ActiveRecord::RecordNotFound, ArgumentError => e
       { transaction: nil, errors: [e.message] }
+    end
+
+    private
+
+    def monthly_budget
+      @monthly_budget ||= Account.where(account_type: "monthly_budget").first
+      raise ArgumentError, "No monthly budget account found" unless @monthly_budget
+
+      @monthly_budget
     end
   end
 end

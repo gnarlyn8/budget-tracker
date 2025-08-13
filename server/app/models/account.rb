@@ -5,6 +5,8 @@ class Account < ApplicationRecord
     { monthly_budget: "monthly_budget", loan: "loan"}, 
     prefix: :type
 
+  default_scope { includes(transactions: :budget_category) }
+
   validate :only_one_monthly_budget
 
   private

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation, useApolloClient } from "@apollo/client";
+import { useMutation, useApolloClient, useQuery } from "@apollo/client";
 import { CREATE_ACCOUNT } from "../graphql/mutations";
 import { GET_ACCOUNTS } from "../graphql/queries";
 
@@ -8,6 +8,11 @@ export function CreateBankAccountForm() {
   const [accountType, setAccountType] = useState("cash");
   const [startingBalance, setStartingBalance] = useState("");
   const client = useApolloClient();
+
+  const { data: accountsData } = useQuery(GET_ACCOUNTS);
+  const hasMonthlyBudget = accountsData?.accounts?.some(
+    (account: any) => account.accountType === "monthly_budget"
+  );
 
   const [createAccount, { loading, error }] = useMutation(CREATE_ACCOUNT);
 
@@ -68,7 +73,9 @@ export function CreateBankAccountForm() {
             onChange={(e) => setAccountType(e.target.value)}
             required
           >
-            <option value="cash">Cash</option>
+            <option value="monthly_budget" disabled={hasMonthlyBudget}>
+              Monthly Budget {hasMonthlyBudget ? "(Already exists)" : ""}
+            </option>
             <option value="loan">Loan</option>
           </select>
         </div>

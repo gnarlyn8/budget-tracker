@@ -1,7 +1,11 @@
 import { useState } from "react";
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation, useQuery, gql } from "@apollo/client";
 import { CREATE_TRANSACTION } from "../graphql/mutations";
-import { GET_ACCOUNTS, GET_BUDGET_CATEGORIES } from "../graphql/queries";
+import {
+  GET_ACCOUNTS,
+  GET_ACCOUNT,
+  GET_BUDGET_CATEGORIES,
+} from "../graphql/queries";
 
 interface CreateTransactionFormProps {
   accountId?: string;
@@ -27,8 +31,22 @@ export function CreateTransactionForm({
   const { data: accountsData } = useQuery(GET_ACCOUNTS);
   const { data: categoriesData } = useQuery(GET_BUDGET_CATEGORIES);
 
-  const [createTransaction, { loading, error }] =
-    useMutation(CREATE_TRANSACTION);
+  // Get monthly budget account and check balance
+  const monthlyBudgetAccount = accountsData?.accounts?.find(
+    (account: any) => account.accountType === "monthly_budget"
+  );
+  const hasInsufficientFunds =
+    monthlyBudgetAccount && monthlyBudgetAccount.currentBalance <= 0;
+
+  const [createTransaction, { loading, error }] = useMutation(
+    CREATE_TRANSACTION,
+    {
+      refetchQueries: [
+        { query: GET_ACCOUNTS },
+        { query: GET_ACCOUNT, variables: { id: accountId } },
+      ].filter(Boolean),
+    }
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,20 +69,6 @@ export function CreateTransactionForm({
       setOccurredOn("");
       if (!accountId) setSelectedAccountId("");
       if (!budgetCategoryId) setSelectedBudgetCategoryId("");
-
-      // Check if this was a debt repayment transaction
-      const selectedCategory = categoriesData?.budgetCategories?.find(
-        (cat: any) => cat.id === selectedBudgetCategoryId
-      );
-
-      if (
-        selectedCategory?.categoryType === "debt_repayment" &&
-        onAllAccountsRefresh
-      ) {
-        onAllAccountsRefresh();
-      } else {
-        onTransactionCreated();
-      }
     } catch (err) {
       console.error("Error creating transaction:", err);
     }
@@ -73,8 +77,16 @@ export function CreateTransactionForm({
   return (
     <div className="create-transaction-form">
       <h3>Add New Transaction</h3>
+
+      {hasInsufficientFunds && (
+        <div className="warning-message">
+          ⚠️ Cannot add transactions: Monthly budget balance is $
+          {monthlyBudgetAccount?.currentBalance.toFixed(2)}
+        </div>
+      )}
+
       <form onSubmit={handleSubmit}>
-        {!accountId && (
+        {!accountId && !selectedBudgetCategoryId && (
           <div className="form-group">
             <label htmlFor="account">Account:</label>
             <select
@@ -111,29 +123,39 @@ export function CreateTransactionForm({
           </div>
         )}
 
-        {selectedBudgetCategoryId &&
-          categoriesData?.budgetCategories?.find(
-            (cat: any) => cat.id === selectedBudgetCategoryId
-          )?.categoryType === "debt_repayment" && (
-            <div className="form-group">
-              <label htmlFor="account">Loan Account:</label>
-              <select
-                id="account"
-                value={selectedAccountId}
-                onChange={(e) => setSelectedAccountId(e.target.value)}
-                required
-              >
-                <option value="">Select loan account</option>
-                {accountsData?.accounts
-                  ?.filter((account: any) => account.accountType === "loan")
-                  .map((account: any) => (
-                    <option key={account.id} value={account.id}>
-                      {account.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-          )}
+        {selectedBudgetCategoryId && (
+          <>
+            {categoriesData?.budgetCategories?.find(
+              (cat: any) => cat.id === selectedBudgetCategoryId
+            )?.categoryType === "debt_repayment" ? (
+              <div className="form-group">
+                <label htmlFor="account">Loan Account:</label>
+                <select
+                  id="account"
+                  value={selectedAccountId}
+                  onChange={(e) => setSelectedAccountId(e.target.value)}
+                  required
+                >
+                  <option value="">Select loan account</option>
+                  {accountsData?.accounts
+                    ?.filter((account: any) => account.accountType === "loan")
+                    .map((account: any) => (
+                      <option key={account.id} value={account.id}>
+                        {account.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            ) : (
+              <div className="form-group">
+                <p className="info-message">
+                  💡 This transaction will be deducted from your monthly budget
+                  account
+                </p>
+              </div>
+            )}
+          </>
+        )}
 
         <div className="form-group">
           <label htmlFor="memo">Description:</label>
@@ -143,6 +165,7 @@ export function CreateTransactionForm({
             value={memo}
             onChange={(e) => setMemo(e.target.value)}
             required
+            disabled={hasInsufficientFunds}
             placeholder="e.g., Grocery shopping, Movie tickets"
           />
         </div>
@@ -156,6 +179,7 @@ export function CreateTransactionForm({
             onChange={(e) => setAmount(e.target.value)}
             required
             step="0.01"
+            disabled={hasInsufficientFunds}
             placeholder="0.00"
           />
         </div>
@@ -167,12 +191,20 @@ export function CreateTransactionForm({
             id="occurredOn"
             value={occurredOn}
             onChange={(e) => setOccurredOn(e.target.value)}
+            disabled={hasInsufficientFunds}
             placeholder="Leave empty for today"
           />
         </div>
 
-        <button type="submit" disabled={loading || !selectedAccountId}>
-          {loading ? "Adding..." : "Add Transaction"}
+        <button
+          type="submit"
+          disabled={loading || !selectedAccountId || hasInsufficientFunds}
+        >
+          {loading
+            ? "Adding..."
+            : hasInsufficientFunds
+            ? "Insufficient Funds"
+            : "Add Transaction"}
         </button>
 
         {error && <p className="error">Error: {error.message}</p>}
