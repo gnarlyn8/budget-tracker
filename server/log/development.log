@@ -11837,3 +11837,20 @@ Processing by GraphqlController#execute as */*
 Completed 200 OK in 11ms (Views: 0.2ms | ActiveRecord: 0.5ms (5 queries, 0 cached) | GC: 0.4ms)
 
 
+Started POST "/graphql" for ::1 at 2025-08-13 07:45:04 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"CreateBudgetCategory", "variables"=>{"name"=>"Entertainment", "amount"=>250, "description"=>"Restaurants, movies, and anything that is fun", "categoryType"=>"variable_expense"}, "query"=>"mutation CreateBudgetCategory($name: String!, $amount: Float!, $description: String, $categoryType: String) {\n  createBudgetCategory(\n    input: {name: $name, amount: $amount, description: $description, categoryType: $categoryType}\n  ) {\n    budgetCategory {\n      id\n      name\n      amount\n      description\n      categoryType\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"CreateBudgetCategory", "variables"=>{"name"=>"Entertainment", "amount"=>250, "description"=>"Restaurants, movies, and anything that is fun", "categoryType"=>"variable_expense"}, "query"=>"mutation CreateBudgetCategory($name: String!, $amount: Float!, $description: String, $categoryType: String) {\n  createBudgetCategory(\n    input: {name: $name, amount: $amount, description: $description, categoryType: $categoryType}\n  ) {\n    budgetCategory {\n      id\n      name\n      amount\n      description\n      categoryType\n      createdAt\n      updatedAt\n      __typename\n    }\n    errors\n    __typename\n  }\n}"}}
+  [1m[36mTRANSACTION (0.0ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[36mBudgetCategory Create (2.1ms)[0m  [1m[32mINSERT INTO "budget_categories" ("name", "amount", "description", "created_at", "updated_at", "category_type") VALUES (?, ?, ?, ?, ?, ?) RETURNING "id"[0m  [["name", "Entertainment"], ["amount", 250.0], ["description", "Restaurants, movies, and anything that is fun"], ["created_at", "2025-08-13 14:45:05.003142"], ["updated_at", "2025-08-13 14:45:05.003142"], ["category_type", "variable_expense"]]
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+Completed 200 OK in 30ms (Views: 0.1ms | ActiveRecord: 2.5ms (1 query, 0 cached) | GC: 0.1ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 07:45:17 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?, ?, ?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2], ["budget_category_id", 3], ["budget_category_id", 4], ["budget_category_id", 5]]
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+

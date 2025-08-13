@@ -3,13 +3,14 @@ import { useQuery } from "@apollo/client";
 import { GET_ACCOUNTS } from "./graphql/queries";
 import { AccountList } from "./components/AccountList";
 import { CreateBankAccountForm } from "./components/CreateBankAccountForm";
+import { CreateBudgetCategoryForm } from "./components/CreateBudgetCategoryForm";
 import { Account } from "./components/Account";
 import "./App.css";
 
 function App() {
-  const [activeTab, setActiveTab] = useState<"list" | "create" | "show">(
-    "list"
-  );
+  const [activeTab, setActiveTab] = useState<
+    "list" | "create" | "categories" | "show"
+  >("list");
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
   );
@@ -33,6 +34,12 @@ function App() {
           >
             Add New Bank / Loan Account
           </button>
+          <button
+            className={activeTab === "categories" ? "active" : ""}
+            onClick={() => setActiveTab("categories")}
+          >
+            Add Budget Categories
+          </button>
         </nav>
       </header>
 
@@ -46,6 +53,7 @@ function App() {
           />
         )}
         {activeTab === "create" && <CreateBankAccountForm />}
+        {activeTab === "categories" && <CreateBudgetCategoryForm />}
         {activeTab === "show" && selectedAccountId && (
           <Account
             accountId={selectedAccountId}
