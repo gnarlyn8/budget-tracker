@@ -19,6 +19,7 @@ interface Account {
   accountType: string;
   startingBalance: number;
   currentBalance: number;
+  totalSpendingOrPayments: number;
   createdAt: string;
   updatedAt: string;
   transactions: Transaction[];

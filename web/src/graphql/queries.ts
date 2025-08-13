@@ -8,6 +8,7 @@ export const GET_ACCOUNTS = gql`
       accountType
       startingBalance
       currentBalance
+      totalSpendingOrPayments
       createdAt
       updatedAt
       transactions {
@@ -35,6 +36,7 @@ export const GET_ACCOUNT = gql`
       accountType
       startingBalance
       currentBalance
+      totalSpendingOrPayments
       createdAt
       updatedAt
       transactions {

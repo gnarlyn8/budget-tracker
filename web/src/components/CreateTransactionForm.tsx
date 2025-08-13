@@ -7,18 +7,19 @@ interface CreateTransactionFormProps {
   accountId?: string;
   budgetCategoryId?: string;
   onTransactionCreated: () => void;
+  onAllAccountsRefresh?: () => void;
 }
 
 export function CreateTransactionForm({
   accountId,
   budgetCategoryId,
   onTransactionCreated,
+  onAllAccountsRefresh,
 }: CreateTransactionFormProps) {
   const [selectedAccountId, setSelectedAccountId] = useState(accountId || "");
   const [selectedBudgetCategoryId, setSelectedBudgetCategoryId] = useState(
     budgetCategoryId || ""
   );
-  const [selectedLoanAccountId, setSelectedLoanAccountId] = useState("");
   const [memo, setMemo] = useState("");
   const [amount, setAmount] = useState("");
   const [occurredOn, setOccurredOn] = useState("");
@@ -38,7 +39,6 @@ export function CreateTransactionForm({
           input: {
             accountId: selectedAccountId,
             budgetCategoryId: selectedBudgetCategoryId || null,
-            loanAccountId: selectedLoanAccountId || null,
             memo,
             amount: parseFloat(amount),
             occurredOn: occurredOn || null,
@@ -49,10 +49,22 @@ export function CreateTransactionForm({
       setMemo("");
       setAmount("");
       setOccurredOn("");
-      setSelectedLoanAccountId("");
       if (!accountId) setSelectedAccountId("");
       if (!budgetCategoryId) setSelectedBudgetCategoryId("");
-      onTransactionCreated();
+
+      // Check if this was a debt repayment transaction
+      const selectedCategory = categoriesData?.budgetCategories?.find(
+        (cat: any) => cat.id === selectedBudgetCategoryId
+      );
+
+      if (
+        selectedCategory?.categoryType === "debt_repayment" &&
+        onAllAccountsRefresh
+      ) {
+        onAllAccountsRefresh();
+      } else {
+        onTransactionCreated();
+      }
     } catch (err) {
       console.error("Error creating transaction:", err);
     }
@@ -104,11 +116,11 @@ export function CreateTransactionForm({
             (cat: any) => cat.id === selectedBudgetCategoryId
           )?.categoryType === "debt_repayment" && (
             <div className="form-group">
-              <label htmlFor="loanAccount">Loan Account:</label>
+              <label htmlFor="account">Loan Account:</label>
               <select
-                id="loanAccount"
-                value={selectedLoanAccountId}
-                onChange={(e) => setSelectedLoanAccountId(e.target.value)}
+                id="account"
+                value={selectedAccountId}
+                onChange={(e) => setSelectedAccountId(e.target.value)}
                 required
               >
                 <option value="">Select loan account</option>

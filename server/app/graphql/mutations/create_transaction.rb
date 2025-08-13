@@ -4,7 +4,6 @@ module Mutations
 
     argument :account_id, ID, required: true
     argument :budget_category_id, ID, required: false
-    argument :loan_account_id, ID, required: false
     argument :memo, String, required: true
     argument :amount, Float, required: true
     argument :occurred_on, GraphQL::Types::ISO8601Date, required: false
@@ -22,15 +21,18 @@ module Mutations
       transaction =
         case category&.category_type
         when "debt_repayment"
-          loan = require_loan!(args[:loan_account_id])
-          Ledger.repay(cash: account, loan: loan, category: category, amount_cents: cents, on: on, memo: memo)
+          monthly_budget = Account.where(account_type: "monthly_budget").first
+          raise ArgumentError, "No monthly budget account found" unless monthly_budget
+
+          Ledger.repay(cash: monthly_budget, loan: account, category: category, amount_cents: cents, on: on, memo: memo)
         when "variable_expense"
           Ledger.spend(cash: account, category: category, amount_cents: cents, on: on, memo: memo)
         else
+
           Transaction.create!(
             account: account,
             budget_category: category,
-            amount_cents: cents,
+            amount_cents: -cents,
             occurred_on: on,
             memo: memo
           )
@@ -41,17 +43,6 @@ module Mutations
       { transaction: nil, errors: e.record.errors.full_messages }
     rescue ActiveRecord::RecordNotFound, ArgumentError => e
       { transaction: nil, errors: [e.message] }
-    end
-
-    private
-
-    def require_loan!(loan_id)
-      raise ArgumentError, "Loan account must be specified for debt repayment transactions" unless loan_id
-
-      loan_account = Account.find(loan_id)
-      raise ArgumentError, "Specified account is not a loan account" unless loan_account.type_loan?
-
-      loan_account
     end
   end
 end

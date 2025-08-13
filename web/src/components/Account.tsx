@@ -7,6 +7,7 @@ import { EditAccountForm } from "./EditAccountForm";
 interface AccountProps {
   accountId: string;
   onBack: () => void;
+  onAllAccountsRefresh?: () => void;
 }
 
 interface BudgetCategory {
@@ -33,12 +34,17 @@ interface Account {
   accountType: string;
   startingBalance: number;
   currentBalance: number;
+  totalSpendingOrPayments: number;
   createdAt: string;
   updatedAt: string;
   transactions: Transaction[];
 }
 
-export function Account({ accountId, onBack }: AccountProps) {
+export function Account({
+  accountId,
+  onBack,
+  onAllAccountsRefresh,
+}: AccountProps) {
   const [isEditing, setIsEditing] = useState(false);
   const { loading, error, data, refetch } = useQuery(GET_ACCOUNT, {
     variables: { id: accountId },
@@ -56,10 +62,6 @@ export function Account({ accountId, onBack }: AccountProps) {
     (a, b) =>
       new Date(b.occurredOn).getTime() - new Date(a.occurredOn).getTime()
   );
-
-  const totalSpending = account.transactions
-    .filter((t) => t.amount < 0)
-    .reduce((sum, t) => sum + Math.abs(t.amount), 0);
 
   return (
     <div className="account-details">
@@ -121,7 +123,9 @@ export function Account({ accountId, onBack }: AccountProps) {
               ? "Total Payments"
               : "Total Spending"}
           </h3>
-          <p className="amount positive">${totalSpending.toFixed(2)}</p>
+          <p className="amount positive">
+            ${account.totalSpendingOrPayments.toFixed(2)}
+          </p>
         </div>
       </div>
 
@@ -130,6 +134,7 @@ export function Account({ accountId, onBack }: AccountProps) {
         <CreateTransactionForm
           accountId={accountId}
           onTransactionCreated={refetch}
+          onAllAccountsRefresh={onAllAccountsRefresh}
         />
 
         {sortedTransactions.length === 0 ? (

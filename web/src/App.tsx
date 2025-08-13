@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_ACCOUNTS } from "./graphql/queries";
 import { AccountList } from "./components/AccountList";
 import { CreateBankAccountForm } from "./components/CreateBankAccountForm";
 import { Account } from "./components/Account";
@@ -11,6 +13,8 @@ function App() {
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
   );
+
+  const { refetch: refetchAccounts } = useQuery(GET_ACCOUNTS);
 
   return (
     <div className="app">
@@ -46,6 +50,7 @@ function App() {
           <Account
             accountId={selectedAccountId}
             onBack={() => setActiveTab("list")}
+            onAllAccountsRefresh={refetchAccounts}
           />
         )}
       </main>

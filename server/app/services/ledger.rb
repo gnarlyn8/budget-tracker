@@ -23,7 +23,7 @@ class Ledger
 
       Transaction.create!(
         account: loan,
-        amount_cents: -amount_cents,  
+        amount_cents: amount_cents,  
         occurred_on: on,
         memo: memo
       )
