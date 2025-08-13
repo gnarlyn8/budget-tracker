@@ -86,22 +86,8 @@ export const CREATE_BUDGET_CATEGORY = gql`
 `;
 
 export const CREATE_TRANSACTION = gql`
-  mutation CreateTransaction(
-    $accountId: ID!
-    $budgetCategoryId: ID
-    $memo: String!
-    $amount: Float!
-    $occurredOn: ISO8601Date
-  ) {
-    createTransaction(
-      input: {
-        accountId: $accountId
-        budgetCategoryId: $budgetCategoryId
-        memo: $memo
-        amount: $amount
-        occurredOn: $occurredOn
-      }
-    ) {
+  mutation CreateTransaction($input: CreateTransactionInput!) {
+    createTransaction(input: $input) {
       transaction {
         id
         accountId

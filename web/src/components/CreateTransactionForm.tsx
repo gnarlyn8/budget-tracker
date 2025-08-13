@@ -18,6 +18,7 @@ export function CreateTransactionForm({
   const [selectedBudgetCategoryId, setSelectedBudgetCategoryId] = useState(
     budgetCategoryId || ""
   );
+  const [selectedLoanAccountId, setSelectedLoanAccountId] = useState("");
   const [memo, setMemo] = useState("");
   const [amount, setAmount] = useState("");
   const [occurredOn, setOccurredOn] = useState("");
@@ -34,17 +35,21 @@ export function CreateTransactionForm({
     try {
       await createTransaction({
         variables: {
-          accountId: selectedAccountId,
-          budgetCategoryId: selectedBudgetCategoryId || null,
-          memo,
-          amount: parseFloat(amount),
-          occurredOn: occurredOn || null,
+          input: {
+            accountId: selectedAccountId,
+            budgetCategoryId: selectedBudgetCategoryId || null,
+            loanAccountId: selectedLoanAccountId || null,
+            memo,
+            amount: parseFloat(amount),
+            occurredOn: occurredOn || null,
+          },
         },
       });
 
       setMemo("");
       setAmount("");
       setOccurredOn("");
+      setSelectedLoanAccountId("");
       if (!accountId) setSelectedAccountId("");
       if (!budgetCategoryId) setSelectedBudgetCategoryId("");
       onTransactionCreated();
@@ -93,6 +98,30 @@ export function CreateTransactionForm({
             </select>
           </div>
         )}
+
+        {selectedBudgetCategoryId &&
+          categoriesData?.budgetCategories?.find(
+            (cat: any) => cat.id === selectedBudgetCategoryId
+          )?.categoryType === "debt_repayment" && (
+            <div className="form-group">
+              <label htmlFor="loanAccount">Loan Account:</label>
+              <select
+                id="loanAccount"
+                value={selectedLoanAccountId}
+                onChange={(e) => setSelectedLoanAccountId(e.target.value)}
+                required
+              >
+                <option value="">Select loan account</option>
+                {accountsData?.accounts
+                  ?.filter((account: any) => account.accountType === "loan")
+                  .map((account: any) => (
+                    <option key={account.id} value={account.id}>
+                      {account.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+          )}
 
         <div className="form-group">
           <label htmlFor="memo">Description:</label>

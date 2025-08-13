@@ -15,7 +15,14 @@ module Types
     
     field :current_balance, Float, null: false
     def current_balance
-      balance_cents = object.starting_balance_cents + object.transactions.sum(:amount_cents)
+      if object.account_type == "monthly_budget"
+        total_transaction_cents = object.transactions.sum(:amount_cents)
+        balance_cents = object.starting_balance_cents + total_transaction_cents
+      else
+        total_transaction_cents = object.transactions.sum(:amount_cents)
+        balance_cents = object.starting_balance_cents + total_transaction_cents
+      end
+      
       balance_cents / 100.0
     end
   end

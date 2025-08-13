@@ -10,8 +10,10 @@ class Ledger
   end
 
   def self.repay(cash:, loan:, category:, amount_cents:, on:, memo:)
+    cash_transaction = nil
+
     ApplicationRecord.transaction do
-      Transaction.create!(
+      cash_transaction = Transaction.create!(
         account: cash,
         budget_category_id: category.id,
         amount_cents: -amount_cents,
@@ -26,5 +28,7 @@ class Ledger
         memo: memo
       )
     end
+
+    cash_transaction
   end
 end

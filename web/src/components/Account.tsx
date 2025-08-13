@@ -52,18 +52,12 @@ export function Account({ accountId, onBack }: AccountProps) {
 
   const account: Account = data.account;
 
-  // Sort transactions by date (newest first)
   const sortedTransactions = [...account.transactions].sort(
     (a, b) =>
       new Date(b.occurredOn).getTime() - new Date(a.occurredOn).getTime()
   );
 
-  // Calculate total inflows and outflows
-  const totalInflows = account.transactions
-    .filter((t) => t.amount > 0)
-    .reduce((sum, t) => sum + t.amount, 0);
-
-  const totalOutflows = account.transactions
+  const totalSpending = account.transactions
     .filter((t) => t.amount < 0)
     .reduce((sum, t) => sum + Math.abs(t.amount), 0);
 
@@ -122,12 +116,12 @@ export function Account({ accountId, onBack }: AccountProps) {
           </p>
         </div>
         <div className="summary-card">
-          <h3>Total Inflows</h3>
-          <p className="amount positive">${totalInflows.toFixed(2)}</p>
-        </div>
-        <div className="summary-card">
-          <h3>Total Outflows</h3>
-          <p className="amount negative">${totalOutflows.toFixed(2)}</p>
+          <h3>
+            {account.accountType === "loan"
+              ? "Total Payments"
+              : "Total Spending"}
+          </h3>
+          <p className="amount positive">${totalSpending.toFixed(2)}</p>
         </div>
       </div>
 
