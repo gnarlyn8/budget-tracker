@@ -10,8 +10,12 @@ module Mutations
 
     def resolve(id:, **attributes)
       account = Account.find(id)
-      
-      # Convert starting_balance to cents if provided
+      user = context[:current_user] or raise GraphQL::ExecutionError, "Unauthorized"
+
+      if account.user != user
+        raise GraphQL::ExecutionError, "Unauthorized"
+      end
+
       if attributes[:starting_balance]
         attributes[:starting_balance_cents] = (attributes.delete(:starting_balance) * 100).round
       end

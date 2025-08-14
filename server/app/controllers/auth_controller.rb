@@ -5,7 +5,7 @@ class AuthController < ApplicationController
       session[:user_id] = user.id
       render json: { ok: true }
     else
-      render json: { ok: false, errors: user.errors.full_messages }, status: :unprocessable_entity
+      render json: { ok: false, errors: user.errors.full_messages }, status: :unprocessable_content
     end
   end
 
@@ -15,7 +15,7 @@ class AuthController < ApplicationController
       session[:user_id] = user.id
       render json: { user: user }
     else
-      render json: { error: "Invalid email or password" }, status: :unprocessable_entity
+      render json: { error: "Invalid email or password" }, status: :unprocessable_content
     end
   end
 
@@ -30,11 +30,5 @@ class AuthController < ApplicationController
     else
       render json: { email: nil }, status: :unauthorized
     end
-  end
-
-  private
-
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
   end
 end

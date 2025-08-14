@@ -18,14 +18,12 @@ module Types
       ids.map { |id| context.schema.object_from_id(id, context) }
     end
 
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
-
-        field :accounts, [Types::AccountType], null: false,
-      description: "Returns a list of accounts"
+    field :accounts, [Types::AccountType], null: false,
+    description: "Returns a list of accounts"
 
     def accounts
-      Account.includes(:transactions).all
+      user = context[:current_user] or raise GraphQL::ExecutionError, "Unauthorized"
+      user.accounts.includes(:transactions)
     end
 
     field :account, Types::AccountType, null: true do
@@ -33,7 +31,8 @@ module Types
     end
 
     def account(id:)
-      Account.includes(:transactions).find(id)
+      user = context[:current_user] or raise GraphQL::ExecutionError, "Unauthorized"
+      user.accounts.includes(:transactions).find(id)
     end
 
     field :budget_categories, [Types::BudgetCategoryType], null: false,

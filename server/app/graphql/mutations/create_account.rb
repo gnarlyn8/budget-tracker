@@ -8,10 +8,13 @@ module Mutations
     field :errors, [String], null: false
 
     def resolve(name:, account_type:, starting_balance: 0.0)
+      user = context[:current_user] or raise GraphQL::ExecutionError, "Unauthorized"
+
       account = Account.new(
         name: name,
         account_type: account_type,
-        starting_balance_cents: (starting_balance * 100).round
+        starting_balance_cents: (starting_balance * 100).round,
+        user: user
       )
 
       if account.save

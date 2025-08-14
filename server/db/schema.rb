@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_14_171252) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_14_190122) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.string "account_type", null: false
     t.integer "starting_balance_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["user_id"], name: "idx_accounts_one_monthly_budget_per_user", unique: true, where: "account_type = 'monthly_budget'"
+    t.index ["user_id"], name: "index_accounts_on_user_id"
   end
 
   create_table "budget_categories", force: :cascade do |t|
@@ -50,6 +53,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_171252) do
     t.index ["email"], name: "index_users_on_email"
   end
 
+  add_foreign_key "accounts", "users"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "budget_categories"
 end

@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class GraphqlController < ApplicationController
-  protect_from_forgery with: :exception
-
   def execute
     context = { current_user: current_user }
     result = ServerSchema.execute(
