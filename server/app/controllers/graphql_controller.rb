@@ -1,11 +1,14 @@
 # frozen_string_literal: true
 
 class GraphqlController < ApplicationController
+  protect_from_forgery with: :exception
+
   def execute
+    context = { current_user: current_user }
     result = ServerSchema.execute(
       params[:query],
       variables: prepare_variables(params[:variables]),
-      context: { current_user: nil },
+      context: context,
       operation_name: params[:operationName]
     )
     render json: result
@@ -43,5 +46,9 @@ class GraphqlController < ApplicationController
 
     render json: { errors: [{ message: e.message, backtrace: e.backtrace }], data: {} },
            status: :internal_server_error
+  end
+
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id])
   end
 end

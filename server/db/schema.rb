@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_12_195906) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_14_171252) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.string "account_type", null: false
@@ -40,6 +40,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_12_195906) do
     t.index ["account_id"], name: "index_transactions_on_account_id"
     t.index ["budget_category_id"], name: "index_transactions_on_budget_category_id"
     t.index ["occurred_on"], name: "index_transactions_on_occurred_on"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email"
   end
 
   add_foreign_key "transactions", "accounts"

@@ -6,5 +6,13 @@ module Mutations
     field_class Types::BaseField
     input_object_class Types::BaseInputObject
     object_class Types::BaseObject
+
+    private
+
+    def require_user!
+      user = context[:current_user]
+      raise GraphQL::ExecutionError, "Unauthorized" unless user
+      user
+    end
   end
 end

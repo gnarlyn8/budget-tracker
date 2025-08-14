@@ -11854,3 +11854,777 @@ Processing by GraphqlController#execute as */*
 Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
 
 
+Started POST "/graphql" for ::1 at 2025-08-13 07:56:05 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (1.9ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 65ms (Views: 0.5ms | ActiveRecord: 3.1ms (9 queries, 1 cached) | GC: 2.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 08:05:47 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (1.8ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 34ms (Views: 0.4ms | ActiveRecord: 3.2ms (9 queries, 1 cached) | GC: 0.9ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 08:09:06 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (1.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (1.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.5ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.6ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 105ms (Views: 1.7ms | ActiveRecord: 4.5ms (9 queries, 1 cached) | GC: 3.7ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 08:25:28 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (2.0ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 45ms (Views: 0.4ms | ActiveRecord: 3.4ms (9 queries, 1 cached) | GC: 1.4ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 10:42:53 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (7.6ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (1.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.9ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.5ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 136ms (Views: 1.6ms | ActiveRecord: 11.7ms (9 queries, 1 cached) | GC: 9.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 11:00:01 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (3.4ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.9ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 50ms (Views: 0.5ms | ActiveRecord: 5.3ms (9 queries, 1 cached) | GC: 1.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:05:57 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (3.8ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.7ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 56ms (Views: 0.9ms | ActiveRecord: 5.4ms (9 queries, 1 cached) | GC: 1.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:09:29 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 31ms (Views: 0.6ms | ActiveRecord: 1.5ms (9 queries, 1 cached) | GC: 1.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:15:28 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 41ms (Views: 0.7ms | ActiveRecord: 1.4ms (9 queries, 1 cached) | GC: 1.1ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:21:51 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (1.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 33ms (Views: 0.7ms | ActiveRecord: 2.6ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:22:44 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 23ms (Views: 0.4ms | ActiveRecord: 1.0ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:24:03 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 28ms (Views: 0.4ms | ActiveRecord: 1.4ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:25:42 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 26ms (Views: 0.4ms | ActiveRecord: 1.3ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:26:29 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 24ms (Views: 0.4ms | ActiveRecord: 1.1ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:28:29 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 26ms (Views: 0.4ms | ActiveRecord: 1.4ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:28:41 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 23ms (Views: 0.4ms | ActiveRecord: 1.0ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:29:42 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 25ms (Views: 0.6ms | ActiveRecord: 0.8ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:33:58 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 26ms (Views: 0.4ms | ActiveRecord: 1.2ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:35:07 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.3ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.8ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 30ms (Views: 0.4ms | ActiveRecord: 1.8ms (9 queries, 1 cached) | GC: 2.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:35:55 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 26ms (Views: 0.4ms | ActiveRecord: 1.1ms (9 queries, 1 cached) | GC: 1.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:37:10 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.4ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 28ms (Views: 0.6ms | ActiveRecord: 1.5ms (9 queries, 1 cached) | GC: 0.8ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 12:38:15 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 25ms (Views: 0.6ms | ActiveRecord: 1.2ms (9 queries, 1 cached) | GC: 1.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 13:33:57 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (4.6ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (1.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (1.0ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 47ms (Views: 0.4ms | ActiveRecord: 7.3ms (9 queries, 1 cached) | GC: 1.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 14:02:59 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (1.0ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 34ms (Views: 0.7ms | ActiveRecord: 1.9ms (9 queries, 1 cached) | GC: 1.4ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 14:03:30 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 31ms (Views: 0.7ms | ActiveRecord: 1.2ms (9 queries, 1 cached) | GC: 1.2ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 14:08:24 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.4ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 29ms (Views: 0.6ms | ActiveRecord: 1.5ms (9 queries, 1 cached) | GC: 0.8ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 14:55:37 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (5.6ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (1.0ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.6ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.7ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 113ms (Views: 2.2ms | ActiveRecord: 9.0ms (9 queries, 1 cached) | GC: 3.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 15:23:44 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (1.8ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 35ms (Views: 0.4ms | ActiveRecord: 3.1ms (9 queries, 1 cached) | GC: 0.1ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 15:25:05 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 26ms (Views: 0.6ms | ActiveRecord: 0.9ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 15:31:08 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (1.7ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 41ms (Views: 0.5ms | ActiveRecord: 3.5ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 15:33:20 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 23ms (Views: 0.4ms | ActiveRecord: 1.0ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 17:45:26 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (5.6ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (1.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.9ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.5ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.7ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.7ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.7ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 156ms (Views: 3.8ms | ActiveRecord: 10.5ms (9 queries, 1 cached) | GC: 9.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 17:49:10 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 28ms (Views: 0.4ms | ActiveRecord: 1.2ms (9 queries, 1 cached) | GC: 1.2ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 17:50:34 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 28ms (Views: 0.4ms | ActiveRecord: 1.2ms (9 queries, 1 cached) | GC: 1.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-13 17:51:07 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 27ms (Views: 0.4ms | ActiveRecord: 1.5ms (9 queries, 1 cached) | GC: 0.9ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:39:03 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (15.0ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (2.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (1.6ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (1.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.5ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.7ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.5ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 143ms (Views: 2.3ms | ActiveRecord: 21.7ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:39:47 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.6ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.8ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.5ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.8ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.6ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.7ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (1.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 123ms (Views: 1.9ms | ActiveRecord: 4.8ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:41:20 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.3ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 37ms (Views: 0.4ms | ActiveRecord: 1.6ms (9 queries, 1 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:45:18 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.7ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 42ms (Views: 0.6ms | ActiveRecord: 2.0ms (9 queries, 1 cached) | GC: 3.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:45:35 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 31ms (Views: 0.8ms | ActiveRecord: 1.3ms (9 queries, 1 cached) | GC: 1.3ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:46:22 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 31ms (Views: 0.5ms | ActiveRecord: 1.2ms (9 queries, 1 cached) | GC: 0.7ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:46:44 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 30ms (Views: 0.4ms | ActiveRecord: 1.4ms (9 queries, 1 cached) | GC: 1.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:47:53 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 23ms (Views: 0.4ms | ActiveRecord: 0.8ms (9 queries, 1 cached) | GC: 1.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:49:23 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 26ms (Views: 0.4ms | ActiveRecord: 1.1ms (9 queries, 1 cached) | GC: 1.2ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:50:10 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 24ms (Views: 1.1ms | ActiveRecord: 1.0ms (9 queries, 1 cached) | GC: 1.1ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:57:39 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (3.5ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (3.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 37ms (Views: 0.8ms | ActiveRecord: 7.7ms (9 queries, 1 cached) | GC: 1.5ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:58:26 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 24ms (Views: 0.4ms | ActiveRecord: 1.1ms (9 queries, 1 cached) | GC: 0.8ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 08:58:48 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 28ms (Views: 0.4ms | ActiveRecord: 1.4ms (9 queries, 1 cached) | GC: 1.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 09:00:31 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 23ms (Views: 0.4ms | ActiveRecord: 1.0ms (9 queries, 1 cached) | GC: 0.8ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 09:01:56 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (3.8ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 30ms (Views: 0.5ms | ActiveRecord: 4.9ms (9 queries, 1 cached) | GC: 3.6ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 09:05:35 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts"[0m
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?, ?, ?)[0m  [["id", 1], ["id", 3], ["id", 2], ["id", 4]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 25ms (Views: 0.4ms | ActiveRecord: 1.1ms (9 queries, 1 cached) | GC: 2.5ms)
+
+
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateUsers (20250814171252)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mBEGIN immediate TRANSACTION[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar, "password_digest" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.1ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250814171252') RETURNING "version"[0m
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[36mCOMMIT TRANSACTION[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m

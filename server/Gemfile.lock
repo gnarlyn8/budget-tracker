@@ -74,6 +74,7 @@ GEM
       uri (>= 0.13.1)
     ast (2.4.3)
     base64 (0.3.0)
+    bcrypt (3.1.20)
     bcrypt_pbkdf (1.1.1)
     bcrypt_pbkdf (1.1.1-arm64-darwin)
     bcrypt_pbkdf (1.1.1-x86_64-darwin)
@@ -192,6 +193,8 @@ GEM
     raabro (1.4.0)
     racc (1.8.1)
     rack (3.2.0)
+    rack-attack (6.7.0)
+      rack (>= 1.0, < 4)
     rack-cors (3.0.0)
       logger
       rack (>= 3.0.14)
@@ -334,6 +337,7 @@ PLATFORMS
   x86_64-linux-musl
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
   bootsnap
   brakeman
   debug
@@ -341,6 +345,7 @@ DEPENDENCIES
   graphql
   kamal
   puma (>= 5.0)
+  rack-attack
   rack-cors
   rails (~> 8.0.2)
   rubocop-rails-omakase

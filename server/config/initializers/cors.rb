@@ -9,8 +9,13 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins "http://localhost:5173", "http://localhost:3000"
 
-    resource "*",
+    resource "/graphql",
       headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
+      methods: [:post, :options],
+      credentials: true
+    resource "/auth/*",
+      headers: :any,
+      methods: [:post, :delete, :get, :options],
+      credentials: true
   end
 end

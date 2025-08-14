@@ -5,4 +5,9 @@ Rails.application.routes.draw do
   end
 
   post "/graphql", to: "graphql#execute"
+  get "/auth/csrf", to: "csrf#show"
+  post "/auth/register", to: "auth#register"
+  post "/auth/login", to: "auth#login"
+  delete "/auth/logout", to: "auth#logout"
+  get "/auth/me", to: "auth#me"
 end
