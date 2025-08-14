@@ -4,15 +4,16 @@ import { CREATE_ACCOUNT } from "../graphql/mutations";
 import { GET_ACCOUNTS } from "../graphql/queries";
 
 export function CreateBankAccountForm() {
-  const [name, setName] = useState("");
-  const [accountType, setAccountType] = useState("cash");
-  const [startingBalance, setStartingBalance] = useState("");
-  const client = useApolloClient();
-
   const { data: accountsData } = useQuery(GET_ACCOUNTS);
   const hasMonthlyBudget = accountsData?.accounts?.some(
     (account: any) => account.accountType === "monthly_budget"
   );
+  const [name, setName] = useState("");
+  const [accountType, setAccountType] = useState(
+    hasMonthlyBudget ? "loan" : "monthly_budget"
+  );
+  const [startingBalance, setStartingBalance] = useState("");
+  const client = useApolloClient();
 
   const [createAccount, { loading, error }] = useMutation(CREATE_ACCOUNT);
 
@@ -42,7 +43,7 @@ export function CreateBankAccountForm() {
       }
 
       setName("");
-      setAccountType("cash");
+      setAccountType("monthly_budget");
       setStartingBalance("");
     } catch (error) {
       console.error("Error creating account:", error);

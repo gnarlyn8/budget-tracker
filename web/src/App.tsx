@@ -4,6 +4,7 @@ import { GET_ACCOUNTS } from "./graphql/queries";
 import { AccountList } from "./components/AccountList";
 import { CreateBankAccountForm } from "./components/CreateBankAccountForm";
 import { CreateBudgetCategoryForm } from "./components/CreateBudgetCategoryForm";
+import { CreateTransactionForm } from "./components/CreateTransactionForm";
 import { Account } from "./components/Account";
 import { LoginForm } from "./components/LoginForm";
 import { SignupForm } from "./components/SignupForm";
@@ -18,8 +19,9 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [authMode, setAuthMode] = useState<"login" | "signup">("login");
+  const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<
-    "list" | "create" | "categories" | "show"
+    "list" | "create" | "categories" | "transactions" | "show"
   >("list");
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
@@ -36,6 +38,8 @@ function App() {
         setIsAuthenticated(!!user);
       } catch (error) {
         console.error("Failed to load user:", error);
+      } finally {
+        setIsLoading(false);
       }
     };
     fetchUser();
@@ -50,6 +54,19 @@ function App() {
       console.error("Failed to logout:", error);
     }
   };
+
+  if (isLoading) {
+    return (
+      <div className="app">
+        <header className="app-header">
+          <h1>MicroBudget</h1>
+        </header>
+        <main className="app-main">
+          <div className="loading">Loading...</div>
+        </main>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (
@@ -103,6 +120,12 @@ function App() {
           >
             Add Budget Categories
           </button>
+          <button
+            className={activeTab === "transactions" ? "active" : ""}
+            onClick={() => setActiveTab("transactions")}
+          >
+            Add Transaction
+          </button>
         </nav>
       </header>
 
@@ -117,6 +140,9 @@ function App() {
         )}
         {activeTab === "create" && <CreateBankAccountForm />}
         {activeTab === "categories" && <CreateBudgetCategoryForm />}
+        {activeTab === "transactions" && (
+          <CreateTransactionForm onTransactionCreated={refetchAccounts} />
+        )}
         {activeTab === "show" && selectedAccountId && (
           <Account
             accountId={selectedAccountId}

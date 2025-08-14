@@ -235,3 +235,10 @@
 .logout-button:hover {
   background: #c0392b;
 }
+
+.loading {
+  text-align: center;
+  padding: 2rem;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
