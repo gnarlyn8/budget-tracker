@@ -32,10 +32,19 @@ interface AccountListProps {
 export function AccountList({ onAccountClick }: AccountListProps) {
   const { loading, error, data } = useQuery(GET_ACCOUNTS);
 
-  if (loading) return <p>Loading accounts...</p>;
+  if (loading)
+    return (
+      <p className="text-center text-gray-600 dark:text-gray-400 text-lg">
+        Loading accounts...
+      </p>
+    );
   if (error) {
     console.error("Error loading accounts:", error);
-    return <p>Error loading accounts: {error.message}</p>;
+    return (
+      <p className="text-center text-red-500 text-lg">
+        Error loading accounts: {error.message}
+      </p>
+    );
   }
 
   const accounts = data?.accounts || [];
@@ -63,43 +72,53 @@ export function AccountList({ onAccountClick }: AccountListProps) {
     return (
       <div
         key={account.id}
-        className={isMonthlyBudget ? "monthly-budget-card" : "account-card"}
+        className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-lg cursor-pointer ${
+          isMonthlyBudget ? "w-full" : "min-w-70 max-w-80 flex-1"
+        }`}
         onClick={() => onAccountClick(account.id)}
-        style={{ cursor: "pointer" }}
       >
-        <h3>
+        <h3 className="text-gray-800 dark:text-white text-xl font-semibold mb-2 flex justify-between items-center">
           {account.name}
-          <span className={`account-type-badge ${account.accountType}`}>
+          <span className="text-xs px-2 py-1 rounded bg-purple-500 text-white font-normal">
             {account.accountType === "monthly_budget" && "💰"}
             {account.accountType === "loan" && "🏦"}
             {account.accountType.replace("_", " ").toUpperCase()}
           </span>
         </h3>
 
-        <div className="account-balances">
-          <p className="starting-balance">
+        <div className="my-4">
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
             Starting: ${account.startingBalance.toFixed(2)}
           </p>
           <p
-            className={`current-balance ${
-              account.currentBalance < 0 ? "negative" : "positive"
+            className={`font-bold text-lg ${
+              account.currentBalance < 0 ? "text-red-500" : "text-cyan-500"
             }`}
           >
             Current: ${account.currentBalance.toFixed(2)}
           </p>
         </div>
 
-        <div className="recent-transactions">
-          <h4>Recent Transactions</h4>
+        <div className="my-4">
+          <h4 className="text-gray-800 dark:text-white text-base font-medium mb-2">
+            Recent Transactions
+          </h4>
           {recentTransactions.length === 0 ? (
-            <p className="no-transactions">No transactions yet</p>
+            <p className="text-gray-500 dark:text-gray-400 italic text-sm">
+              No transactions yet
+            </p>
           ) : (
             recentTransactions.map((transaction) => (
-              <div key={transaction.id} className="transaction-preview">
-                <span className="transaction-memo">{transaction.memo}</span>
+              <div
+                key={transaction.id}
+                className="flex justify-between items-center py-1 text-sm"
+              >
+                <span className="text-gray-700 dark:text-gray-300">
+                  {transaction.memo}
+                </span>
                 <span
-                  className={`transaction-amount ${
-                    transaction.amount < 0 ? "negative" : "positive"
+                  className={`${
+                    transaction.amount < 0 ? "text-red-500" : "text-cyan-500"
                   }`}
                 >
                   ${Math.abs(transaction.amount).toFixed(2)}
@@ -109,10 +128,10 @@ export function AccountList({ onAccountClick }: AccountListProps) {
           )}
         </div>
 
-        <p className="transaction-count">
+        <p className="text-gray-500 dark:text-gray-400 text-xs mb-1">
           {account.transactions.length} total transactions
         </p>
-        <p className="date">
+        <p className="text-gray-400 dark:text-gray-500 text-xs">
           Created: {new Date(account.createdAt).toLocaleDateString()}
         </p>
       </div>
@@ -120,14 +139,18 @@ export function AccountList({ onAccountClick }: AccountListProps) {
   };
 
   return (
-    <div className="account-list">
-      <h2>Your Accounts</h2>
+    <div className="w-full">
+      <h2 className="text-gray-800 dark:text-white text-2xl font-bold mb-6 text-center">
+        Your Accounts
+      </h2>
       {accounts.length === 0 ? (
-        <p>No accounts found. Create your first account!</p>
+        <p className="text-center text-gray-600 dark:text-gray-400 text-lg">
+          No accounts found. Create your first account!
+        </p>
       ) : (
-        <div className="account-grid">
+        <div className="flex flex-col items-center gap-8 w-full">
           {monthlyBudgetAccounts.length > 0 && (
-            <div className="account-row monthly-budget-row">
+            <div className="w-full mb-12 border-b-2 border-gray-200 dark:border-gray-700 pb-8">
               {monthlyBudgetAccounts.map((account: Account) =>
                 renderAccountCard(account, true)
               )}
@@ -135,7 +158,10 @@ export function AccountList({ onAccountClick }: AccountListProps) {
           )}
 
           {loanRows.map((row, rowIndex) => (
-            <div key={rowIndex} className="account-row loan-row">
+            <div
+              key={rowIndex}
+              className="flex justify-center gap-6 flex-wrap w-full mb-6"
+            >
               {row.map((account: Account) => renderAccountCard(account, false))}
             </div>
           ))}
