@@ -17282,3 +17282,984 @@ Processing by GraphqlController#execute as */*
 Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.3ms (3 queries, 0 cached) | GC: 0.0ms)
 
 
+Started DELETE "/auth/logout" for ::1 at 2025-08-14 13:31:27 -0700
+Processing by AuthController#logout as */*
+  Parameters: {"auth"=>{}}
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/auth/login" for ::1 at 2025-08-14 13:31:34 -0700
+Processing by AuthController#login as */*
+  Parameters: {"email"=>"[FILTERED]", "password"=>"[FILTERED]", "auth"=>{"email"=>"[FILTERED]", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "[FILTERED]"], ["LIMIT", 1]]
+Completed 200 OK in 223ms (Views: 0.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:36:19 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 13:36:19 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"1"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["user_id", 1], ["id", 1], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+Completed 200 OK in 9ms (Views: 0.1ms | ActiveRecord: 0.5ms (6 queries, 1 cached) | GC: 0.4ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:39:09 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/me" for ::1 at 2025-08-14 13:39:09 -0700
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:40:24 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 13:40:24 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["user_id", 1], ["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 0.8ms (5 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:51:26 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:51:26 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 13:51:26 -0700
+Processing by AuthController#me as */*
+  [1m[36mUser Load (1.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 1.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:51:26 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 13:51:26 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Started POST "/graphql" for ::1 at 2025-08-14 13:51:26 -0700
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.2ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 21ms (Views: 0.3ms | ActiveRecord: 1.4ms (10 queries, 1 cached) | GC: 0.5ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:53:31 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:53:31 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 13:53:31 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:53:31 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 13:53:31 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 13:53:31 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.4ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 1.2ms (10 queries, 1 cached) | GC: 0.6ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:57:10 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:57:10 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 13:57:10 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:57:10 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 13:57:10 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 13:57:10 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 1.0ms (10 queries, 1 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:59:27 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:59:27 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 13:59:27 -0700
+Processing by CsrfController#show as */*
+Processing by AuthController#me as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:59:27 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 13:59:27 -0700
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 13:59:28 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 0.8ms (10 queries, 1 cached) | GC: 0.7ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:59:47 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 13:59:47 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["user_id", 1], ["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.5ms (5 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 13:59:47 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 13:59:47 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2]]
+Completed 200 OK in 7ms (Views: 0.3ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:00:05 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:00:05 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:00:05 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:00:05 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:00:05 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:00:06 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 0.8ms (10 queries, 1 cached) | GC: 0.5ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:00:16 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:00:16 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:00:16 -0700
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:00:16 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:00:16 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:00:16 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.3ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 18ms (Views: 0.7ms | ActiveRecord: 1.6ms (10 queries, 1 cached) | GC: 0.6ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:00:20 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:00:20 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["user_id", 1], ["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 0.4ms (5 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:00:20 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:00:20 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2]]
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 1.6ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:02:47 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:02:47 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:02:47 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:02:47 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:02:47 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:02:47 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 0.9ms (10 queries, 1 cached) | GC: 0.6ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:14:37 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:14:37 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:14:37 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (2.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 4ms (Views: 0.1ms | ActiveRecord: 2.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:14:37 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:14:37 -0700
+Processing by CsrfController#show as */*
+Processing by AuthController#me as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:14:37 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.8ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.4ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 20ms (Views: 0.4ms | ActiveRecord: 2.5ms (10 queries, 1 cached) | GC: 0.2ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:24:48 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:24:48 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:24:48 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 1.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:24:48 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:24:48 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:24:48 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 0.9ms (10 queries, 1 cached) | GC: 0.4ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:25:01 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:25:01 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccount", "variables"=>{"id"=>"3"}, "query"=>"query GetAccount($id: ID!) {\n  account(id: $id) {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        amount\n        description\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ? AND "accounts"."id" = ? LIMIT ?[0m  [["user_id", 1], ["id", 3], ["LIMIT", 1]]
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 7ms (Views: 0.1ms | ActiveRecord: 0.5ms (5 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:25:01 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:25:01 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.1ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2]]
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+  [1m[36mAccount Load (5.4ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" /* loading for pp */ LIMIT ?[0m  [["LIMIT", 11]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:46:25 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:46:25 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:46:25 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:46:25 -0700
+Processing by AuthController#me as */*
+  [1m[36mUser Load (3.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 8ms (Views: 0.4ms | ActiveRecord: 3.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/me" for ::1 at 2025-08-14 14:46:25 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:46:25 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (1.0ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.7ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 21ms (Views: 0.6ms | ActiveRecord: 2.6ms (10 queries, 1 cached) | GC: 1.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:46:26 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:46:26 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:46:26 -0700
+Processing by AuthController#me as */*
+Processing by CsrfController#show as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:46:26 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:46:26 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:46:26 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 13ms (Views: 0.2ms | ActiveRecord: 1.0ms (10 queries, 1 cached) | GC: 0.6ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:50:53 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:50:53 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetBudgetCategories", "variables"=>{}, "query"=>"query GetBudgetCategories {\n  budgetCategories {\n    id\n    name\n    amount\n    description\n    categoryType\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      memo\n      occurredOn\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories"[0m
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."budget_category_id" IN (?, ?)[0m  [["budget_category_id", 1], ["budget_category_id", 2]]
+Completed 200 OK in 5ms (Views: 0.1ms | ActiveRecord: 0.4ms (3 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:54:27 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:54:27 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:54:27 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:54:27 -0700
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/me" for ::1 at 2025-08-14 14:54:27 -0700
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:54:27 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.6ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.3ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 27ms (Views: 0.5ms | ActiveRecord: 1.9ms (10 queries, 1 cached) | GC: 0.9ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:54:40 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:54:40 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:54:40 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:54:40 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:54:40 -0700
+Processing by CsrfController#show as */*
+Processing by AuthController#me as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:54:40 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.7ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 1.7ms (10 queries, 1 cached) | GC: 0.9ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:57:11 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:57:11 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:57:11 -0700
+Processing by AuthController#me as */*
+Processing by CsrfController#show as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 0ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:57:11 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:57:11 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:57:11 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 14ms (Views: 0.2ms | ActiveRecord: 0.9ms (10 queries, 1 cached) | GC: 0.8ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:57:20 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 15ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:57:20 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:57:20 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 50ms (Views: 0.1ms | ActiveRecord: 8.6ms (1 query, 0 cached) | GC: 3.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:57:20 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:57:20 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:57:20 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.1ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 388ms (Views: 0.3ms | ActiveRecord: 2.1ms (10 queries, 1 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:57:48 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:57:48 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:57:48 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 14:57:48 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 14:57:48 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 14:57:48 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (1.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 18ms (Views: 0.2ms | ActiveRecord: 2.1ms (10 queries, 1 cached) | GC: 0.8ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 15:14:47 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 2ms (Views: 1.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 15:14:47 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 15:14:47 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 15:14:47 -0700
+Processing by AuthController#me as */*
+  [1m[36mUser Load (3.9ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 3.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/me" for ::1 at 2025-08-14 15:14:47 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.2ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 15:14:47 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.6ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.2ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.2ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 23ms (Views: 0.2ms | ActiveRecord: 1.9ms (10 queries, 1 cached) | GC: 1.4ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 17:09:15 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 17:09:15 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 17:09:15 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (4.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 8ms (Views: 0.2ms | ActiveRecord: 4.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 17:09:16 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 17:09:16 -0700
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 17:09:16 -0700
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.8ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.7ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.4ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 27ms (Views: 0.3ms | ActiveRecord: 3.0ms (10 queries, 1 cached) | GC: 0.5ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 17:09:39 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 17:09:39 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 17:09:39 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 2ms (Views: 0.1ms | ActiveRecord: 0.1ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/auth/csrf" for ::1 at 2025-08-14 17:09:39 -0700
+Started GET "/auth/me" for ::1 at 2025-08-14 17:09:39 -0700
+Processing by CsrfController#show as */*
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/graphql" for ::1 at 2025-08-14 17:09:39 -0700
+Processing by AuthController#me as */*
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Processing by GraphqlController#execute as */*
+  Parameters: {"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}", "graphql"=>{"operationName"=>"GetAccounts", "variables"=>{}, "query"=>"query GetAccounts {\n  accounts {\n    id\n    name\n    accountType\n    startingBalance\n    currentBalance\n    totalSpendingOrPayments\n    createdAt\n    updatedAt\n    transactions {\n      id\n      amount\n      occurredOn\n      memo\n      createdAt\n      updatedAt\n      budgetCategory {\n        id\n        name\n        categoryType\n        __typename\n      }\n      __typename\n    }\n    __typename\n  }\n}"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mAccount Load (0.1ms)[0m  [1m[34mSELECT "accounts".* FROM "accounts" WHERE "accounts"."user_id" = ?[0m  [["user_id", 1]]
+  [1m[36mTransaction Load (0.5ms)[0m  [1m[34mSELECT "transactions".* FROM "transactions" WHERE "transactions"."account_id" IN (?, ?, ?)[0m  [["account_id", 1], ["account_id", 2], ["account_id", 3]]
+  [1m[36mBudgetCategory Load (0.6ms)[0m  [1m[34mSELECT "budget_categories".* FROM "budget_categories" WHERE "budget_categories"."id" IN (?, ?)[0m  [["id", 1], ["id", 2]]
+  [1m[36mTransaction Sum (0.4ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mCACHE Transaction Sum (0.0ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents < 0)[0m  [["account_id", 1]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 2]]
+  [1m[36mTransaction Sum (0.1ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ?[0m  [["account_id", 3]]
+  [1m[36mTransaction Sum (0.2ms)[0m  [1m[34mSELECT SUM("transactions"."amount_cents") FROM "transactions" WHERE "transactions"."account_id" = ? AND (amount_cents > 0)[0m  [["account_id", 3]]
+Completed 200 OK in 22ms (Views: 0.7ms | ActiveRecord: 2.2ms (10 queries, 1 cached) | GC: 0.0ms)
+
+

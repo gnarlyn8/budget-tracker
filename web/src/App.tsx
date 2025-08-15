@@ -26,6 +26,7 @@ function App() {
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
   );
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const { refetch: refetchAccounts } = useQuery(GET_ACCOUNTS);
 
@@ -45,6 +46,10 @@ function App() {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    document.body.className = isDarkMode ? "dark-mode" : "light-mode";
+  }, [isDarkMode]);
+
   const handleLogout = async () => {
     try {
       await logout();
@@ -55,11 +60,15 @@ function App() {
     }
   };
 
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+
   if (isLoading) {
     return (
       <div className="app">
         <header className="app-header">
-          <h1>MicroBudget</h1>
+          <img src="/casapay-logo.png" alt="CasaPay" className="app-logo" />
         </header>
         <main className="app-main">
           <div className="loading">Loading...</div>
@@ -72,20 +81,28 @@ function App() {
     return (
       <div className="app">
         <header className="app-header">
-          <h1>MicroBudget</h1>
+          <img src="/casapay-logo.png" alt="CasaPay" className="app-logo" />
+          <button onClick={toggleTheme} className="theme-toggle">
+            <div className={`theme-slider ${isDarkMode ? "dark" : "light"}`}>
+              <span className="theme-icon">☀️</span>
+              <span className="theme-icon">🌙</span>
+            </div>
+          </button>
         </header>
         <main className="app-main">
-          {authMode === "login" ? (
-            <LoginForm
-              onLoginSuccess={() => setIsAuthenticated(true)}
-              onSwitchToSignup={() => setAuthMode("signup")}
-            />
-          ) : (
-            <SignupForm
-              onSignupSuccess={() => setIsAuthenticated(true)}
-              onSwitchToLogin={() => setAuthMode("login")}
-            />
-          )}
+          <div className="auth-container">
+            {authMode === "login" ? (
+              <LoginForm
+                onLoginSuccess={() => setIsAuthenticated(true)}
+                onSwitchToSignup={() => setAuthMode("signup")}
+              />
+            ) : (
+              <SignupForm
+                onSignupSuccess={() => setIsAuthenticated(true)}
+                onSwitchToLogin={() => setAuthMode("login")}
+              />
+            )}
+          </div>
         </main>
       </div>
     );
@@ -94,12 +111,26 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>MicroBudget</h1>
-        <div className="user-info">
-          <span>Welcome, {user?.email}</span>
-          <button onClick={handleLogout} className="logout-button">
-            Logout
-          </button>
+        <div className="header-content">
+          <img
+            src="../public/casapay-logo.png"
+            alt="CasaPay"
+            className="app-logo"
+          />
+          <div className="header-controls">
+            <button onClick={toggleTheme} className="theme-toggle">
+              <div className={`theme-slider ${isDarkMode ? "dark" : "light"}`}>
+                <span className="theme-icon">☀️</span>
+                <span className="theme-icon">🌙</span>
+              </div>
+            </button>
+            <div className="user-info">
+              <span>Welcome, {user?.email}</span>
+              <button onClick={handleLogout} className="logout-button">
+                Logout
+              </button>
+            </div>
+          </div>
         </div>
         <nav className="nav-tabs">
           <button
@@ -130,26 +161,28 @@ function App() {
       </header>
 
       <main className="app-main">
-        {activeTab === "list" && (
-          <AccountList
-            onAccountClick={(accountId) => {
-              setSelectedAccountId(accountId);
-              setActiveTab("show");
-            }}
-          />
-        )}
-        {activeTab === "create" && <CreateBankAccountForm />}
-        {activeTab === "categories" && <CreateBudgetCategoryForm />}
-        {activeTab === "transactions" && (
-          <CreateTransactionForm onTransactionCreated={refetchAccounts} />
-        )}
-        {activeTab === "show" && selectedAccountId && (
-          <Account
-            accountId={selectedAccountId}
-            onBack={() => setActiveTab("list")}
-            onAllAccountsRefresh={refetchAccounts}
-          />
-        )}
+        <div className="content-container">
+          {activeTab === "list" && (
+            <AccountList
+              onAccountClick={(accountId) => {
+                setSelectedAccountId(accountId);
+                setActiveTab("show");
+              }}
+            />
+          )}
+          {activeTab === "create" && <CreateBankAccountForm />}
+          {activeTab === "categories" && <CreateBudgetCategoryForm />}
+          {activeTab === "transactions" && (
+            <CreateTransactionForm onTransactionCreated={refetchAccounts} />
+          )}
+          {activeTab === "show" && selectedAccountId && (
+            <Account
+              accountId={selectedAccountId}
+              onBack={() => setActiveTab("list")}
+              onAllAccountsRefresh={refetchAccounts}
+            />
+          )}
+        </div>
       </main>
     </div>
   );
