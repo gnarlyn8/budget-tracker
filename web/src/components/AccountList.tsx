@@ -72,18 +72,18 @@ export function AccountList({ onAccountClick }: AccountListProps) {
     return (
       <div
         key={account.id}
-        className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-lg cursor-pointer ${
+        className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-lg cursor-pointer relative ${
           isMonthlyBudget ? "w-full" : "min-w-70 max-w-80 flex-1"
         }`}
         onClick={() => onAccountClick(account.id)}
       >
-        <h3 className="text-gray-800 dark:text-white text-xl font-semibold mb-2 flex justify-between items-center">
+        <span className="absolute top-2 right-2 text-xs px-2 py-1 rounded bg-purple-500 text-white font-normal">
+          {account.accountType === "monthly_budget"}
+          {account.accountType === "loan"}
+          {account.accountType.replace("_", " ").toUpperCase()}
+        </span>
+        <h3 className="text-gray-800 dark:text-white text-xl font-semibold mb-2 pr-16">
           {account.name}
-          <span className="text-xs px-2 py-1 rounded bg-purple-500 text-white font-normal">
-            {account.accountType === "monthly_budget" && "💰"}
-            {account.accountType === "loan" && "🏦"}
-            {account.accountType.replace("_", " ").toUpperCase()}
-          </span>
         </h3>
 
         <div className="my-4">
