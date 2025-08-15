@@ -75,11 +75,13 @@ export function CreateTransactionForm({
   };
 
   return (
-    <div className="create-transaction-form">
-      <h3>Add New Transaction</h3>
+    <div className="max-w-md mx-auto bg-gray-800 border border-gray-700 rounded-xl p-8 shadow-md">
+      <h3 className="text-gray-100 text-xl font-semibold mb-6 text-center">
+        Add New Transaction
+      </h3>
 
       {hasInsufficientFunds && (
-        <div className="warning-message">
+        <div className="bg-red-900/20 border border-red-500 text-red-400 p-4 rounded-lg mb-6 text-center">
           ⚠️ Cannot add transactions: Monthly budget balance is $
           {monthlyBudgetAccount?.currentBalance.toFixed(2)}
         </div>
@@ -87,13 +89,23 @@ export function CreateTransactionForm({
 
       <form onSubmit={handleSubmit}>
         {!accountId && !selectedBudgetCategoryId && (
-          <div className="form-group">
-            <label htmlFor="account">Account:</label>
+          <div className="mb-6">
+            <label
+              htmlFor="account"
+              className="block mb-2 text-gray-300 font-medium"
+            >
+              Account:
+            </label>
             <select
               id="account"
               value={selectedAccountId}
               onChange={(e) => setSelectedAccountId(e.target.value)}
               required
+              className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 cursor-pointer appearance-none bg-no-repeat bg-right-3 bg-center bg-4 pr-10 focus:outline-none focus:border-purple-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1)]"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e\")",
+              }}
             >
               <option value="">Select an account</option>
               {accountsData?.accounts?.map((account: any) => (
@@ -106,12 +118,22 @@ export function CreateTransactionForm({
         )}
 
         {!budgetCategoryId && (
-          <div className="form-group">
-            <label htmlFor="budgetCategory">Budget Category (optional):</label>
+          <div className="mb-6">
+            <label
+              htmlFor="budgetCategory"
+              className="block mb-2 text-gray-300 font-medium"
+            >
+              Budget Category (optional):
+            </label>
             <select
               id="budgetCategory"
               value={selectedBudgetCategoryId}
               onChange={(e) => setSelectedBudgetCategoryId(e.target.value)}
+              className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 cursor-pointer appearance-none bg-no-repeat bg-right-3 bg-center bg-4 pr-10 focus:outline-none focus:border-purple-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1)]"
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e\")",
+              }}
             >
               <option value="">No category</option>
               {categoriesData?.budgetCategories?.map((category: any) => (
@@ -128,13 +150,23 @@ export function CreateTransactionForm({
             {categoriesData?.budgetCategories?.find(
               (cat: any) => cat.id === selectedBudgetCategoryId
             )?.categoryType === "debt_repayment" ? (
-              <div className="form-group">
-                <label htmlFor="account">Loan Account:</label>
+              <div className="mb-6">
+                <label
+                  htmlFor="account"
+                  className="block mb-2 text-gray-300 font-medium"
+                >
+                  Loan Account:
+                </label>
                 <select
                   id="account"
                   value={selectedAccountId}
                   onChange={(e) => setSelectedAccountId(e.target.value)}
                   required
+                  className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 cursor-pointer appearance-none bg-no-repeat bg-right-3 bg-center bg-4 pr-10 focus:outline-none focus:border-purple-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1)]"
+                  style={{
+                    backgroundImage:
+                      "url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e\")",
+                  }}
                 >
                   <option value="">Select loan account</option>
                   {accountsData?.accounts
@@ -147,8 +179,8 @@ export function CreateTransactionForm({
                 </select>
               </div>
             ) : (
-              <div className="form-group">
-                <p className="info-message">
+              <div className="mb-6">
+                <p className="bg-purple-900/20 border border-purple-500 text-purple-400 p-4 rounded-lg text-center">
                   💡 This transaction will be deducted from your monthly budget
                   account
                 </p>
@@ -157,8 +189,13 @@ export function CreateTransactionForm({
           </>
         )}
 
-        <div className="form-group">
-          <label htmlFor="memo">Description:</label>
+        <div className="mb-6">
+          <label
+            htmlFor="memo"
+            className="block mb-2 text-gray-300 font-medium"
+          >
+            Description:
+          </label>
           <input
             type="text"
             id="memo"
@@ -167,11 +204,17 @@ export function CreateTransactionForm({
             required
             disabled={hasInsufficientFunds}
             placeholder="e.g., Grocery shopping, Movie tickets"
+            className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 focus:outline-none focus:border-purple-500 disabled:opacity-50"
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="amount">Amount ($):</label>
+        <div className="mb-6">
+          <label
+            htmlFor="amount"
+            className="block mb-2 text-gray-300 font-medium"
+          >
+            Amount ($):
+          </label>
           <input
             type="number"
             id="amount"
@@ -181,11 +224,17 @@ export function CreateTransactionForm({
             step="0.01"
             disabled={hasInsufficientFunds}
             placeholder="0.00"
+            className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 focus:outline-none focus:border-purple-500 disabled:opacity-50"
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="occurredOn">Date:</label>
+        <div className="mb-6">
+          <label
+            htmlFor="occurredOn"
+            className="block mb-2 text-gray-300 font-medium"
+          >
+            Date:
+          </label>
           <input
             type="date"
             id="occurredOn"
@@ -193,12 +242,14 @@ export function CreateTransactionForm({
             onChange={(e) => setOccurredOn(e.target.value)}
             disabled={hasInsufficientFunds}
             placeholder="Leave empty for today"
+            className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 focus:outline-none focus:border-purple-500 disabled:opacity-50"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading || !selectedAccountId || hasInsufficientFunds}
+          className="w-full p-4 bg-purple-500 text-white border-none rounded-lg text-base font-medium cursor-pointer transition-colors duration-300 hover:bg-purple-600 disabled:bg-gray-500 disabled:cursor-not-allowed"
         >
           {loading
             ? "Adding..."
@@ -207,7 +258,11 @@ export function CreateTransactionForm({
             : "Add Transaction"}
         </button>
 
-        {error && <p className="error">Error: {error.message}</p>}
+        {error && (
+          <p className="text-red-400 mt-4 text-center">
+            Error: {error.message}
+          </p>
+        )}
       </form>
     </div>
   );
