@@ -51,6 +51,20 @@ export function Account({
     variables: { id: accountId },
   });
 
+  const handleToggleTransactionForm = () => {
+    const newState = !showTransactionForm;
+    setShowTransactionForm(newState);
+
+    if (newState) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth",
+        });
+      }, 100);
+    }
+  };
+
   const groupedTransactions = useMemo(() => {
     if (!data?.account) return {};
 
@@ -268,7 +282,7 @@ export function Account({
 
       <div className="flex justify-end mt-6">
         <button
-          onClick={() => setShowTransactionForm(!showTransactionForm)}
+          onClick={handleToggleTransactionForm}
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
         >
           {showTransactionForm ? "Cancel" : "Add Transaction"}
