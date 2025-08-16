@@ -215,7 +215,7 @@ export function Account({
                     {transactions.map((transaction) => (
                       <div
                         key={transaction.id}
-                        className="px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors duration-150"
+                        className="px-6 py-4 hover:bg-gray-50 dark:hover:bg-gray-500 transition-colors duration-150"
                       >
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
