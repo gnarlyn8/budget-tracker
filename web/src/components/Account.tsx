@@ -104,9 +104,8 @@ export function Account({
           <h1>
             {account.name}
             <span className={`account-type-badge ${account.accountType}`}>
-              {account.accountType === "monthly_budget" && "💰"}
-              {account.accountType === "loan" && "🏦"}
-              {account.accountType.replace("_", " ").toUpperCase()}
+              {account.accountType === "monthly_budget"}
+              {account.accountType === "loan"}
             </span>
           </h1>
           <button
