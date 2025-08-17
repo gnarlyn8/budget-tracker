@@ -3,7 +3,7 @@ import { useQuery } from "@apollo/client";
 import { GET_ACCOUNTS } from "./graphql/queries";
 import { AccountList } from "./components/AccountList";
 import { CreateBankAccountForm } from "./components/CreateBankAccountForm";
-import { CreateBudgetCategoryForm } from "./components/CreateBudgetCategoryForm";
+import { BudgetCategoriesPage } from "./components/BudgetCategoriesPage";
 import { CreateTransactionForm } from "./components/CreateTransactionForm";
 import { Account } from "./components/Account";
 import { LoginForm } from "./components/LoginForm";
@@ -142,19 +142,19 @@ function App() {
             </button>
             <button
               className={`px-6 py-3 border-2 border-purple-500 bg-transparent text-purple-500 rounded-lg cursor-pointer text-base transition-all duration-300 hover:bg-purple-500 hover:text-white ${
+                activeTab === "categories" ? "bg-purple-500 text-white" : ""
+              }`}
+              onClick={() => setActiveTab("categories")}
+            >
+              View Budget Categories
+            </button>
+            <button
+              className={`px-6 py-3 border-2 border-purple-500 bg-transparent text-purple-500 rounded-lg cursor-pointer text-base transition-all duration-300 hover:bg-purple-500 hover:text-white ${
                 activeTab === "create" ? "bg-purple-500 text-white" : ""
               }`}
               onClick={() => setActiveTab("create")}
             >
               Add New Bank / Loan Account
-            </button>
-            <button
-              className={`px-6 py-3 border-2 border-purple-500 bg-transparent text-purple-500 rounded-lg cursor-pointer text-base transition-all duration-300 hover:bg-purple-500 hover:text-white ${
-                activeTab === "categories" ? "bg-purple-500 text-white" : ""
-              }`}
-              onClick={() => setActiveTab("categories")}
-            >
-              Add Budget Categories
             </button>
             <button
               className={`px-6 py-3 border-2 border-purple-500 bg-transparent text-purple-500 rounded-lg cursor-pointer text-base transition-all duration-300 hover:bg-purple-500 hover:text-white ${
@@ -177,8 +177,8 @@ function App() {
                 }}
               />
             )}
+            {activeTab === "categories" && <BudgetCategoriesPage />}
             {activeTab === "create" && <CreateBankAccountForm />}
-            {activeTab === "categories" && <CreateBudgetCategoryForm />}
             {activeTab === "transactions" && (
               <CreateTransactionForm onTransactionCreated={refetchAccounts} />
             )}
