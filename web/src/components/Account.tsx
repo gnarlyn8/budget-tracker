@@ -1,6 +1,7 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { useState, useMemo } from "react";
 import { GET_ACCOUNT } from "../graphql/queries";
+import { DELETE_TRANSACTION, DELETE_ACCOUNT } from "../graphql/mutations";
 import { CreateTransactionForm } from "./CreateTransactionForm";
 import { EditAccountForm } from "./EditAccountForm";
 
@@ -50,6 +51,41 @@ export function Account({
   const { loading, error, data, refetch } = useQuery(GET_ACCOUNT, {
     variables: { id: accountId },
   });
+
+  const [deleteTransaction] = useMutation(DELETE_TRANSACTION);
+  const [deleteAccount] = useMutation(DELETE_ACCOUNT);
+
+  const handleDeleteTransaction = async (transactionId: string) => {
+    if (window.confirm("Are you sure you want to delete this transaction?")) {
+      try {
+        await deleteTransaction({
+          variables: { id: transactionId },
+        });
+        refetch();
+      } catch (error) {
+        console.error("Error deleting transaction:", error);
+        alert("Failed to delete transaction");
+      }
+    }
+  };
+
+  const handleDeleteAccount = async () => {
+    if (
+      window.confirm(
+        `Are you sure you want to delete the account "${account.name}"? This will also delete all associated transactions.`
+      )
+    ) {
+      try {
+        await deleteAccount({
+          variables: { id: accountId },
+        });
+        onBack();
+      } catch (error) {
+        console.error("Error deleting account:", error);
+        alert("Failed to delete account");
+      }
+    }
+  };
 
   const handleToggleTransactionForm = () => {
     const newState = !showTransactionForm;
@@ -108,13 +144,21 @@ export function Account({
               {account.accountType === "loan"}
             </span>
           </h1>
-          <button
-            onClick={() => setIsEditing(true)}
-            className="edit-button"
-            disabled={isEditing}
-          >
-            ✏️ Edit Account
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setIsEditing(true)}
+              className="edit-button"
+              disabled={isEditing}
+            >
+              Edit Account
+            </button>
+            <button
+              onClick={handleDeleteAccount}
+              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+            >
+              Delete Account
+            </button>
+          </div>
         </div>
       </div>
 
@@ -251,22 +295,33 @@ export function Account({
                               </span>
                             )}
                           </div>
-                          <div className="text-right ml-4">
-                            <span
-                              className={`text-lg font-semibold ${
-                                transaction.amount < 0
-                                  ? "text-red-500"
-                                  : "text-green-500"
-                              }`}
+                          <div className="text-right ml-4 flex items-center gap-2">
+                            <div>
+                              <span
+                                className={`text-lg font-semibold ${
+                                  transaction.amount < 0
+                                    ? "text-red-500"
+                                    : "text-green-500"
+                                }`}
+                              >
+                                {transaction.amount < 0 ? "-" : "+"}$
+                                {Math.abs(transaction.amount).toFixed(2)}
+                              </span>
+                              <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
+                                {new Date(
+                                  transaction.occurredOn
+                                ).toLocaleDateString()}
+                              </p>
+                            </div>
+                            <button
+                              onClick={() =>
+                                handleDeleteTransaction(transaction.id)
+                              }
+                              className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-1 rounded transition-colors duration-150"
+                              title="Delete transaction"
                             >
-                              {transaction.amount < 0 ? "-" : "+"}$
-                              {Math.abs(transaction.amount).toFixed(2)}
-                            </span>
-                            <p className="text-gray-500 dark:text-gray-400 text-sm mt-1">
-                              {new Date(
-                                transaction.occurredOn
-                              ).toLocaleDateString()}
-                            </p>
+                              ×
+                            </button>
                           </div>
                         </div>
                       </div>

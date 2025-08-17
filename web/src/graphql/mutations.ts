@@ -107,3 +107,30 @@ export const CREATE_TRANSACTION = gql`
     }
   }
 `;
+
+export const DELETE_ACCOUNT = gql`
+  mutation DeleteAccount($id: ID!) {
+    deleteAccount(input: { id: $id }) {
+      success
+      errors
+    }
+  }
+`;
+
+export const DELETE_BUDGET_CATEGORY = gql`
+  mutation DeleteBudgetCategory($id: ID!) {
+    deleteBudgetCategory(input: { id: $id }) {
+      success
+      errors
+    }
+  }
+`;
+
+export const DELETE_TRANSACTION = gql`
+  mutation DeleteTransaction($id: ID!) {
+    deleteTransaction(input: { id: $id }) {
+      success
+      errors
+    }
+  }
+`;
