@@ -20,13 +20,7 @@ interface BudgetCategory {
   transactions: Transaction[];
 }
 
-interface BudgetCategoryListProps {
-  onCategoryClick: (categoryId: string) => void;
-}
-
-export function BudgetCategoryList({
-  onCategoryClick,
-}: BudgetCategoryListProps) {
+export function BudgetCategoryList() {
   const { loading, error, data, refetch } = useQuery(GET_BUDGET_CATEGORIES);
   const [deleteBudgetCategory] = useMutation(DELETE_BUDGET_CATEGORY);
 
@@ -60,12 +54,18 @@ export function BudgetCategoryList({
   const budgetCategories = data?.budgetCategories || [];
 
   return (
-    <div className="budget-category-list">
-      <h2>Your Budget Categories</h2>
+    <div>
       {budgetCategories.length === 0 ? (
-        <p>No budget categories found. Create your first category!</p>
+        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center">
+          <div className="text-gray-400 dark:text-gray-500 text-6xl mb-4 font-bold">
+            +
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 text-lg">
+            No budget categories found. Create your first category below!
+          </p>
+        </div>
       ) : (
-        <div className="category-grid">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {budgetCategories.map((category: BudgetCategory) => {
             const totalSpent = category.transactions.reduce(
               (sum, transaction) => sum + Math.abs(transaction.amount),
@@ -78,19 +78,10 @@ export function BudgetCategoryList({
             return (
               <div
                 key={category.id}
-                className="category-card"
-                onClick={() => onCategoryClick(category.id)}
-                style={{ cursor: "pointer" }}
+                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200"
               >
                 <div className="flex justify-between items-start">
-                  <h3>
-                    {category.name}
-                    <span
-                      className={`category-type-badge ${category.categoryType}`}
-                    >
-                      {category.categoryType.replace("_", " ").toUpperCase()}
-                    </span>
-                  </h3>
+                  <h3>{category.name}</h3>
                   <button
                     onClick={(e) => {
                       e.stopPropagation();
@@ -103,45 +94,49 @@ export function BudgetCategoryList({
                   </button>
                 </div>
 
-                <div className="category-amounts">
-                  <p className="budget-amount">
+                <div className="mt-4 space-y-2">
+                  <p className="text-gray-800 dark:text-white font-medium">
                     Budget: ${category.amount.toFixed(2)}
                   </p>
-                  <p className="spent-amount">
+                  <p className="text-gray-600 dark:text-gray-400">
                     Spent: ${totalSpent.toFixed(2)}
                   </p>
                   <p
-                    className={`remaining-amount ${
-                      remaining < 0 ? "over-budget" : "remaining"
+                    className={`font-semibold ${
+                      remaining < 0 ? "text-red-500" : "text-green-500"
                     }`}
                   >
                     Remaining: ${remaining.toFixed(2)}
                   </p>
                 </div>
 
-                <div className="progress-bar">
-                  <div
-                    className={`progress-fill ${
-                      percentSpent > 100 ? "over-budget" : ""
-                    }`}
-                    style={{
-                      width: `${Math.min(percentSpent, 100)}%`,
-                    }}
-                  />
+                <div className="mt-4">
+                  <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                    <div
+                      className={`h-2 rounded-full transition-all duration-300 ${
+                        percentSpent > 100 ? "bg-red-500" : "bg-blue-500"
+                      }`}
+                      style={{
+                        width: `${Math.min(percentSpent, 100)}%`,
+                      }}
+                    />
+                  </div>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                    {percentSpent.toFixed(1)}% of budget used
+                  </p>
                 </div>
-                <p className="progress-text">
-                  {percentSpent.toFixed(1)}% of budget used
-                </p>
 
                 {category.description && (
-                  <p className="description">{category.description}</p>
+                  <p className="text-gray-600 dark:text-gray-400 text-sm mt-3 italic">
+                    {category.description}
+                  </p>
                 )}
 
-                <div className="category-stats">
-                  <p className="transaction-count">
+                <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">
                     {category.transactions.length} transactions
                   </p>
-                  <p className="date">
+                  <p className="text-gray-500 dark:text-gray-400 text-xs mt-1">
                     Created: {new Date(category.createdAt).toLocaleDateString()}
                   </p>
                 </div>
