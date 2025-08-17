@@ -1,5 +1,6 @@
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import { GET_BUDGET_CATEGORIES } from "../graphql/queries";
+import { DELETE_BUDGET_CATEGORY } from "../graphql/mutations";
 
 interface Transaction {
   id: string;
@@ -26,7 +27,29 @@ interface BudgetCategoryListProps {
 export function BudgetCategoryList({
   onCategoryClick,
 }: BudgetCategoryListProps) {
-  const { loading, error, data } = useQuery(GET_BUDGET_CATEGORIES);
+  const { loading, error, data, refetch } = useQuery(GET_BUDGET_CATEGORIES);
+  const [deleteBudgetCategory] = useMutation(DELETE_BUDGET_CATEGORY);
+
+  const handleDeleteBudgetCategory = async (
+    categoryId: string,
+    categoryName: string
+  ) => {
+    if (
+      window.confirm(
+        `Are you sure you want to delete the budget category "${categoryName}"?`
+      )
+    ) {
+      try {
+        await deleteBudgetCategory({
+          variables: { id: categoryId },
+        });
+        refetch();
+      } catch (error) {
+        console.error("Error deleting budget category:", error);
+        alert("Failed to delete budget category");
+      }
+    }
+  };
 
   if (loading) return <p>Loading budget categories...</p>;
   if (error) {
@@ -59,16 +82,26 @@ export function BudgetCategoryList({
                 onClick={() => onCategoryClick(category.id)}
                 style={{ cursor: "pointer" }}
               >
-                <h3>
-                  {category.name}
-                  <span
-                    className={`category-type-badge ${category.categoryType}`}
+                <div className="flex justify-between items-start">
+                  <h3>
+                    {category.name}
+                    <span
+                      className={`category-type-badge ${category.categoryType}`}
+                    >
+                      {category.categoryType.replace("_", " ").toUpperCase()}
+                    </span>
+                  </h3>
+                  <button
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDeleteBudgetCategory(category.id, category.name);
+                    }}
+                    className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-1 rounded transition-colors duration-150 text-xs"
+                    title="Delete budget category"
                   >
-                    {category.categoryType === "variable_expense" && "💸"}
-                    {category.categoryType === "debt_repayment" && "💳"}
-                    {category.categoryType.replace("_", " ").toUpperCase()}
-                  </span>
-                </h3>
+                    ×
+                  </button>
+                </div>
 
                 <div className="category-amounts">
                   <p className="budget-amount">
