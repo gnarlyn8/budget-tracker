@@ -334,7 +334,7 @@ export function Account({
         )}
       </div>
 
-      <div className="flex justify-end mt-6">
+      <div className="flex justify-center mt-6">
         <button
           onClick={handleToggleTransactionForm}
           className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
