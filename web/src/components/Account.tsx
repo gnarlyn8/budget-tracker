@@ -144,21 +144,6 @@ export function Account({
               {account.accountType === "loan"}
             </span>
           </h1>
-          <div className="flex gap-2">
-            <button
-              onClick={() => setIsEditing(true)}
-              className="edit-button"
-              disabled={isEditing}
-            >
-              Edit Account
-            </button>
-            <button
-              onClick={handleDeleteAccount}
-              className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
-            >
-              Delete Account
-            </button>
-          </div>
         </div>
       </div>
 
@@ -195,8 +180,8 @@ export function Account({
 
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
           <div className="flex items-center mb-3">
-            <div className="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-3">
-              <span className="text-green-600 dark:text-green-400 text-lg font-bold">
+            <div className="w-10 h-10 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center mr-3">
+              <span className="text-teal-600 dark:text-teal-400 text-lg font-bold">
                 =
               </span>
             </div>
@@ -206,7 +191,7 @@ export function Account({
           </div>
           <p
             className={`text-2xl font-bold ${
-              account.currentBalance < 0 ? "text-red-500" : "text-green-500"
+              account.currentBalance < 0 ? "text-red-500" : "text-teal-500"
             }`}
           >
             ${account.currentBalance.toFixed(2)}
@@ -334,10 +319,23 @@ export function Account({
         )}
       </div>
 
-      <div className="flex justify-center mt-6">
+      <div className="flex justify-center gap-4 mt-6">
+        <button
+          onClick={() => setIsEditing(true)}
+          className="!bg-gray-600 hover:!bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+          disabled={isEditing}
+        >
+          Edit Account
+        </button>
+        <button
+          onClick={handleDeleteAccount}
+          className="!bg-red-500 hover:!bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+        >
+          Delete Account
+        </button>
         <button
           onClick={handleToggleTransactionForm}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
+          className="!bg-teal-500 hover:!bg-teal-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
         >
           {showTransactionForm ? "Cancel" : "Add Transaction"}
         </button>

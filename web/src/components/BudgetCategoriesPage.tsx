@@ -31,7 +31,7 @@ export function BudgetCategoriesPage() {
       <div className="flex justify-center mt-6">
         <button
           onClick={handleToggleCategoryForm}
-          className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
+          className="!bg-teal-500 hover:!bg-teal-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
         >
           {showCategoryForm ? "Cancel" : "Add Budget Category"}
         </button>
