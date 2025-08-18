@@ -92,7 +92,7 @@ export function AccountList({ onAccountClick }: AccountListProps) {
           </p>
           <p
             className={`font-bold text-lg ${
-              account.currentBalance < 0 ? "text-red-500" : "text-cyan-500"
+              account.currentBalance < 0 ? "text-red-500" : "text-teal-500"
             }`}
           >
             Current: ${account.currentBalance.toFixed(2)}
@@ -118,7 +118,7 @@ export function AccountList({ onAccountClick }: AccountListProps) {
                 </span>
                 <span
                   className={`${
-                    transaction.amount < 0 ? "text-red-500" : "text-cyan-500"
+                    transaction.amount < 0 ? "text-red-500" : "text-teal-500"
                   }`}
                 >
                   ${Math.abs(transaction.amount).toFixed(2)}
