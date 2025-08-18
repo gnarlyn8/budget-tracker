@@ -103,7 +103,7 @@ export function BudgetCategoryList() {
                   </p>
                   <p
                     className={`font-semibold ${
-                      remaining < 0 ? "text-red-500" : "text-green-500"
+                      remaining < 0 ? "text-red-500" : "text-teal-500"
                     }`}
                   >
                     Remaining: ${remaining.toFixed(2)}
