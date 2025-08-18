@@ -101,6 +101,20 @@ export function Account({
     }
   };
 
+  const handleToggleEditForm = () => {
+    const newState = !isEditing;
+    setIsEditing(newState);
+
+    if (newState) {
+      setTimeout(() => {
+        window.scrollTo({
+          top: document.documentElement.scrollHeight,
+          behavior: "smooth",
+        });
+      }, 100);
+    }
+  };
+
   const groupedTransactions = useMemo(() => {
     if (!data?.account) return {};
 
@@ -146,20 +160,6 @@ export function Account({
           </h1>
         </div>
       </div>
-
-      {isEditing && (
-        <EditAccountForm
-          accountId={accountId}
-          currentName={account.name}
-          currentAccountType={account.accountType}
-          currentStartingBalance={account.startingBalance}
-          onAccountUpdated={() => {
-            setIsEditing(false);
-            refetch();
-          }}
-          onCancel={() => setIsEditing(false)}
-        />
-      )}
 
       <div className="account-summary">
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
@@ -321,11 +321,10 @@ export function Account({
 
       <div className="flex justify-center gap-4 mt-6">
         <button
-          onClick={() => setIsEditing(true)}
+          onClick={handleToggleEditForm}
           className="!bg-gray-600 hover:!bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
-          disabled={isEditing}
         >
-          Edit Account
+          {isEditing ? "Cancel" : "Edit Account"}
         </button>
         <button
           onClick={handleDeleteAccount}
@@ -340,6 +339,21 @@ export function Account({
           {showTransactionForm ? "Cancel" : "Add Transaction"}
         </button>
       </div>
+      {isEditing && (
+        <div className="mt-8">
+          <EditAccountForm
+            accountId={accountId}
+            currentName={account.name}
+            currentAccountType={account.accountType}
+            currentStartingBalance={account.startingBalance}
+            onAccountUpdated={() => {
+              setIsEditing(false);
+              refetch();
+            }}
+            onCancel={() => setIsEditing(false)}
+          />
+        </div>
+      )}
       {showTransactionForm && (
         <div className="mt-8">
           <CreateTransactionForm
