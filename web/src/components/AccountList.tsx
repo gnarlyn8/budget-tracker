@@ -61,6 +61,13 @@ export function AccountList({ onAccountClick }: AccountListProps) {
     loanRows.push(loanAccounts.slice(i, i + 3));
   }
 
+  const columnsClass =
+    loanAccounts.length === 1
+      ? "grid-cols-1"
+      : loanAccounts.length === 2
+      ? "grid-cols-1 md:grid-cols-2"
+      : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+
   const renderAccountCard = (account: Account, isMonthlyBudget = false) => {
     const recentTransactions = account.transactions
       .slice(0, 3)
@@ -68,12 +75,11 @@ export function AccountList({ onAccountClick }: AccountListProps) {
         (a, b) =>
           new Date(b.occurredOn).getTime() - new Date(a.occurredOn).getTime()
       );
-
     return (
       <div
         key={account.id}
         className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-lg cursor-pointer relative ${
-          isMonthlyBudget ? "w-full" : "min-w-70 max-w-80 flex-1"
+          isMonthlyBudget ? "w-full" : ""
         }`}
         onClick={() => onAccountClick(account.id)}
       >
@@ -140,31 +146,29 @@ export function AccountList({ onAccountClick }: AccountListProps) {
 
   return (
     <div className="w-full">
-      <h2 className="text-gray-800 dark:text-white text-2xl font-bold mb-6 text-center">
-        Your Accounts
-      </h2>
       {accounts.length === 0 ? (
         <p className="text-center text-gray-600 dark:text-gray-400 text-lg">
           No accounts found. Create your first account!
         </p>
       ) : (
-        <div className="flex flex-col items-center gap-8 w-full">
+        <div className="space-y-8">
           {monthlyBudgetAccounts.length > 0 && (
-            <div className="w-full mb-12 border-b-2 border-gray-200 dark:border-gray-700 pb-8">
+            <div className="w-full">
               {monthlyBudgetAccounts.map((account: Account) =>
                 renderAccountCard(account, true)
               )}
             </div>
           )}
 
-          {loanRows.map((row, rowIndex) => (
-            <div
-              key={rowIndex}
-              className="flex justify-center gap-6 flex-wrap w-full mb-6"
-            >
-              {row.map((account: Account) => renderAccountCard(account, false))}
+          {loanAccounts.length > 0 && (
+            <div className="flex justify-center">
+              <div className={`grid gap-6 w-full ${columnsClass}`}>
+                {loanAccounts.map((account: Account) =>
+                  renderAccountCard(account, false)
+                )}
+              </div>
             </div>
-          ))}
+          )}
         </div>
       )}
     </div>

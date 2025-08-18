@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_ACCOUNTS } from "./graphql/queries";
-import { AccountList } from "./components/AccountList";
-import { CreateBankAccountForm } from "./components/CreateBankAccountForm";
+import { AccountsPage } from "./components/AccountsPage";
 import { BudgetCategoriesPage } from "./components/BudgetCategoriesPage";
-import { CreateTransactionForm } from "./components/CreateTransactionForm";
+import { TransactionsPage } from "./components/TransactionsPage";
 import { Account } from "./components/Account";
 import { LoginForm } from "./components/LoginForm";
 import { SignupForm } from "./components/SignupForm";
@@ -21,7 +20,7 @@ function App() {
   const [authMode, setAuthMode] = useState<"login" | "signup">("login");
   const [isLoading, setIsLoading] = useState(true);
   const [activeTab, setActiveTab] = useState<
-    "list" | "create" | "categories" | "transactions" | "show"
+    "list" | "categories" | "transactions" | "show"
   >("list");
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
@@ -112,8 +111,8 @@ function App() {
   }
 
   return (
-    <div className="w-full min-h-screen font-sans bg-gray-900">
-      <div className="max-w-6xl mx-auto p-8">
+    <div className="min-h-screen font-sans bg-gray-900">
+      <div className="max-w-5xl mx-auto px-8 py-8">
         <header className="text-center mb-8 bg-gray-800 p-6 rounded-xl shadow-md">
           <div className="flex justify-between items-center mb-6">
             <img
@@ -138,7 +137,7 @@ function App() {
               }`}
               onClick={() => setActiveTab("list")}
             >
-              View Bank / Loan Accounts
+              View Accounts
             </button>
             <button
               className={`px-6 py-3 border-2 border-purple-500 bg-transparent text-purple-500 rounded-lg cursor-pointer text-base transition-all duration-300 hover:bg-purple-500 hover:text-white ${
@@ -148,14 +147,7 @@ function App() {
             >
               View Budget Categories
             </button>
-            <button
-              className={`px-6 py-3 border-2 border-purple-500 bg-transparent text-purple-500 rounded-lg cursor-pointer text-base transition-all duration-300 hover:bg-purple-500 hover:text-white ${
-                activeTab === "create" ? "bg-purple-500 text-white" : ""
-              }`}
-              onClick={() => setActiveTab("create")}
-            >
-              Add New Bank / Loan Account
-            </button>
+
             <button
               className={`px-6 py-3 border-2 border-purple-500 bg-transparent text-purple-500 rounded-lg cursor-pointer text-base transition-all duration-300 hover:bg-purple-500 hover:text-white ${
                 activeTab === "transactions" ? "bg-purple-500 text-white" : ""
@@ -168,28 +160,25 @@ function App() {
         </header>
 
         <main className="min-h-96">
-          <div className="max-w-6xl mx-auto">
-            {activeTab === "list" && (
-              <AccountList
-                onAccountClick={(accountId) => {
-                  setSelectedAccountId(accountId);
-                  setActiveTab("show");
-                }}
-              />
-            )}
-            {activeTab === "categories" && <BudgetCategoriesPage />}
-            {activeTab === "create" && <CreateBankAccountForm />}
-            {activeTab === "transactions" && (
-              <CreateTransactionForm onTransactionCreated={refetchAccounts} />
-            )}
-            {activeTab === "show" && selectedAccountId && (
-              <Account
-                accountId={selectedAccountId}
-                onBack={() => setActiveTab("list")}
-                onAllAccountsRefresh={refetchAccounts}
-              />
-            )}
-          </div>
+          {activeTab === "list" && (
+            <AccountsPage
+              onAccountClick={(accountId) => {
+                setSelectedAccountId(accountId);
+                setActiveTab("show");
+              }}
+            />
+          )}
+          {activeTab === "categories" && <BudgetCategoriesPage />}
+          {activeTab === "transactions" && (
+            <TransactionsPage onTransactionCreated={refetchAccounts} />
+          )}
+          {activeTab === "show" && selectedAccountId && (
+            <Account
+              accountId={selectedAccountId}
+              onBack={() => setActiveTab("list")}
+              onAllAccountsRefresh={refetchAccounts}
+            />
+          )}
         </main>
       </div>
     </div>

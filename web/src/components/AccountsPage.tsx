@@ -1,13 +1,17 @@
 import { useState } from "react";
-import { BudgetCategoryList } from "./BudgetCategoryList";
-import { CreateBudgetCategoryForm } from "./CreateBudgetCategoryForm";
+import { AccountList } from "./AccountList";
+import { CreateBankAccountForm } from "./CreateBankAccountForm";
 
-export function BudgetCategoriesPage() {
-  const [showCategoryForm, setShowCategoryForm] = useState(false);
+interface AccountsPageProps {
+  onAccountClick: (accountId: string) => void;
+}
 
-  const handleToggleCategoryForm = () => {
-    const newState = !showCategoryForm;
-    setShowCategoryForm(newState);
+export function AccountsPage({ onAccountClick }: AccountsPageProps) {
+  const [showAccountForm, setShowAccountForm] = useState(false);
+
+  const handleToggleAccountForm = () => {
+    const newState = !showAccountForm;
+    setShowAccountForm(newState);
 
     if (newState) {
       setTimeout(() => {
@@ -23,27 +27,27 @@ export function BudgetCategoriesPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-gray-800 dark:text-white text-3xl font-bold text-center">
-          Budget Categories
+          Your Accounts
         </h1>
-        <BudgetCategoryList />
+        <AccountList onAccountClick={onAccountClick} />
       </div>
 
       <div className="flex justify-center mt-6">
         <button
-          onClick={handleToggleCategoryForm}
+          onClick={handleToggleAccountForm}
           className="!bg-teal-500 hover:!bg-teal-600 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 flex items-center gap-2"
         >
-          {showCategoryForm ? "Cancel" : "Add Budget Category"}
+          {showAccountForm ? "Cancel" : "Add New Account"}
         </button>
       </div>
 
-      {showCategoryForm && (
+      {showAccountForm && (
         <div className="mt-8">
           <div className="border-t border-gray-200 dark:border-gray-700 pt-8">
             <h2 className="text-gray-800 dark:text-white text-2xl font-bold mb-6 text-center">
-              Add New Budget Category
+              Add New Account
             </h2>
-            <CreateBudgetCategoryForm />
+            <CreateBankAccountForm />
           </div>
         </div>
       )}
