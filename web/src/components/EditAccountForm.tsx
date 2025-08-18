@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { UPDATE_ACCOUNT } from "../graphql/mutations";
+import { Notification } from "./Notification";
 
 interface EditAccountFormProps {
   accountId: string;
@@ -24,6 +25,7 @@ export function EditAccountForm({
   const [startingBalance, setStartingBalance] = useState(
     currentStartingBalance.toString()
   );
+  const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   const [updateAccount, { loading, error }] = useMutation(UPDATE_ACCOUNT);
 
@@ -40,9 +42,11 @@ export function EditAccountForm({
         },
       });
 
+      setNotification({ message: "Account updated successfully!", type: "success" });
       onAccountUpdated();
     } catch (err) {
       console.error("Error updating account:", err);
+      setNotification({ message: "Failed to update account. Please try again.", type: "error" });
     }
   };
 
@@ -132,6 +136,14 @@ export function EditAccountForm({
           </div>
         )}
       </form>
+      
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
     </div>
   );
 }

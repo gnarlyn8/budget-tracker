@@ -2,12 +2,17 @@ import { useState } from "react";
 import { useMutation, useApolloClient } from "@apollo/client";
 import { CREATE_BUDGET_CATEGORY } from "../graphql/mutations";
 import { GET_BUDGET_CATEGORIES } from "../graphql/queries";
+import { Notification } from "./Notification";
 
 export function CreateBudgetCategoryForm() {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [categoryType, setCategoryType] = useState("variable_expense");
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
   const client = useApolloClient();
 
   const [createBudgetCategory, { loading, error }] = useMutation(
@@ -44,8 +49,16 @@ export function CreateBudgetCategoryForm() {
       setAmount("");
       setDescription("");
       setCategoryType("variable_expense");
+      setNotification({
+        message: "Budget category created successfully!",
+        type: "success",
+      });
     } catch (err) {
       console.error("Error creating budget category:", err);
+      setNotification({
+        message: "Failed to create budget category. Please try again.",
+        type: "error",
+      });
     }
   };
 
@@ -147,6 +160,13 @@ export function CreateBudgetCategoryForm() {
           </p>
         )}
       </form>
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
     </div>
   );
 }
