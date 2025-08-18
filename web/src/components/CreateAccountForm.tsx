@@ -2,11 +2,16 @@ import { useState } from "react";
 import { useMutation, useApolloClient } from "@apollo/client";
 import { CREATE_ACCOUNT } from "../graphql/mutations";
 import { GET_ACCOUNTS } from "../graphql/queries";
+import { Notification } from "./Notification";
 
 export function CreateAccountForm() {
   const [name, setName] = useState("");
   const [accountType, setAccountType] = useState("monthly_budget");
   const [startingBalance, setStartingBalance] = useState("");
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
   const client = useApolloClient();
 
   const [createAccount, { loading, error }] = useMutation(CREATE_ACCOUNT);
@@ -28,7 +33,10 @@ export function CreateAccountForm() {
         client.writeQuery({
           query: GET_ACCOUNTS,
           data: {
-            accounts: [...existingData.accounts, result.data.createAccount.account],
+            accounts: [
+              ...existingData.accounts,
+              result.data.createAccount.account,
+            ],
           },
         });
       }
@@ -36,14 +44,29 @@ export function CreateAccountForm() {
       setName("");
       setAccountType("monthly_budget");
       setStartingBalance("");
+      setNotification({
+        message: "Account created successfully!",
+        type: "success",
+      });
     } catch (err) {
       console.error("Error creating account:", err);
+      setNotification({
+        message: "Failed to create account. Please try again.",
+        type: "error",
+      });
     }
   };
 
   return (
     <div className="create-account-form">
       <h2>Create New Account</h2>
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name">Account Name:</label>

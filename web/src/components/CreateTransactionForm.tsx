@@ -6,6 +6,7 @@ import {
   GET_ACCOUNT,
   GET_BUDGET_CATEGORIES,
 } from "../graphql/queries";
+import { Notification } from "./Notification";
 
 interface CreateTransactionFormProps {
   accountId?: string;
@@ -17,6 +18,8 @@ interface CreateTransactionFormProps {
 export function CreateTransactionForm({
   accountId,
   budgetCategoryId,
+  onTransactionCreated,
+  onAllAccountsRefresh,
 }: CreateTransactionFormProps) {
   const [selectedAccountId, setSelectedAccountId] = useState(accountId || "");
   const [selectedBudgetCategoryId, setSelectedBudgetCategoryId] = useState(
@@ -25,6 +28,10 @@ export function CreateTransactionForm({
   const [memo, setMemo] = useState("");
   const [amount, setAmount] = useState("");
   const [occurredOn, setOccurredOn] = useState("");
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   const { data: accountsData } = useQuery(GET_ACCOUNTS);
   const { data: categoriesData } = useQuery(GET_BUDGET_CATEGORIES);
@@ -66,8 +73,19 @@ export function CreateTransactionForm({
       setOccurredOn("");
       if (!accountId) setSelectedAccountId("");
       if (!budgetCategoryId) setSelectedBudgetCategoryId("");
+
+      setNotification({
+        message: "Transaction created successfully!",
+        type: "success",
+      });
+      onTransactionCreated?.();
+      onAllAccountsRefresh?.();
     } catch (err) {
       console.error("Error creating transaction:", err);
+      setNotification({
+        message: "Failed to create transaction. Please try again.",
+        type: "error",
+      });
     }
   };
 
@@ -84,6 +102,13 @@ export function CreateTransactionForm({
         </div>
       )}
 
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
       <form onSubmit={handleSubmit}>
         {!accountId && !selectedBudgetCategoryId && (
           <div className="mb-6">

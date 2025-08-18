@@ -4,6 +4,7 @@ import { GET_ACCOUNT } from "../graphql/queries";
 import { DELETE_TRANSACTION, DELETE_ACCOUNT } from "../graphql/mutations";
 import { CreateTransactionForm } from "./CreateTransactionForm";
 import { EditAccountForm } from "./EditAccountForm";
+import { Notification } from "./Notification";
 
 interface AccountProps {
   accountId: string;
@@ -48,6 +49,10 @@ export function Account({
 }: AccountProps) {
   const [isEditing, setIsEditing] = useState(false);
   const [showTransactionForm, setShowTransactionForm] = useState(false);
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
   const { loading, error, data, refetch } = useQuery(GET_ACCOUNT, {
     variables: { id: accountId },
   });
@@ -62,9 +67,16 @@ export function Account({
           variables: { id: transactionId },
         });
         refetch();
+        setNotification({
+          message: "Transaction deleted successfully!",
+          type: "success",
+        });
       } catch (error) {
         console.error("Error deleting transaction:", error);
-        alert("Failed to delete transaction");
+        setNotification({
+          message: "Failed to delete transaction. Please try again.",
+          type: "error",
+        });
       }
     }
   };
@@ -82,7 +94,10 @@ export function Account({
         onBack();
       } catch (error) {
         console.error("Error deleting account:", error);
-        alert("Failed to delete account");
+        setNotification({
+          message: "Failed to delete account. Please try again.",
+          type: "error",
+        });
       }
     }
   };
@@ -362,6 +377,14 @@ export function Account({
             onAllAccountsRefresh={onAllAccountsRefresh}
           />
         </div>
+      )}
+
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
       )}
     </div>
   );
