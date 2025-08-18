@@ -61,6 +61,13 @@ export function AccountList({ onAccountClick }: AccountListProps) {
     loanRows.push(loanAccounts.slice(i, i + 3));
   }
 
+  const columnsClass =
+    loanAccounts.length === 1
+      ? "grid-cols-1"
+      : loanAccounts.length === 2
+      ? "grid-cols-1 md:grid-cols-2"
+      : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3";
+
   const renderAccountCard = (account: Account, isMonthlyBudget = false) => {
     const recentTransactions = account.transactions
       .slice(0, 3)
@@ -68,7 +75,6 @@ export function AccountList({ onAccountClick }: AccountListProps) {
         (a, b) =>
           new Date(b.occurredOn).getTime() - new Date(a.occurredOn).getTime()
       );
-
     return (
       <div
         key={account.id}
@@ -155,10 +161,12 @@ export function AccountList({ onAccountClick }: AccountListProps) {
           )}
 
           {loanAccounts.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {loanAccounts.map((account: Account) =>
-                renderAccountCard(account, false)
-              )}
+            <div className="flex justify-center">
+              <div className={`grid gap-6 w-full ${columnsClass}`}>
+                {loanAccounts.map((account: Account) =>
+                  renderAccountCard(account, false)
+                )}
+              </div>
             </div>
           )}
         </div>

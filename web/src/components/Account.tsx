@@ -154,18 +154,7 @@ export function Account({
           ← Back to Accounts
         </button>
         <div className="text-center">
-          <h1>
-            {account.name}
-            <span
-              className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                account.accountType === "monthly_budget"
-                  ? "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
-                  : "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
-              }`}
-            >
-              {account.accountType.replace("_", " ").toUpperCase()}
-            </span>
-          </h1>
+          <h1>{account.name}</h1>
         </div>
       </div>
 
