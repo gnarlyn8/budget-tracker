@@ -17,8 +17,6 @@ interface CreateTransactionFormProps {
 export function CreateTransactionForm({
   accountId,
   budgetCategoryId,
-  onTransactionCreated,
-  onAllAccountsRefresh,
 }: CreateTransactionFormProps) {
   const [selectedAccountId, setSelectedAccountId] = useState(accountId || "");
   const [selectedBudgetCategoryId, setSelectedBudgetCategoryId] = useState(
@@ -31,7 +29,6 @@ export function CreateTransactionForm({
   const { data: accountsData } = useQuery(GET_ACCOUNTS);
   const { data: categoriesData } = useQuery(GET_BUDGET_CATEGORIES);
 
-  // Get monthly budget account and check balance
   const monthlyBudgetAccount = accountsData?.accounts?.find(
     (account: any) => account.accountType === "monthly_budget"
   );
@@ -75,7 +72,7 @@ export function CreateTransactionForm({
   };
 
   return (
-    <div className="max-w-md mx-auto bg-gray-800 border border-gray-700 rounded-xl p-8 shadow-md">
+    <div className="w-full bg-gray-800 border border-gray-700 rounded-xl p-8 shadow-md">
       <h3 className="text-gray-100 text-xl font-semibold mb-6 text-center">
         Add New Transaction
       </h3>

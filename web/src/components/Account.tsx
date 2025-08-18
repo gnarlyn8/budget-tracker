@@ -145,12 +145,15 @@ export function Account({
   const account: Account = data.account;
 
   return (
-    <div className="account-details">
-      <div className="account-header">
-        <button onClick={onBack} className="back-button">
+    <div className="w-full">
+      <div className="mb-6">
+        <button
+          onClick={onBack}
+          className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white mb-4"
+        >
           ← Back to Accounts
         </button>
-        <div className="header-content">
+        <div className="text-center">
           <h1>
             {account.name}
             <span className={`account-type-badge ${account.accountType}`}>
@@ -161,7 +164,7 @@ export function Account({
         </div>
       </div>
 
-      <div className="account-summary">
+      <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
           <div className="flex items-center mb-3">
             <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
@@ -217,7 +220,7 @@ export function Account({
         </div>
       </div>
 
-      <div className="transactions-section">
+      <div className="w-full">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-gray-800 dark:text-white text-2xl font-bold">
             Transactions

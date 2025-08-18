@@ -50,7 +50,7 @@ export function CreateBudgetCategoryForm() {
   };
 
   return (
-    <div className="max-w-md mx-auto bg-gray-800 border border-gray-700 rounded-xl p-8 shadow-md">
+    <div className="w-full bg-gray-800 border border-gray-700 rounded-xl p-8 shadow-md">
       <h2 className="text-gray-100 text-xl font-semibold mb-6 text-center">
         Create New Budget Category
       </h2>
