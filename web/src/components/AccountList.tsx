@@ -155,7 +155,7 @@ export function AccountList({ onAccountClick }: AccountListProps) {
           )}
 
           {loanAccounts.length > 0 && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {loanAccounts.map((account: Account) =>
                 renderAccountCard(account, false)
               )}

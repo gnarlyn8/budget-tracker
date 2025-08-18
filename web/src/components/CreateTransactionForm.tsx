@@ -72,7 +72,7 @@ export function CreateTransactionForm({
   };
 
   return (
-    <div className="w-full bg-gray-800 border border-gray-700 rounded-xl p-8 shadow-md">
+    <div className="bg-gray-800 border border-gray-700 rounded-xl p-8 shadow-md">
       <h3 className="text-gray-100 text-xl font-semibold mb-6 text-center">
         Add New Transaction
       </h3>

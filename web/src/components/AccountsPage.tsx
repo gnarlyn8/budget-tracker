@@ -24,9 +24,9 @@ export function AccountsPage({ onAccountClick }: AccountsPageProps) {
   };
 
   return (
-    <div className="w-full">
+    <div className="space-y-6">
       <div>
-        <h1 className="text-gray-800 dark:text-white text-3xl font-bold mb-6 text-center">
+        <h1 className="text-gray-800 dark:text-white text-3xl font-bold text-center">
           Your Accounts
         </h1>
         <AccountList onAccountClick={onAccountClick} />

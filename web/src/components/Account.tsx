@@ -145,26 +145,31 @@ export function Account({
   const account: Account = data.account;
 
   return (
-    <div className="w-full">
-      <div className="mb-6">
+    <div className="space-y-6">
+      <div>
         <button
           onClick={onBack}
-          className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white mb-4"
+          className="text-gray-600 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white"
         >
           ← Back to Accounts
         </button>
         <div className="text-center">
           <h1>
             {account.name}
-            <span className={`account-type-badge ${account.accountType}`}>
-              {account.accountType === "monthly_budget"}
-              {account.accountType === "loan"}
+            <span
+              className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                account.accountType === "monthly_budget"
+                  ? "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200"
+                  : "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
+              }`}
+            >
+              {account.accountType.replace("_", " ").toUpperCase()}
             </span>
           </h1>
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
           <div className="flex items-center mb-3">
             <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">

@@ -111,8 +111,8 @@ function App() {
   }
 
   return (
-    <div className="w-full min-h-screen font-sans bg-gray-900">
-      <div className="w-full p-8">
+    <div className="min-h-screen font-sans bg-gray-900">
+      <div className="max-w-5xl mx-auto px-8 py-8">
         <header className="text-center mb-8 bg-gray-800 p-6 rounded-xl shadow-md">
           <div className="flex justify-between items-center mb-6">
             <img
@@ -160,27 +160,25 @@ function App() {
         </header>
 
         <main className="min-h-96">
-          <div className="max-w-4xl mx-auto">
-            {activeTab === "list" && (
-              <AccountsPage
-                onAccountClick={(accountId) => {
-                  setSelectedAccountId(accountId);
-                  setActiveTab("show");
-                }}
-              />
-            )}
-            {activeTab === "categories" && <BudgetCategoriesPage />}
-            {activeTab === "transactions" && (
-              <TransactionsPage onTransactionCreated={refetchAccounts} />
-            )}
-            {activeTab === "show" && selectedAccountId && (
-              <Account
-                accountId={selectedAccountId}
-                onBack={() => setActiveTab("list")}
-                onAllAccountsRefresh={refetchAccounts}
-              />
-            )}
-          </div>
+          {activeTab === "list" && (
+            <AccountsPage
+              onAccountClick={(accountId) => {
+                setSelectedAccountId(accountId);
+                setActiveTab("show");
+              }}
+            />
+          )}
+          {activeTab === "categories" && <BudgetCategoriesPage />}
+          {activeTab === "transactions" && (
+            <TransactionsPage onTransactionCreated={refetchAccounts} />
+          )}
+          {activeTab === "show" && selectedAccountId && (
+            <Account
+              accountId={selectedAccountId}
+              onBack={() => setActiveTab("list")}
+              onAllAccountsRefresh={refetchAccounts}
+            />
+          )}
         </main>
       </div>
     </div>
