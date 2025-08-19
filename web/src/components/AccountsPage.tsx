@@ -25,7 +25,7 @@ export function AccountsPage({ onAccountClick }: AccountsPageProps) {
 
   return (
     <div className="space-y-6">
-      <div>
+      <div className="space-y-6">
         <h1 className="text-gray-800 dark:text-white text-3xl font-bold text-center">
           Your Accounts
         </h1>
