@@ -1,6 +1,8 @@
 import { useQuery, useMutation } from "@apollo/client";
+import { useState } from "react";
 import { GET_BUDGET_CATEGORIES } from "../graphql/queries";
 import { DELETE_BUDGET_CATEGORY } from "../graphql/mutations";
+import { Notification } from "./Notification";
 
 interface Transaction {
   id: string;
@@ -23,6 +25,10 @@ interface BudgetCategory {
 export function BudgetCategoryList() {
   const { loading, error, data, refetch } = useQuery(GET_BUDGET_CATEGORIES);
   const [deleteBudgetCategory] = useMutation(DELETE_BUDGET_CATEGORY);
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   const handleDeleteBudgetCategory = async (
     categoryId: string,
@@ -38,9 +44,16 @@ export function BudgetCategoryList() {
           variables: { id: categoryId },
         });
         refetch();
+        setNotification({
+          message: `Budget category "${categoryName}" deleted successfully`,
+          type: "success",
+        });
       } catch (error) {
         console.error("Error deleting budget category:", error);
-        alert("Failed to delete budget category");
+        setNotification({
+          message: "Failed to delete budget category",
+          type: "error",
+        });
       }
     }
   };
@@ -55,6 +68,14 @@ export function BudgetCategoryList() {
 
   return (
     <div>
+      {notification && (
+        <Notification
+          message={notification.message}
+          type={notification.type}
+          onClose={() => setNotification(null)}
+        />
+      )}
+
       {budgetCategories.length === 0 ? (
         <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center">
           <div className="text-gray-400 dark:text-gray-500 text-6xl mb-4 font-bold">
