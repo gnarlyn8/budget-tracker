@@ -5,6 +5,12 @@ import {
   from,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { loadErrorMessages, loadDevMessages } from "@apollo/client/dev";
+
+if (import.meta.env.DEV) {
+  loadDevMessages();
+  loadErrorMessages();
+}
 
 const httpLink = createHttpLink({
   uri: "http://localhost:3000/graphql",

@@ -22,7 +22,13 @@ interface BudgetCategory {
   transactions: Transaction[];
 }
 
-export function BudgetCategoryList() {
+interface BudgetCategoryListProps {
+  onCategoryClick: (categoryId: string) => void;
+}
+
+export function BudgetCategoryList({
+  onCategoryClick,
+}: BudgetCategoryListProps) {
   const { loading, error, data, refetch } = useQuery(GET_BUDGET_CATEGORIES);
   const [deleteBudgetCategory] = useMutation(DELETE_BUDGET_CATEGORY);
   const [notification, setNotification] = useState<{
@@ -96,7 +102,8 @@ export function BudgetCategoryList() {
             return (
               <div
                 key={category.id}
-                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200"
+                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+                onClick={() => onCategoryClick(category.id)}
               >
                 <div className="flex justify-between items-start">
                   <h3>{category.name}</h3>
@@ -105,7 +112,7 @@ export function BudgetCategoryList() {
                       e.stopPropagation();
                       handleDeleteBudgetCategory(category.id, category.name);
                     }}
-                    className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-1 rounded transition-colors duration-150 text-xs"
+                    className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-1 rounded transition-colors duration-150 text-xs z-10"
                     title="Delete budget category"
                   >
                     ×
