@@ -1,4 +1,4 @@
-# Budget Tracker
+# CasaPay
 
 A full-stack budget tracking application built with Rails GraphQL API and React TypeScript frontend.
 
@@ -24,6 +24,7 @@ This project consists of two main components:
 - TypeScript
 - Apollo Client for GraphQL
 - Vite for build tooling
+- Tailwind CSS for styling
 - ESLint for code quality
 
 ## Getting Started
@@ -118,10 +119,36 @@ budget-tracker/
 
 ## Features
 
-- Create and manage budgets
-- GraphQL API for flexible data querying
-- Modern React frontend with TypeScript
-- Real-time development with hot reloading
+### Authentication
+
+- User registration and login
+- Session management with CSRF protection
+- Secure logout functionality
+
+### Account Management
+
+- Create and manage different types of accounts (Monthly Budget, Loans/Credit)
+- Set starting balances for accounts
+- View account details and transaction history
+
+### Budget Categories
+
+- Create budget categories with custom amounts
+- Support for variable expenses and debt repayment categories
+- Optional descriptions for better organization
+
+### Transaction Tracking
+
+- Add transactions to specific accounts
+- Categorize transactions with budget categories
+- Track spending against budget limits
+
+### User Interface
+
+- Modern dark theme with purple accent colors
+- Responsive design that works on desktop and mobile
+- Real-time updates with Apollo Client cache management
+- Intuitive navigation between different sections
 
 ## Contributing
 
