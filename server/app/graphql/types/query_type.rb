@@ -39,7 +39,8 @@ module Types
       description: "Returns a list of budget categories"
 
     def budget_categories
-      BudgetCategory.includes(:transactions).all
+      user = context[:current_user] or raise GraphQL::ExecutionError, "Unauthorized"
+      user.budget_categories.includes(:transactions).all
     end
 
     field :budget_category, Types::BudgetCategoryType, null: true do

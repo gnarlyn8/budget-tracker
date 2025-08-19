@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useQuery } from "@apollo/client";
+import { useQuery, useApolloClient } from "@apollo/client";
 import { GET_ACCOUNTS } from "./graphql/queries";
 import { AccountsPage } from "./components/AccountsPage";
 import { BudgetCategoriesPage } from "./components/BudgetCategoriesPage";
@@ -26,6 +26,7 @@ function App() {
     null
   );
 
+  const client = useApolloClient();
   const { refetch: refetchAccounts } = useQuery(GET_ACCOUNTS);
 
   useEffect(() => {
@@ -35,6 +36,10 @@ function App() {
         const user = await me();
         setUser(user);
         setIsAuthenticated(!!user);
+
+        if (user) {
+          await client.clearStore();
+        }
       } catch (error) {
         console.error("Failed to load user:", error);
       } finally {
@@ -42,7 +47,7 @@ function App() {
       }
     };
     fetchUser();
-  }, []);
+  }, [client]);
 
   useEffect(() => {
     document.documentElement.classList.add("dark");
@@ -53,8 +58,31 @@ function App() {
       await logout();
       setUser(null);
       setIsAuthenticated(false);
+      await client.clearStore();
     } catch (error) {
       console.error("Failed to logout:", error);
+    }
+  };
+
+  const handleLoginSuccess = async () => {
+    try {
+      const user = await me();
+      setUser(user);
+      setIsAuthenticated(true);
+      await client.clearStore();
+    } catch (error) {
+      console.error("Failed to get user after login:", error);
+    }
+  };
+
+  const handleSignupSuccess = async () => {
+    try {
+      const user = await me();
+      setUser(user);
+      setIsAuthenticated(true);
+      await client.clearStore();
+    } catch (error) {
+      console.error("Failed to get user after signup:", error);
     }
   };
 
@@ -94,12 +122,12 @@ function App() {
             <div className="max-w-md mx-auto">
               {authMode === "login" ? (
                 <LoginForm
-                  onLoginSuccess={() => setIsAuthenticated(true)}
+                  onLoginSuccess={handleLoginSuccess}
                   onSwitchToSignup={() => setAuthMode("signup")}
                 />
               ) : (
                 <SignupForm
-                  onSignupSuccess={() => setIsAuthenticated(true)}
+                  onSignupSuccess={handleSignupSuccess}
                   onSwitchToLogin={() => setAuthMode("login")}
                 />
               )}
