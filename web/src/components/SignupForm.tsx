@@ -38,11 +38,18 @@ export function SignupForm({
   };
 
   return (
-    <div className="auth-form">
-      <h2>Sign Up</h2>
+    <div className="w-full bg-gray-800 border border-gray-700 rounded-xl p-8 shadow-md">
+      <h2 className="text-gray-100 text-xl font-semibold mb-6 text-center">
+        Sign Up
+      </h2>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
+        <div className="mb-6">
+          <label
+            htmlFor="email"
+            className="block mb-2 text-gray-300 font-medium"
+          >
+            Email:
+          </label>
           <input
             type="email"
             id="email"
@@ -51,11 +58,17 @@ export function SignupForm({
             required
             disabled={loading}
             placeholder="Enter your email"
+            className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 focus:outline-none focus:border-purple-500"
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
+        <div className="mb-6">
+          <label
+            htmlFor="password"
+            className="block mb-2 text-gray-300 font-medium"
+          >
+            Password:
+          </label>
           <input
             type="password"
             id="password"
@@ -64,11 +77,17 @@ export function SignupForm({
             required
             disabled={loading}
             placeholder="Enter your password"
+            className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 focus:outline-none focus:border-purple-500"
           />
         </div>
 
-        <div className="form-group">
-          <label htmlFor="passwordConfirmation">Confirm Password:</label>
+        <div className="mb-6">
+          <label
+            htmlFor="passwordConfirmation"
+            className="block mb-2 text-gray-300 font-medium"
+          >
+            Confirm Password:
+          </label>
           <input
             type="password"
             id="passwordConfirmation"
@@ -77,21 +96,26 @@ export function SignupForm({
             required
             disabled={loading}
             placeholder="Confirm your password"
+            className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 focus:outline-none focus:border-purple-500"
           />
         </div>
 
-        <button type="submit" disabled={loading}>
+        <button
+          type="submit"
+          disabled={loading}
+          className="w-full p-4 bg-purple-500 text-white border-none rounded-lg text-base font-medium cursor-pointer transition-colors duration-300 hover:bg-purple-600 disabled:bg-gray-500 disabled:cursor-not-allowed"
+        >
           {loading ? "Creating account..." : "Sign Up"}
         </button>
 
-        {error && <p className="error">{error}</p>}
+        {error && <p className="text-red-400 mt-4 text-center">{error}</p>}
 
-        <p className="auth-switch">
+        <p className="text-center text-sm text-gray-400 mt-4">
           Already have an account?{" "}
           <button
             type="button"
             onClick={onSwitchToLogin}
-            className="link-button"
+            className="text-purple-400 hover:text-purple-300 font-medium focus:outline-none focus:underline"
           >
             Login
           </button>
