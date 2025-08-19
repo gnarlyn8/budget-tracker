@@ -123,6 +123,37 @@ budget-tracker/
 - Modern React frontend with TypeScript
 - Real-time development with hot reloading
 
+## How to Use
+
+### Getting Started
+
+1. **Sign up** for an account using your email address
+2. **Create your monthly budget account** - This will be your primary income source
+3. **Add loan/repayment accounts** - Create separate accounts for each loan or debt you want to track
+4. **Set up budget categories** - Create categories for non-loan expenses (groceries, utilities, etc.)
+
+### Managing Your Budget
+
+- **Monthly Budget Account**: This represents your income and is reduced by all transactions
+- **Loan Accounts**: Track individual loans and their repayments
+- **Budget Categories**: Organize other expenses that aren't loan-related
+- **Transactions**: Add income and expenses that affect your accounts
+
+### Key Features
+
+- **Edit and delete** all accounts, transactions, and budget categories
+- **Track spending** across different categories
+- **Monitor loan repayments** separately from other expenses
+- **Real-time updates** as you add or modify transactions
+
+### Workflow
+
+1. Add your monthly income to your budget account
+2. Create loan accounts for each debt you're tracking
+3. Set up budget categories for regular expenses
+4. Record transactions as they occur
+5. Monitor your spending and loan repayment progress
+
 ## Contributing
 
 1. Fork the repository

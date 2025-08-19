@@ -35,6 +35,12 @@ export function LoginForm({
       <h2 className="text-gray-100 text-xl font-semibold mb-6 text-center">
         Login
       </h2>
+      <div className="mb-6 p-4 bg-gray-700 rounded-lg border border-gray-600">
+        <p className="text-gray-300 text-sm leading-relaxed">
+          Welcome back! Sign in to access your budget tracker and continue
+          managing your accounts, transactions, and budget categories.
+        </p>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
           <label

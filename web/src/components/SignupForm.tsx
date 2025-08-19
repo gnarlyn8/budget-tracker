@@ -42,6 +42,13 @@ export function SignupForm({
       <h2 className="text-gray-100 text-xl font-semibold mb-6 text-center">
         Sign Up
       </h2>
+      <div className="mb-6 p-4 bg-gray-700 rounded-lg border border-gray-600">
+        <p className="text-gray-300 text-sm leading-relaxed">
+          Create an account to start tracking your budget. You'll be able to
+          manage your monthly income, track loan repayments, and organize
+          expenses by categories.
+        </p>
+      </div>
       <form onSubmit={handleSubmit}>
         <div className="mb-6">
           <label

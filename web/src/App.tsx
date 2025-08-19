@@ -7,6 +7,7 @@ import { TransactionsPage } from "./components/TransactionsPage";
 import { Account } from "./components/Account";
 import { LoginForm } from "./components/LoginForm";
 import { SignupForm } from "./components/SignupForm";
+import { HelpModal } from "./components/HelpModal";
 import { loadCsrf, me, logout } from "./authentication/api";
 import "./App.css";
 
@@ -25,6 +26,7 @@ function App() {
   const [selectedAccountId, setSelectedAccountId] = useState<string | null>(
     null
   );
+  const [showHelp, setShowHelp] = useState(false);
 
   const client = useApolloClient();
   const { refetch: refetchAccounts } = useQuery(GET_ACCOUNTS);
@@ -151,6 +153,12 @@ function App() {
             <div className="flex items-center gap-4 text-gray-300">
               <span>Welcome, {user?.email}</span>
               <button
+                onClick={() => setShowHelp(true)}
+                className="px-4 py-2 bg-purple-600 text-white border-none rounded-md cursor-pointer text-sm transition-colors duration-300 hover:bg-purple-500"
+              >
+                Help
+              </button>
+              <button
                 onClick={handleLogout}
                 className="px-4 py-2 bg-gray-600 text-white border-none rounded-md cursor-pointer text-sm transition-colors duration-300 hover:bg-gray-500"
               >
@@ -209,6 +217,7 @@ function App() {
           )}
         </main>
       </div>
+      <HelpModal isOpen={showHelp} onClose={() => setShowHelp(false)} />
     </div>
   );
 }
