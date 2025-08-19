@@ -1,9 +1,13 @@
 import { useState } from "react";
 import { BudgetCategoryList } from "./BudgetCategoryList";
+import { BudgetCategory } from "./BudgetCategory";
 import { CreateBudgetCategoryForm } from "./CreateBudgetCategoryForm";
 
 export function BudgetCategoriesPage() {
   const [showCategoryForm, setShowCategoryForm] = useState(false);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string | null>(
+    null
+  );
 
   const handleToggleCategoryForm = () => {
     const newState = !showCategoryForm;
@@ -19,13 +23,22 @@ export function BudgetCategoriesPage() {
     }
   };
 
+  if (selectedCategoryId) {
+    return (
+      <BudgetCategory
+        categoryId={selectedCategoryId}
+        onBack={() => setSelectedCategoryId(null)}
+      />
+    );
+  }
+
   return (
     <div className="space-y-6">
       <div className="space-y-6">
         <h1 className="text-gray-800 dark:text-white text-3xl font-bold text-center">
           Budget Categories
         </h1>
-        <BudgetCategoryList />
+        <BudgetCategoryList onCategoryClick={setSelectedCategoryId} />
       </div>
 
       <div className="flex justify-center mt-6">

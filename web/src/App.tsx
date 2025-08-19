@@ -38,10 +38,6 @@ function App() {
         const user = await me();
         setUser(user);
         setIsAuthenticated(!!user);
-
-        if (user) {
-          await client.clearStore();
-        }
       } catch (error) {
         console.error("Failed to load user:", error);
       } finally {
@@ -60,7 +56,7 @@ function App() {
       await logout();
       setUser(null);
       setIsAuthenticated(false);
-      await client.clearStore();
+      await client.resetStore();
     } catch (error) {
       console.error("Failed to logout:", error);
     }
@@ -71,7 +67,7 @@ function App() {
       const user = await me();
       setUser(user);
       setIsAuthenticated(true);
-      await client.clearStore();
+      await client.resetStore();
     } catch (error) {
       console.error("Failed to get user after login:", error);
     }
@@ -82,7 +78,7 @@ function App() {
       const user = await me();
       setUser(user);
       setIsAuthenticated(true);
-      await client.clearStore();
+      await client.resetStore();
     } catch (error) {
       console.error("Failed to get user after signup:", error);
     }
