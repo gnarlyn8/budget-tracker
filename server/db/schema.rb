@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_14_190122) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_19_000435) do
   create_table "accounts", force: :cascade do |t|
     t.string "name"
     t.string "account_type", null: false
@@ -29,7 +29,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_190122) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category_type", default: "variable_expense", null: false
+    t.integer "user_id", null: false
     t.index ["category_type"], name: "index_budget_categories_on_category_type"
+    t.index ["user_id"], name: "index_budget_categories_on_user_id"
   end
 
   create_table "transactions", force: :cascade do |t|
@@ -54,6 +56,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_14_190122) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "budget_categories", "users"
   add_foreign_key "transactions", "accounts"
   add_foreign_key "transactions", "budget_categories"
 end

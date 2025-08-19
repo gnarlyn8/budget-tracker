@@ -9,11 +9,14 @@ module Mutations
     field :errors, [String], null: false
 
     def resolve(name:, amount:, description: nil, category_type: 'variable_expense')
+      user = context[:current_user] or raise GraphQL::ExecutionError, "Unauthorized"
+      
       budget_category = BudgetCategory.new(
         name: name,
         amount: amount,
         description: description,
-        category_type: category_type
+        category_type: category_type,
+        user: user
       )
 
       if budget_category.save
