@@ -14,6 +14,11 @@ if (import.meta.env.DEV) {
 const API_URL = import.meta.env.DEV
   ? "http://localhost:3000/graphql"
   : import.meta.env.VITE_API_URL;
+
+const BASE_URL = import.meta.env.DEV
+  ? "http://localhost:3000"
+  : import.meta.env.VITE_API_URL?.replace("/graphql", "");
+
 const httpLink = createHttpLink({
   uri: API_URL,
   credentials: "include",
@@ -23,7 +28,7 @@ const authLink = setContext(async (_, { headers }) => {
   let csrfToken = null;
 
   try {
-    const response = await fetch("http://localhost:3000/auth/csrf", {
+    const response = await fetch(`${BASE_URL}/auth/csrf`, {
       credentials: "include",
     });
     const data = await response.json();
