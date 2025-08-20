@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { loadCsrf, register } from "../authentication/api";
+import { register } from "../authentication/api";
 interface SignupFormProps {
   onSignupSuccess: () => void;
   onSwitchToLogin: () => void;

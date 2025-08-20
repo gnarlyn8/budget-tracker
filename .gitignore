@@ -13,6 +13,11 @@ capybara-*.html
 /db/*.sqlite3-[0-9]*
 /db/*.sqlite3-shm
 /db/*.sqlite3-wal
+server/db/*.sqlite3
+server/db/*.sqlite3-journal
+server/db/*.sqlite3-[0-9]*
+server/db/*.sqlite3-shm
+server/db/*.sqlite3-wal
 /public/system
 /coverage/
 /spec/tmp
@@ -24,9 +29,11 @@ pickle-email-*.html
 /log/*
 /tmp/*
 server/tmp/*
+server/log/*
 !/log/.keep
 !/tmp/.keep
 !/server/tmp/.keep
+!/server/log/.keep
 
 # Rails pidfiles
 /tmp/pids/*
@@ -67,6 +74,7 @@ server/config/credentials/*.key
 .env.development.local
 .env.test.local
 .env.production.local
+.env.production
 
 # Build outputs
 /dist

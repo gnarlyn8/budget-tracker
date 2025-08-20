@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation, useQuery, gql, useApolloClient } from "@apollo/client";
+import { useMutation, useQuery, useApolloClient } from "@apollo/client";
 import { CREATE_TRANSACTION } from "../graphql/mutations";
 import {
   GET_ACCOUNTS,
