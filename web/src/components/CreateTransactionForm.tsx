@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation, useQuery, gql } from "@apollo/client";
+import { useMutation, useQuery, gql, useApolloClient } from "@apollo/client";
 import { CREATE_TRANSACTION } from "../graphql/mutations";
 import {
   GET_ACCOUNTS,
@@ -33,6 +33,7 @@ export function CreateTransactionForm({
     type: "success" | "error";
   } | null>(null);
 
+  const client = useApolloClient();
   const { data: accountsData } = useQuery(GET_ACCOUNTS);
   const { data: categoriesData } = useQuery(GET_BUDGET_CATEGORIES);
 
@@ -42,21 +43,14 @@ export function CreateTransactionForm({
   const hasInsufficientFunds =
     monthlyBudgetAccount && monthlyBudgetAccount.currentBalance <= 0;
 
-  const [createTransaction, { loading, error }] = useMutation(
-    CREATE_TRANSACTION,
-    {
-      refetchQueries: [
-        { query: GET_ACCOUNTS },
-        { query: GET_ACCOUNT, variables: { id: accountId } },
-      ].filter(Boolean),
-    }
-  );
+  const [createTransaction, { loading, error }] =
+    useMutation(CREATE_TRANSACTION);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
-      await createTransaction({
+      const result = await createTransaction({
         variables: {
           input: {
             accountId: selectedAccountId,
@@ -67,6 +61,29 @@ export function CreateTransactionForm({
           },
         },
       });
+
+      await client.refetchQueries({
+        include: [GET_ACCOUNTS, ...(accountId ? [GET_ACCOUNT] : [])],
+      });
+
+      if (result.data?.createTransaction?.errors?.length > 0) {
+        console.error(
+          "Transaction creation errors:",
+          result.data.createTransaction.errors
+        );
+        setNotification({
+          message: `Failed to create transaction: ${result.data.createTransaction.errors.join(
+            ", "
+          )}`,
+          type: "error",
+        });
+        return;
+      }
+
+      console.log(
+        "Transaction created successfully:",
+        result.data?.createTransaction?.transaction
+      );
 
       setMemo("");
       setAmount("");

@@ -1,6 +1,10 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useState, useMemo } from "react";
-import { GET_ACCOUNT } from "../graphql/queries";
+import {
+  GET_ACCOUNT,
+  GET_ACCOUNTS,
+  GET_BUDGET_CATEGORIES,
+} from "../graphql/queries";
 import { DELETE_TRANSACTION, DELETE_ACCOUNT } from "../graphql/mutations";
 import { CreateTransactionForm } from "./CreateTransactionForm";
 import { EditAccountForm } from "./EditAccountForm";
@@ -65,8 +69,12 @@ export function Account({
       try {
         await deleteTransaction({
           variables: { id: transactionId },
+          refetchQueries: [
+            { query: GET_ACCOUNTS },
+            { query: GET_ACCOUNT, variables: { id: accountId } },
+            { query: GET_BUDGET_CATEGORIES },
+          ],
         });
-        refetch();
         setNotification({
           message: "Transaction deleted successfully!",
           type: "success",
@@ -90,6 +98,26 @@ export function Account({
       try {
         await deleteAccount({
           variables: { id: accountId },
+          update: (cache) => {
+            const existingAccounts = cache.readQuery({
+              query: GET_ACCOUNTS,
+            }) as { accounts: any[] } | null;
+            if (existingAccounts) {
+              cache.writeQuery({
+                query: GET_ACCOUNTS,
+                data: {
+                  accounts: existingAccounts.accounts.filter(
+                    (acc: any) => acc.id !== accountId
+                  ),
+                },
+              });
+            }
+
+            cache.evict({
+              id: cache.identify({ __typename: "Account", id: accountId }),
+            });
+            cache.gc();
+          },
         });
         onBack();
       } catch (error) {

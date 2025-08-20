@@ -1,6 +1,10 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useState, useMemo } from "react";
-import { GET_BUDGET_CATEGORY } from "../graphql/queries";
+import {
+  GET_BUDGET_CATEGORY,
+  GET_ACCOUNTS,
+  GET_BUDGET_CATEGORIES,
+} from "../graphql/queries";
 import { DELETE_TRANSACTION } from "../graphql/mutations";
 import { CreateTransactionForm } from "./CreateTransactionForm";
 import { Notification } from "./Notification";
@@ -56,13 +60,17 @@ export function BudgetCategory({ categoryId, onBack }: BudgetCategoryProps) {
       try {
         await deleteTransaction({
           variables: { id: transactionId },
+          refetchQueries: [
+            { query: GET_ACCOUNTS },
+            { query: GET_BUDGET_CATEGORIES },
+            { query: GET_BUDGET_CATEGORY, variables: { id: categoryId } },
+          ],
         });
-        refetch();
         setNotification({
           message: "Transaction deleted successfully!",
           type: "success",
         });
-      } catch (error) {
+      } catch (error: any) {
         console.error("Error deleting transaction:", error);
         setNotification({
           message: "Failed to delete transaction. Please try again.",

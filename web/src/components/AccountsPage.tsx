@@ -47,7 +47,9 @@ export function AccountsPage({ onAccountClick }: AccountsPageProps) {
             <h2 className="text-gray-800 dark:text-white text-2xl font-bold mb-6 text-center">
               Add New Account
             </h2>
-            <CreateBankAccountForm />
+            <CreateBankAccountForm
+              onAccountCreated={() => setShowAccountForm(false)}
+            />
           </div>
         </div>
       )}

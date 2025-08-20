@@ -56,7 +56,9 @@ export function BudgetCategoriesPage() {
             <h2 className="text-gray-800 dark:text-white text-2xl font-bold mb-6 text-center">
               Add New Budget Category
             </h2>
-            <CreateBudgetCategoryForm />
+            <CreateBudgetCategoryForm
+              onCategoryCreated={() => setShowCategoryForm(false)}
+            />
           </div>
         </div>
       )}

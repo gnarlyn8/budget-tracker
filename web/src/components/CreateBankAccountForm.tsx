@@ -3,7 +3,13 @@ import { useMutation, useApolloClient, useQuery } from "@apollo/client";
 import { CREATE_ACCOUNT } from "../graphql/mutations";
 import { GET_ACCOUNTS } from "../graphql/queries";
 
-export function CreateBankAccountForm() {
+interface CreateBankAccountFormProps {
+  onAccountCreated?: () => void;
+}
+
+export function CreateBankAccountForm({
+  onAccountCreated,
+}: CreateBankAccountFormProps) {
   const { data: accountsData } = useQuery(GET_ACCOUNTS);
   const hasMonthlyBudget = accountsData?.accounts?.some(
     (account: any) => account.accountType === "monthly_budget"
@@ -20,6 +26,10 @@ export function CreateBankAccountForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    if (accountType === "monthly_budget" && hasMonthlyBudget) {
+      return;
+    }
+
     try {
       const result = await createAccount({
         variables: {
@@ -28,6 +38,11 @@ export function CreateBankAccountForm() {
           startingBalance: parseFloat(startingBalance),
         },
       });
+
+      if (result.data.createAccount.errors.length > 0) {
+        console.error("Validation errors:", result.data.createAccount.errors);
+        return;
+      }
 
       const existingData = client.readQuery({ query: GET_ACCOUNTS });
       if (existingData) {
@@ -45,6 +60,7 @@ export function CreateBankAccountForm() {
       setName("");
       setAccountType("monthly_budget");
       setStartingBalance("");
+      onAccountCreated?.();
     } catch (error) {
       console.error("Error creating account:", error);
     }
@@ -119,7 +135,9 @@ export function CreateBankAccountForm() {
 
         <button
           type="submit"
-          disabled={loading}
+          disabled={
+            loading || (accountType === "monthly_budget" && hasMonthlyBudget)
+          }
           className="w-full p-4 bg-purple-500 text-white border-none rounded-lg text-base font-medium cursor-pointer transition-colors duration-300 hover:bg-purple-600 disabled:bg-gray-500 disabled:cursor-not-allowed"
         >
           {loading ? "Creating..." : "Create Account"}

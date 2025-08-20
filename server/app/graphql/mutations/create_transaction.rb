@@ -54,7 +54,8 @@ module Mutations
     private
 
     def monthly_budget
-      @monthly_budget ||= Account.where(account_type: "monthly_budget").first
+      user = context[:current_user]
+      @monthly_budget ||= Account.where(account_type: "monthly_budget", user: user).first
       raise ArgumentError, "No monthly budget account found" unless @monthly_budget
 
       @monthly_budget

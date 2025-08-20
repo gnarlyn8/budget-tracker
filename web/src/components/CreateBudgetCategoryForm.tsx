@@ -4,7 +4,13 @@ import { CREATE_BUDGET_CATEGORY } from "../graphql/mutations";
 import { GET_BUDGET_CATEGORIES } from "../graphql/queries";
 import { Notification } from "./Notification";
 
-export function CreateBudgetCategoryForm() {
+interface CreateBudgetCategoryFormProps {
+  onCategoryCreated?: () => void;
+}
+
+export function CreateBudgetCategoryForm({
+  onCategoryCreated,
+}: CreateBudgetCategoryFormProps) {
   const [name, setName] = useState("");
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
@@ -53,6 +59,7 @@ export function CreateBudgetCategoryForm() {
         message: "Budget category created successfully!",
         type: "success",
       });
+      onCategoryCreated?.();
     } catch (err) {
       console.error("Error creating budget category:", err);
       setNotification({
