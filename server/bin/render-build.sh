@@ -17,9 +17,5 @@ cp -r dist/* ../server/public/
 # Return to server directory
 cd ../server
 
-# Precompile assets
-bin/rails assets:precompile
-bin/rails assets:clean
-
 # Run database migrations
 bin/rails db:migrate
