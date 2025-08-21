@@ -2,7 +2,8 @@
 # Exit on error
 set -o errexit
 
-# Install Ruby dependencies
+# Change to server directory first
+cd server
 bundle install
 
 # Build frontend

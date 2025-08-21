@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: casapay-api
+    name: casapay
     runtime: ruby
     plan: free
     buildCommand: "./server/bin/render-build.sh"
