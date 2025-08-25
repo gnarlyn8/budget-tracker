@@ -8,6 +8,9 @@ import { Account } from "./components/Account";
 import { LoginForm } from "./components/LoginForm";
 import { SignupForm } from "./components/SignupForm";
 import { HelpModal } from "./components/HelpModal";
+import { NavigationButton } from "./components/NavigationButton";
+import { MobileMenu } from "./components/MobileMenu";
+import { ActionButton } from "./components/ActionButton";
 import { loadCsrf, me, logout } from "./authentication/api";
 import "./App.css";
 
@@ -152,90 +155,41 @@ function App() {
                 Welcome, {user?.email}
               </span>
               <div className="hidden sm:flex gap-2">
-                <button
-                  onClick={() => setShowHelp(true)}
-                  className="px-3 py-2 bg-purple-600 text-white border-none rounded-md cursor-pointer text-sm transition-colors duration-300 hover:bg-purple-500"
-                >
+                <ActionButton variant="help" onClick={() => setShowHelp(true)}>
                   Help
-                </button>
-                <button
-                  onClick={handleLogout}
-                  className="px-3 py-2 bg-gray-600 text-white border-none rounded-md cursor-pointer text-sm transition-colors duration-300 hover:bg-gray-500"
-                >
+                </ActionButton>
+                <ActionButton variant="logout" onClick={handleLogout}>
                   Logout
-                </button>
+                </ActionButton>
               </div>
-              <div className="sm:hidden relative">
-                <button
-                  onClick={() => setShowMobileMenu(!showMobileMenu)}
-                  className="p-2 text-gray-300 hover:text-white"
-                >
-                  <svg
-                    className="w-6 h-6"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 6h16M4 12h16M4 18h16"
-                    />
-                  </svg>
-                </button>
-                {showMobileMenu && (
-                  <div className="absolute right-0 top-full mt-2 bg-gray-700 rounded-lg shadow-lg border border-gray-600 min-w-[120px] z-10">
-                    <button
-                      onClick={() => {
-                        setShowHelp(true);
-                        setShowMobileMenu(false);
-                      }}
-                      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-600 hover:text-white transition-colors duration-200 !bg-gray-700 border border-gray-800 rounded-t-lg"
-                    >
-                      Help
-                    </button>
-                    <button
-                      onClick={() => {
-                        handleLogout();
-                        setShowMobileMenu(false);
-                      }}
-                      className="w-full px-4 py-2 text-left text-gray-300 hover:bg-gray-600 hover:text-white transition-colors duration-200 !bg-gray-700 border border-gray-800 rounded-b-lg"
-                    >
-                      Logout
-                    </button>
-                  </div>
-                )}
-              </div>
+              <MobileMenu
+                isOpen={showMobileMenu}
+                onToggle={() => setShowMobileMenu(!showMobileMenu)}
+                onHelpClick={() => setShowHelp(true)}
+                onLogoutClick={handleLogout}
+              />
             </div>
           </div>
 
           <nav className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 flex-wrap">
-            <button
-              className={`px-3 sm:px-4 lg:px-6 py-2 sm:py-3 border-2 border-purple-500 bg-transparent text-purple-500 rounded-lg cursor-pointer text-sm sm:text-base transition-all duration-300 hover:bg-purple-500 hover:text-white ${
-                activeTab === "list" ? "bg-purple-500 text-white" : ""
-              }`}
+            <NavigationButton
+              isActive={activeTab === "list"}
               onClick={() => setActiveTab("list")}
             >
               View Accounts
-            </button>
-            <button
-              className={`px-3 sm:px-4 lg:px-6 py-2 sm:py-3 border-2 border-purple-500 bg-transparent text-purple-500 rounded-lg cursor-pointer text-sm sm:text-base transition-all duration-300 hover:bg-purple-500 hover:text-white ${
-                activeTab === "categories" ? "bg-purple-500 text-white" : ""
-              }`}
+            </NavigationButton>
+            <NavigationButton
+              isActive={activeTab === "categories"}
               onClick={() => setActiveTab("categories")}
             >
               View Budget Categories
-            </button>
-
-            <button
-              className={`px-3 sm:px-4 lg:px-6 py-2 sm:py-3 border-2 border-purple-500 bg-transparent text-purple-500 rounded-lg cursor-pointer text-sm sm:text-base transition-all duration-300 hover:bg-purple-500 hover:text-white ${
-                activeTab === "transactions" ? "bg-purple-500 text-white" : ""
-              }`}
+            </NavigationButton>
+            <NavigationButton
+              isActive={activeTab === "transactions"}
               onClick={() => setActiveTab("transactions")}
             >
               Add Transaction
-            </button>
+            </NavigationButton>
           </nav>
         </header>
 
