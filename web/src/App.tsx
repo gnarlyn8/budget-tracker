@@ -8,9 +8,9 @@ import { Account } from "./components/Account";
 import { LoginForm } from "./components/LoginForm";
 import { SignupForm } from "./components/SignupForm";
 import { HelpModal } from "./components/HelpModal";
-import { NavigationButton } from "./components/NavigationButton";
-import { MobileMenu } from "./components/MobileMenu";
-import { ActionButton } from "./components/ActionButton";
+import { Header } from "./components/Header";
+import { AuthenticatedHeader } from "./components/AuthenticatedHeader";
+import { PageWrapper } from "./components/PageWrapper";
 import { loadCsrf, me, logout } from "./authentication/api";
 import "./App.css";
 
@@ -90,108 +90,52 @@ function App() {
 
   if (isLoading) {
     return (
-      <div className="w-full min-h-screen font-sans bg-gray-900">
-        <div className="max-w-6xl mx-auto p-8">
-          <header className="text-center mb-8 bg-gray-800 p-6 rounded-xl shadow-md">
-            <img
-              src="/casapay-logo.png"
-              alt="CasaPay"
-              className="h-24 w-auto m-0"
-            />
-          </header>
-          <main className="min-h-96">
-            <div className="text-center p-8 text-gray-400 text-lg">
-              Loading...
-            </div>
-          </main>
-        </div>
-      </div>
+      <PageWrapper>
+        <Header />
+        <main className="min-h-96">
+          <div className="text-center p-8 text-gray-400 text-lg">
+            Loading...
+          </div>
+        </main>
+      </PageWrapper>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <div className="w-full min-h-screen font-sans bg-gray-900">
-        <div className="max-w-6xl mx-auto p-8">
-          <header className="text-center mb-8 bg-gray-800 p-6 rounded-xl shadow-md relative">
-            <img
-              src="/casapay-logo.png"
-              alt="CasaPay"
-              className="h-24 w-auto m-0"
-            />
-          </header>
-          <main className="min-h-96">
-            <div className="max-w-md mx-auto">
-              {authMode === "login" ? (
-                <LoginForm
-                  onLoginSuccess={handleLoginSuccess}
-                  onSwitchToSignup={() => setAuthMode("signup")}
-                />
-              ) : (
-                <SignupForm
-                  onSignupSuccess={handleSignupSuccess}
-                  onSwitchToLogin={() => setAuthMode("login")}
-                />
-              )}
-            </div>
-          </main>
-        </div>
-      </div>
+      <PageWrapper>
+        <Header />
+        <main className="min-h-96">
+          <div className="max-w-md mx-auto">
+            {authMode === "login" ? (
+              <LoginForm
+                onLoginSuccess={handleLoginSuccess}
+                onSwitchToSignup={() => setAuthMode("signup")}
+              />
+            ) : (
+              <SignupForm
+                onSignupSuccess={handleSignupSuccess}
+                onSwitchToLogin={() => setAuthMode("login")}
+              />
+            )}
+          </div>
+        </main>
+      </PageWrapper>
     );
   }
 
   return (
-    <div className="min-h-screen font-sans bg-gray-900">
-      <div className="max-w-5xl mx-auto px-8 py-8">
-        <header className="text-center mb-8 bg-gray-800 p-4 sm:p-6 rounded-xl shadow-md">
-          <div className="flex justify-between items-center mb-4 sm:mb-6">
-            <img
-              src="/casapay-logo.png"
-              alt="CasaPay"
-              className="h-12 sm:h-16 lg:h-24 w-auto"
-            />
-            <div className="flex items-center gap-4 text-gray-300">
-              <span className="text-sm sm:text-base">
-                Welcome, {user?.email}
-              </span>
-              <div className="hidden sm:flex gap-2">
-                <ActionButton variant="help" onClick={() => setShowHelp(true)}>
-                  Help
-                </ActionButton>
-                <ActionButton variant="logout" onClick={handleLogout}>
-                  Logout
-                </ActionButton>
-              </div>
-              <MobileMenu
-                isOpen={showMobileMenu}
-                onToggle={() => setShowMobileMenu(!showMobileMenu)}
-                onHelpClick={() => setShowHelp(true)}
-                onLogoutClick={handleLogout}
-              />
-            </div>
-          </div>
-
-          <nav className="flex flex-col sm:flex-row justify-center gap-2 sm:gap-4 flex-wrap">
-            <NavigationButton
-              isActive={activeTab === "list"}
-              onClick={() => setActiveTab("list")}
-            >
-              View Accounts
-            </NavigationButton>
-            <NavigationButton
-              isActive={activeTab === "categories"}
-              onClick={() => setActiveTab("categories")}
-            >
-              View Budget Categories
-            </NavigationButton>
-            <NavigationButton
-              isActive={activeTab === "transactions"}
-              onClick={() => setActiveTab("transactions")}
-            >
-              Add Transaction
-            </NavigationButton>
-          </nav>
-        </header>
+    <PageWrapper maxWidth="5xl">
+      <div className="px-0 py-8">
+        <AuthenticatedHeader
+          userEmail={user?.email || ""}
+          activeTab={activeTab}
+          showMobileMenu={showMobileMenu}
+          onTabChange={setActiveTab}
+          onHelpClick={() => setShowHelp(true)}
+          onLogoutClick={handleLogout}
+          onMobileMenuToggle={() => setShowMobileMenu(!showMobileMenu)}
+        />
 
         <main className="min-h-96">
           {activeTab === "list" && (
@@ -216,7 +160,7 @@ function App() {
         </main>
       </div>
       <HelpModal isOpen={showHelp} onClose={() => setShowHelp(false)} />
-    </div>
+    </PageWrapper>
   );
 }
 
