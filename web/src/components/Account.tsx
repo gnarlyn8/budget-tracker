@@ -202,7 +202,7 @@ export function Account({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
           <div className="flex items-center mb-3">
             <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
               <span className="text-blue-600 dark:text-blue-400 text-lg font-bold">
@@ -218,14 +218,12 @@ export function Account({
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
           <div className="flex items-center mb-3">
-            <div className="w-10 h-10 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center mr-3">
-              <span className="text-teal-600 dark:text-teal-400 text-lg font-bold">
-                =
-              </span>
+            <div className="w-10 h-10 bg-teal-900 rounded-lg flex items-center justify-center mr-3">
+              <span className="text-teal-400 text-lg font-bold">=</span>
             </div>
-            <h3 className="text-gray-800 dark:text-white text-lg font-semibold">
+            <h3 className="text-white text-lg font-semibold">
               Current Balance
             </h3>
           </div>
@@ -238,20 +236,20 @@ export function Account({
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
           <div className="flex items-center mb-3">
-            <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-3">
-              <span className="text-purple-600 dark:text-purple-400 text-lg font-bold">
+            <div className="w-10 h-10 bg-purple-900 rounded-lg flex items-center justify-center mr-3">
+              <span className="text-purple-400 text-lg font-bold">
                 {account.accountType === "loan" ? "P" : "S"}
               </span>
             </div>
-            <h3 className="text-gray-800 dark:text-white text-lg font-semibold">
+            <h3 className="text-white text-lg font-semibold">
               {account.accountType === "loan"
                 ? "Total Payments"
                 : "Total Spending"}
             </h3>
           </div>
-          <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+          <p className="text-2xl font-bold text-purple-400">
             ${account.totalSpendingOrPayments.toFixed(2)}
           </p>
         </div>
@@ -278,22 +276,22 @@ export function Account({
               ([categoryName, transactions]) => (
                 <div
                   key={categoryName}
-                  className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl overflow-hidden shadow-md"
+                  className="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden shadow-md"
                 >
-                  <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-b border-gray-200 dark:border-gray-600">
-                    <h3 className="text-gray-800 dark:text-white text-lg font-semibold flex items-center">
-                      <span className="w-6 h-6 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-3 text-xs font-bold text-blue-600 dark:text-blue-400">
+                  <div className="bg-gray-700 px-6 py-4 border-b border-gray-600">
+                    <h3 className="text-white text-lg font-semibold flex items-center">
+                      <span className="w-6 h-6 bg-blue-900 rounded-full flex items-center justify-center mr-3 text-xs font-bold text-blue-400">
                         {transactions.length}
                       </span>
                       {categoryName}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm mt-1">
+                    <p className="text-gray-400 text-sm mt-1">
                       {transactions.length} transaction
                       {transactions.length !== 1 ? "s" : ""}
                     </p>
                   </div>
 
-                  <div className="divide-y divide-gray-200 dark:divide-gray-600">
+                  <div className="divide-y divide-gray-600">
                     {transactions.map((transaction) => (
                       <div
                         key={transaction.id}

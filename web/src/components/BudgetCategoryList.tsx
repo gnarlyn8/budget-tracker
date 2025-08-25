@@ -102,7 +102,7 @@ export function BudgetCategoryList({
             return (
               <div
                 key={category.id}
-                className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer"
+                className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200 cursor-pointer"
                 onClick={() => onCategoryClick(category.id)}
               >
                 <div className="flex justify-between items-start">
@@ -112,7 +112,7 @@ export function BudgetCategoryList({
                       e.stopPropagation();
                       handleDeleteBudgetCategory(category.id, category.name);
                     }}
-                    className="text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 p-1 rounded transition-colors duration-150 text-xs z-10"
+                    className="text-red-400 hover:text-red-300 p-1 rounded transition-colors duration-150 text-xs z-10"
                     title="Delete budget category"
                   >
                     ×
@@ -120,10 +120,10 @@ export function BudgetCategoryList({
                 </div>
 
                 <div className="mt-4 space-y-2">
-                  <p className="text-gray-800 dark:text-white font-medium">
+                  <p className="text-white font-medium">
                     Budget: ${category.amount.toFixed(2)}
                   </p>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-gray-400">
                     Spent: ${totalSpent.toFixed(2)}
                   </p>
                   <p

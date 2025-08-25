@@ -153,7 +153,7 @@ export function BudgetCategory({ categoryId, onBack }: BudgetCategoryProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
           <div className="flex items-center mb-3">
             <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
               <span className="text-blue-600 dark:text-blue-400 text-lg font-bold">
@@ -169,32 +169,24 @@ export function BudgetCategory({ categoryId, onBack }: BudgetCategoryProps) {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
           <div className="flex items-center mb-3">
-            <div className="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-3">
-              <span className="text-red-600 dark:text-red-400 text-lg font-bold">
-                ↓
-              </span>
+            <div className="w-10 h-10 bg-red-900 rounded-lg flex items-center justify-center mr-3">
+              <span className="text-red-400 text-lg font-bold">↓</span>
             </div>
-            <h3 className="text-gray-800 dark:text-white text-lg font-semibold">
-              Total Spent
-            </h3>
+            <h3 className="text-white text-lg font-semibold">Total Spent</h3>
           </div>
-          <p className="text-2xl font-bold text-red-600 dark:text-red-400">
+          <p className="text-2xl font-bold text-red-400">
             ${totalSpent.toFixed(2)}
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
           <div className="flex items-center mb-3">
-            <div className="w-10 h-10 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center mr-3">
-              <span className="text-teal-600 dark:text-teal-400 text-lg font-bold">
-                =
-              </span>
+            <div className="w-10 h-10 bg-teal-900 rounded-lg flex items-center justify-center mr-3">
+              <span className="text-teal-400 text-lg font-bold">=</span>
             </div>
-            <h3 className="text-gray-800 dark:text-white text-lg font-semibold">
-              Remaining
-            </h3>
+            <h3 className="text-white text-lg font-semibold">Remaining</h3>
           </div>
           <p
             className={`text-2xl font-bold ${
@@ -205,18 +197,14 @@ export function BudgetCategory({ categoryId, onBack }: BudgetCategoryProps) {
           </p>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
+        <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow duration-200">
           <div className="flex items-center mb-3">
-            <div className="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-3">
-              <span className="text-purple-600 dark:text-purple-400 text-lg font-bold">
-                %
-              </span>
+            <div className="w-10 h-10 bg-purple-900 rounded-lg flex items-center justify-center mr-3">
+              <span className="text-purple-400 text-lg font-bold">%</span>
             </div>
-            <h3 className="text-gray-800 dark:text-white text-lg font-semibold">
-              Progress
-            </h3>
+            <h3 className="text-white text-lg font-semibold">Progress</h3>
           </div>
-          <p className="text-2xl font-bold text-purple-600 dark:text-purple-400">
+          <p className="text-2xl font-bold text-purple-400">
             {percentSpent.toFixed(1)}%
           </p>
         </div>
@@ -224,9 +212,7 @@ export function BudgetCategory({ categoryId, onBack }: BudgetCategoryProps) {
 
       <div className="w-full">
         <div className="flex justify-between items-center mb-6">
-          <h2 className="text-gray-800 dark:text-white text-2xl font-bold">
-            Transactions
-          </h2>
+          <h2 className="text-white text-2xl font-bold">Transactions</h2>
         </div>
         {Object.keys(groupedTransactions).length === 0 ? (
           <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-8 text-center">

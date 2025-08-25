@@ -25,7 +25,10 @@ export function EditAccountForm({
   const [startingBalance, setStartingBalance] = useState(
     currentStartingBalance.toString()
   );
-  const [notification, setNotification] = useState<{ message: string; type: "success" | "error" } | null>(null);
+  const [notification, setNotification] = useState<{
+    message: string;
+    type: "success" | "error";
+  } | null>(null);
 
   const [updateAccount, { loading, error }] = useMutation(UPDATE_ACCOUNT);
 
@@ -42,24 +45,28 @@ export function EditAccountForm({
         },
       });
 
-      setNotification({ message: "Account updated successfully!", type: "success" });
+      setNotification({
+        message: "Account updated successfully!",
+        type: "success",
+      });
       onAccountUpdated();
     } catch (err) {
       console.error("Error updating account:", err);
-      setNotification({ message: "Failed to update account. Please try again.", type: "error" });
+      setNotification({
+        message: "Failed to update account. Please try again.",
+        type: "error",
+      });
     }
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md">
-      <h3 className="text-gray-800 dark:text-white text-xl font-bold mb-6">
-        Edit Account
-      </h3>
+    <div className="bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md">
+      <h3 className="text-white text-xl font-bold mb-6">Edit Account</h3>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>
           <label
             htmlFor="edit-name"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            className="block text-sm font-medium text-gray-300 mb-2"
           >
             Account Name
           </label>
@@ -70,14 +77,14 @@ export function EditAccountForm({
             onChange={(e) => setName(e.target.value)}
             required
             placeholder="e.g., Monthly Budget, Credit Card"
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-700 text-white"
           />
         </div>
 
         <div>
           <label
             htmlFor="edit-accountType"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            className="block text-sm font-medium text-gray-300 mb-2"
           >
             Account Type
           </label>
@@ -86,7 +93,7 @@ export function EditAccountForm({
             value={accountType}
             onChange={(e) => setAccountType(e.target.value)}
             required
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-700 text-white"
           >
             <option value="monthly_budget">Monthly Budget</option>
             <option value="loan">Loan/Credit</option>
@@ -96,18 +103,19 @@ export function EditAccountForm({
         <div>
           <label
             htmlFor="edit-startingBalance"
-            className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2"
+            className="block text-sm font-medium text-gray-300 mb-2"
           >
-            Starting Balance ($)
+            Starting Balance
           </label>
           <input
             type="number"
             id="edit-startingBalance"
             value={startingBalance}
             onChange={(e) => setStartingBalance(e.target.value)}
-            step="0.01"
             required
-            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-white"
+            step="0.01"
+            placeholder="0.00"
+            className="w-full px-3 py-2 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-gray-700 text-white"
           />
         </div>
 
@@ -136,7 +144,7 @@ export function EditAccountForm({
           </div>
         )}
       </form>
-      
+
       {notification && (
         <Notification
           message={notification.message}

@@ -78,7 +78,7 @@ export function AccountList({ onAccountClick }: AccountListProps) {
     return (
       <div
         key={account.id}
-        className={`bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl p-6 shadow-md transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-lg cursor-pointer relative ${
+        className={`bg-gray-800 border border-gray-700 rounded-xl p-6 shadow-md transition-all duration-200 hover:transform hover:-translate-y-1 hover:shadow-lg cursor-pointer relative ${
           isMonthlyBudget ? "w-full" : ""
         }`}
         onClick={() => onAccountClick(account.id)}
@@ -88,12 +88,12 @@ export function AccountList({ onAccountClick }: AccountListProps) {
           {account.accountType === "loan"}
           {account.accountType.replace("_", " ").toUpperCase()}
         </span>
-        <h3 className="text-gray-800 dark:text-white text-xl font-semibold mb-2 pr-16">
+        <h3 className="text-white text-xl font-semibold mb-2 pr-16">
           {account.name}
         </h3>
 
         <div className="my-4">
-          <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
+          <p className="text-sm text-gray-400 mb-1">
             Starting: ${account.startingBalance.toFixed(2)}
           </p>
           <p

@@ -102,11 +102,7 @@ export function CreateBankAccountForm({
             value={accountType}
             onChange={(e) => setAccountType(e.target.value)}
             required
-            className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 cursor-pointer appearance-none bg-no-repeat bg-right-3 bg-center bg-4 pr-10 focus:outline-none focus:border-purple-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1)]"
-            style={{
-              backgroundImage:
-                "url(\"data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e\")",
-            }}
+            className="w-full p-3 border-2 border-gray-600 rounded-lg text-base transition-colors duration-300 box-border bg-gray-700 text-gray-100 cursor-pointer focus:outline-none focus:border-purple-500 focus:shadow-[0_0_0_3px_rgba(139,92,246,0.1)]"
           >
             <option value="monthly_budget" disabled={hasMonthlyBudget}>
               Monthly Budget {hasMonthlyBudget ? "(Already exists)" : ""}
