@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useMutation, useQuery, useApolloClient } from "@apollo/client";
-import { CREATE_TRANSACTION } from "../graphql/mutations";
+import { CREATE_TRANSACTION } from "../../graphql/mutations";
 import {
   GET_ACCOUNTS,
   GET_ACCOUNT,
   GET_BUDGET_CATEGORIES,
-} from "../graphql/queries";
-import { Notification } from "./Notification";
+} from "../../graphql/queries";
+import { Notification } from "../Notification";
 
 interface CreateTransactionFormProps {
   accountId?: string;

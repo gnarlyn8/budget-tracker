@@ -1,8 +1,8 @@
 import { useQuery, useMutation } from "@apollo/client";
 import { useState } from "react";
-import { GET_BUDGET_CATEGORIES } from "../graphql/queries";
-import { DELETE_BUDGET_CATEGORY } from "../graphql/mutations";
-import { Notification } from "./Notification";
+import { GET_BUDGET_CATEGORIES } from "../../graphql/queries";
+import { DELETE_BUDGET_CATEGORY } from "../../graphql/mutations";
+import { Notification } from "../Notification";
 
 interface Transaction {
   id: string;
@@ -84,7 +84,7 @@ export function BudgetCategoryList({
 
       {budgetCategories.length === 0 ? (
         <div className="text-center">
-          <p className="text-gray-600 dark:text-gray-400 text-lg">
+          <p className="text-gray-400 text-lg">
             No budget categories found. Create your first category below!
           </p>
         </div>

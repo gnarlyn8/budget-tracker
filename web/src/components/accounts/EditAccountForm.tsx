@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation } from "@apollo/client";
-import { UPDATE_ACCOUNT } from "../graphql/mutations";
-import { Notification } from "./Notification";
+import { UPDATE_ACCOUNT } from "../../graphql/mutations";
+import { Notification } from "../Notification";
 
 interface EditAccountFormProps {
   accountId: string;

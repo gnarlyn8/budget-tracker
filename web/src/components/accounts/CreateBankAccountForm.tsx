@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useMutation, useApolloClient, useQuery } from "@apollo/client";
-import { CREATE_ACCOUNT } from "../graphql/mutations";
-import { GET_ACCOUNTS } from "../graphql/queries";
+import { CREATE_ACCOUNT } from "../../graphql/mutations";
+import { GET_ACCOUNTS } from "../../graphql/queries";
 
 interface CreateBankAccountFormProps {
   onAccountCreated?: () => void;

@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useMutation, useApolloClient } from "@apollo/client";
-import { CREATE_BUDGET_CATEGORY } from "../graphql/mutations";
-import { GET_BUDGET_CATEGORIES } from "../graphql/queries";
-import { Notification } from "./Notification";
+import { CREATE_BUDGET_CATEGORY } from "../../graphql/mutations";
+import { GET_BUDGET_CATEGORIES } from "../../graphql/queries";
+import { Notification } from "../Notification";
 
 interface CreateBudgetCategoryFormProps {
   onCategoryCreated?: () => void;

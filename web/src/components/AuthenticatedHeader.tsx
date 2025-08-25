@@ -1,5 +1,5 @@
-import { NavigationButton } from "./NavigationButton";
-import { ActionButton } from "./ActionButton";
+import { NavigationButton } from "./shared/buttons/NavigationButton";
+import { ActionButton } from "./shared/buttons/ActionButton";
 import { MobileMenu } from "./MobileMenu";
 
 interface AuthenticatedHeaderProps {

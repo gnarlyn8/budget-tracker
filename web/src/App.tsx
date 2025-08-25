@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useQuery, useApolloClient } from "@apollo/client";
 import { GET_ACCOUNTS } from "./graphql/queries";
-import { AccountsPage } from "./components/AccountsPage";
-import { BudgetCategoriesPage } from "./components/BudgetCategoriesPage";
-import { TransactionsPage } from "./components/TransactionsPage";
-import { Account } from "./components/Account";
-import { LoginForm } from "./components/LoginForm";
-import { SignupForm } from "./components/SignupForm";
+import { AccountsPage } from "./components/accounts/AccountsPage";
+import { BudgetCategoriesPage } from "./components/budget-categories/BudgetCategoriesPage";
+import { TransactionsPage } from "./components/transactions/TransactionsPage";
+import { Account } from "./components/accounts/Account";
+import { LoginForm } from "./components/shared/forms/LoginForm";
+import { SignupForm } from "./components/shared/forms/SignupForm";
 import { HelpModal } from "./components/HelpModal";
 import { Header } from "./components/Header";
 import { AuthenticatedHeader } from "./components/AuthenticatedHeader";

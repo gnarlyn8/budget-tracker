@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { GET_ACCOUNTS } from "../graphql/queries";
+import { GET_ACCOUNTS } from "../../graphql/queries";
 
 interface Transaction {
   id: string;
@@ -34,9 +34,7 @@ export function AccountList({ onAccountClick }: AccountListProps) {
 
   if (loading)
     return (
-      <p className="text-center text-gray-600 dark:text-gray-400 text-lg">
-        Loading accounts...
-      </p>
+      <p className="text-center text-gray-400 text-lg">Loading accounts...</p>
     );
   if (error) {
     console.error("Error loading accounts:", error);
