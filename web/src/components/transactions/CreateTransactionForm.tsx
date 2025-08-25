@@ -80,11 +80,6 @@ export function CreateTransactionForm({
         return;
       }
 
-      console.log(
-        "Transaction created successfully:",
-        result.data?.createTransaction?.transaction
-      );
-
       setMemo("");
       setAmount("");
       setOccurredOn("");

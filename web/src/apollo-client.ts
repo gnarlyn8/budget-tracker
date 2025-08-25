@@ -20,10 +20,6 @@ const BASE_URL = import.meta.env.DEV
   ? "http://localhost:3000"
   : import.meta.env.VITE_API_URL?.replace("/graphql", "");
 
-console.log("API_URL:", API_URL);
-console.log("BASE_URL:", BASE_URL);
-console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
-
 const httpLink = createHttpLink({
   uri: API_URL,
   credentials: "include",

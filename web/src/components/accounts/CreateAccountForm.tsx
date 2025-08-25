@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useMutation, useApolloClient } from "@apollo/client";
-import { CREATE_ACCOUNT } from "../graphql/mutations";
-import { GET_ACCOUNTS } from "../graphql/queries";
-import { Notification } from "./Notification";
+import { CREATE_ACCOUNT } from "../../graphql/mutations";
+import { GET_ACCOUNTS } from "../../graphql/queries";
+import { Notification } from "../Notification";
 
 export function CreateAccountForm() {
   const [name, setName] = useState("");
