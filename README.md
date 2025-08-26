@@ -29,6 +29,12 @@ This project consists of two main components:
 
 ## Getting Started
 
+### Production
+
+The application is deployed and available at: https://casapay-api.onrender.com/
+
+This application is hosted on [Render](https://render.com/), a modern cloud platform for developers and teams that provides automatic deployments, scaling, and infrastructure management.
+
 ### Prerequisites
 
 - Ruby 3.2+

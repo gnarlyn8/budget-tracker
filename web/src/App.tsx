@@ -125,7 +125,7 @@ function App() {
   }
 
   return (
-    <PageWrapper maxWidth="5xl">
+    <PageWrapper>
       <div className="px-0 py-8">
         <AuthenticatedHeader
           userEmail={user?.email || ""}
