@@ -38,11 +38,7 @@ export function AccountList({ onAccountClick }: AccountListProps) {
     );
   if (error) {
     console.error("Error loading accounts:", error);
-    return (
-      <p className="text-center text-red-500 text-lg">
-        Error loading accounts: {error.message}
-      </p>
-    );
+    return <p className="text-center text-red-500 text-lg">{error.message}</p>;
   }
 
   const accounts = data?.accounts || [];

@@ -130,9 +130,7 @@ describe("AccountList", () => {
       </MockedProvider>
     );
     await waitFor(() => {
-      expect(
-        screen.getByText("Error loading accounts: Error loading accounts")
-      ).toBeInTheDocument();
+      expect(screen.getByText("Error loading accounts")).toBeInTheDocument();
     });
   });
 });
