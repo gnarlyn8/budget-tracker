@@ -1,6 +1,6 @@
 import { MockedProvider } from "@apollo/client/testing";
-import { render, RenderOptions } from "@testing-library/react";
-import { ReactElement } from "react";
+import { render, type RenderOptions } from "@testing-library/react";
+import type { ReactElement } from "react";
 
 interface CustomRenderOptions extends Omit<RenderOptions, "wrapper"> {
   mocks?: any[];

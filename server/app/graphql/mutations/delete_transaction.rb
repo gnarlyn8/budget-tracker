@@ -49,6 +49,8 @@ module Mutations
           occurred_on: transaction.occurred_on,
           memo: transaction.memo,
           amount_cents: transaction.amount_cents.abs
+        ).where(
+          budget_category: [transaction.budget_category, nil]
         ).first
       else
         Transaction.where(
