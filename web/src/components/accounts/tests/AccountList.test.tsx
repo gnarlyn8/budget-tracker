@@ -58,6 +58,16 @@ const mockGetAccountsQueryEmpty = {
     data: { accounts: [] },
   },
 };
+
+const mockGetAccountsQueryError = {
+  request: {
+    query: GET_ACCOUNTS,
+  },
+  result: {
+    errors: [{ message: "Error loading accounts" }],
+  },
+};
+
 describe("AccountList", () => {
   it("renders accounts", async () => {
     render(
@@ -102,5 +112,27 @@ describe("AccountList", () => {
     expect(screen.getAllByText("LOAN")).toHaveLength(2);
     expect(screen.getAllByText("No transactions yet")).toHaveLength(3);
     expect(screen.getAllByText("0 total transactions")).toHaveLength(3);
+  });
+  it("renders loading state when accounts are loading", async () => {
+    render(
+      <MockedProvider mocks={[mockGetAccountsQuery]} addTypename={false}>
+        <AccountList onAccountClick={vi.fn()} />
+      </MockedProvider>
+    );
+    await waitFor(() => {
+      expect(screen.getByText("Loading accounts...")).toBeInTheDocument();
+    });
+  });
+  it("renders error state when accounts are not found", async () => {
+    render(
+      <MockedProvider mocks={[mockGetAccountsQueryError]} addTypename={false}>
+        <AccountList onAccountClick={vi.fn()} />
+      </MockedProvider>
+    );
+    await waitFor(() => {
+      expect(
+        screen.getByText("Error loading accounts: Error loading accounts")
+      ).toBeInTheDocument();
+    });
   });
 });
