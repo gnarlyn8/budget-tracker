@@ -48,8 +48,9 @@ module Mutations
           accounts: { account_type: "loan", user: transaction.account.user },
           occurred_on: transaction.occurred_on,
           memo: transaction.memo,
-          amount_cents: transaction.amount_cents.abs,
-          budget_category: transaction.budget_category
+          amount_cents: transaction.amount_cents.abs
+        ).where(
+          budget_category: [transaction.budget_category, nil]
         ).first
       else
         Transaction.where(
