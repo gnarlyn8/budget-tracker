@@ -360,7 +360,7 @@ export function Account({
       <div className="flex justify-center gap-4 mt-6">
         <button
           onClick={handleToggleEditForm}
-          className="!bg-gray-600 hover:!bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200"
+          className="!bg-gray-600 hover:!bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200 edit-account-button"
         >
           {isEditing ? "Cancel" : "Edit Account"}
         </button>
