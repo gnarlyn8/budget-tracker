@@ -24,7 +24,7 @@ const mockGetAccountsQuery = {
           transactions: [],
         },
         {
-          id: "1",
+          id: "2",
           name: "Test Loan Account",
           accountType: "loan",
           startingBalance: 5000.0,
@@ -35,7 +35,7 @@ const mockGetAccountsQuery = {
           transactions: [],
         },
         {
-          id: "1",
+          id: "3",
           name: "Test Loan Account 2",
           accountType: "loan",
           startingBalance: 2000.0,
