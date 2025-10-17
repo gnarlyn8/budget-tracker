@@ -20,6 +20,7 @@ server/db/*.sqlite3-shm
 server/db/*.sqlite3-wal
 /public/system
 /coverage/
+web/coverage/
 /spec/tmp
 *.orig
 rerun.txt
