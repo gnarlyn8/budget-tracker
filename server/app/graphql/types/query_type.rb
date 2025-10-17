@@ -41,7 +41,7 @@ module Types
 
     def account(id:)
       user = context[:current_user] or raise GraphQL::ExecutionError, "Unauthorized"
-      user.accounts.includes(:transactions).find(id)
+      user.accounts.includes(transactions: :budget_category).find(id)
     end
 
     field :budget_categories, [Types::BudgetCategoryType], null: false,
@@ -49,7 +49,7 @@ module Types
 
     def budget_categories
       user = context[:current_user] or raise GraphQL::ExecutionError, "Unauthorized"
-      user.budget_categories.includes(:transactions).all
+      user.budget_categories.includes(transactions: :account).all
     end
 
     field :budget_category, Types::BudgetCategoryType, null: true do
@@ -57,7 +57,7 @@ module Types
     end
 
     def budget_category(id:)
-      BudgetCategory.includes(:transactions).find(id)
+      BudgetCategory.includes(transactions: :account).find(id)
     end
 
     field :transactions, [Types::TransactionType], null: false,

@@ -23,6 +23,7 @@ class Ledger
 
       Transaction.create!(
         account: loan,
+        budget_category_id: category.id,
         amount_cents: amount_cents,  
         occurred_on: on,
         memo: memo
