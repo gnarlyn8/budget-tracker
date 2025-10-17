@@ -24,6 +24,15 @@ module Types
     def accounts
       user = context[:current_user] or raise GraphQL::ExecutionError, "Unauthorized"
       user.accounts.includes(:transactions)
+    rescue ActiveRecord::RecordNotFound => e
+      Rails.logger.error "User not found: #{e.message}"
+      raise GraphQL::ExecutionError, "Please log in again."
+    rescue ActiveRecord::StatementInvalid => e
+      Rails.logger.error "Database error: #{e.message}"
+      raise GraphQL::ExecutionError, "Unable to load accounts. Please try again later."
+    rescue => e
+      Rails.logger.error "Unexpected error loading accounts: #{e.message}"
+      raise GraphQL::ExecutionError, "Unable to load accounts. Please try again later."
     end
 
     field :account, Types::AccountType, null: true do
