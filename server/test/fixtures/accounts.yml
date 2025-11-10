@@ -1,0 +1,12 @@
+monthly_budget:
+  name: Monthly Budget
+  account_type: monthly_budget
+  starting_balance_cents: 10000
+  user: one
+
+loan:
+  name: Loan
+  account_type: loan
+  starting_balance_cents: 20000
+  user: one
+
