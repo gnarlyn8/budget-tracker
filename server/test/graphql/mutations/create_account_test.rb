@@ -16,7 +16,7 @@ module Mutations
         assert_equal [], payload["errors"]
         assert_equal @account.name, account["name"]
         assert_equal @account.account_type, account["accountType"]
-        assert_in_delta @account.starting_balance_cents / 100.0, account["startingBalance"]
+        assert_equal @account.starting_balance_cents, account["startingBalanceCents"]
       end
 
       account_record = Account.order(:created_at).last
@@ -69,7 +69,7 @@ module Mutations
             account {
               name
               accountType
-              startingBalance
+              startingBalanceCents
             }
             errors
           }

@@ -42,6 +42,8 @@ module Types
     def account(id:)
       user = context[:current_user] or raise GraphQL::ExecutionError, "Unauthorized"
       user.accounts.includes(transactions: :budget_category).find(id)
+    rescue ActiveRecord::RecordNotFound
+      raise GraphQL::ExecutionError, "Account not found"
     end
 
     field :budget_categories, [Types::BudgetCategoryType], null: false,
