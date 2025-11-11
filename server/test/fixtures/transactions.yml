@@ -5,9 +5,13 @@ one:
   amount_cents: 999
   occurred_on: 2025-08-11
   memo: MyString
+  created_at: <%= 1.week.ago %>
+  updated_at: <%= 1.week.ago %>
 
 two:
   account: loan
   amount_cents: 1999
   occurred_on: 2025-08-11
   memo: MyString
+  created_at: <%= 3.days.ago %>
+  updated_at: <%= 3.days.ago %>

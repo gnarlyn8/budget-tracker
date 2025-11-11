@@ -7,6 +7,7 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :transactions, [Types::TransactionType], null: false
+    field :user, Types::UserType, null: false
     
     field :starting_balance, Float, null: false
     def starting_balance
