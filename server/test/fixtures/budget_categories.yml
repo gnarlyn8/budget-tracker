@@ -2,12 +2,14 @@
 
 one:
   user: one
-  name: MyString
-  amount: 9.99
-  description: MyText
+  name: Groceries
+  amount: 200
+  description: Monthly groceries
+  category_type: variable_expense
 
 two:
   user: two
-  name: MyString
+  name: Credit Card Payment
   amount: 9.99
-  description: MyText
+  description: Monthly credit card payment
+  category_type: debt_repayment
