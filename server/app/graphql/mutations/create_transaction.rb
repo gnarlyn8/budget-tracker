@@ -21,7 +21,7 @@ module Mutations
       monthly_budget_account = monthly_budget
       current_balance_cents = monthly_budget_account.starting_balance_cents + monthly_budget_account.transactions.sum(:amount_cents)
       
-      if current_balance_cents <= 0
+      if current_balance_cents < cents
         return {
           transaction: nil,
           errors: ["Insufficient funds in monthly budget. Current balance: $#{current_balance_cents / 100.0}"]
